@@ -600,7 +600,7 @@
   .tile-pattern-7 { background-image: radial-gradient(ellipse at 20% 60%, #1a1018 0%, #111 60%); }
   .tile-pattern-8 { background-image: linear-gradient(200deg, #111 0%, #1a1a12 100%); }
 
-  /* YouTube Modal */
+  /* Video Modal (YouTube & Vimeo) */
   .yt-modal {
     display: none;
     position: fixed; inset: 0;
@@ -1221,8 +1221,8 @@
         <div class="tile-label-type">Video</div>
       </div>
     </a>
-    <!-- VIDEO 3: Cseréld le a href-ben a VIDEO_ID-t a YouTube videód azonosítójára -->
-    <a href="https://vimeo.com/1188707738?share=copy&fl=sv&fe=ci" data-youtube="7yketaseQtk" class="portfolio-tile">
+    <!-- VIDEO 3: Vimeo videóhoz használd a data-vimeo="VIDEO_ID" attribútumot (pl. https://vimeo.com/1188707738 → data-vimeo="1188707738") -->
+    <a href="https://vimeo.com/1188707738" data-vimeo="1188707738" class="portfolio-tile">
       <div class="tile-bg tile-pattern-3" style="background-image: url('images/weddings-video.jpg');"></div>
       <div class="tile-overlay">
         <div class="tile-icon">▶</div>
@@ -1450,7 +1450,7 @@
   <div class="lightbox-counter" id="lightboxCounter"></div>
 </div>
 
-<!-- YouTube Modal -->
+<!-- Video Modal (YouTube & Vimeo) -->
 <div id="ytModal" class="yt-modal" role="dialog" aria-modal="true" aria-label="Video lejátszó">
   <div class="yt-modal-backdrop"></div>
   <div class="yt-modal-content">
@@ -1523,13 +1523,19 @@
   }, { threshold: 0.12 });
   faders.forEach(el => obs.observe(el));
 
-  // YouTube Modal
+  // Video Modal (YouTube & Vimeo)
   const ytModal = document.getElementById('ytModal');
   const ytIframe = document.getElementById('ytIframe');
   const ytClose = document.getElementById('ytModalClose');
 
   function openYtModal(videoId) {
     ytIframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
+    ytModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function openVimeoModal(videoId) {
+    ytIframe.src = 'https://player.vimeo.com/video/' + videoId + '?autoplay=1';
     ytModal.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -1542,6 +1548,7 @@
 
   const ytBackdrop = document.querySelector('.yt-modal-backdrop');
 
+  // YouTube tiles: data-youtube="VIDEO_ID"
   document.querySelectorAll('.portfolio-tile[data-youtube]').forEach(function(tile) {
     tile.setAttribute('role', 'button');
     tile.setAttribute('tabindex', '0');
@@ -1553,6 +1560,22 @@
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         openYtModal(tile.dataset.youtube);
+      }
+    });
+  });
+
+  // Vimeo tiles: data-vimeo="VIDEO_ID"
+  document.querySelectorAll('.portfolio-tile[data-vimeo]').forEach(function(tile) {
+    tile.setAttribute('role', 'button');
+    tile.setAttribute('tabindex', '0');
+    tile.addEventListener('click', function(e) {
+      e.preventDefault();
+      openVimeoModal(tile.dataset.vimeo);
+    });
+    tile.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openVimeoModal(tile.dataset.vimeo);
       }
     });
   });
