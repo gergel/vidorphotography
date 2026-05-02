@@ -1360,15 +1360,25 @@
     document.body.style.overflow = '';
   }
 
+  const ytBackdrop = document.querySelector('.yt-modal-backdrop');
+
   document.querySelectorAll('.portfolio-tile[data-youtube]').forEach(function(tile) {
+    tile.setAttribute('role', 'button');
+    tile.setAttribute('tabindex', '0');
     tile.addEventListener('click', function(e) {
       e.preventDefault();
       openYtModal(tile.dataset.youtube);
     });
+    tile.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openYtModal(tile.dataset.youtube);
+      }
+    });
   });
 
   ytClose.addEventListener('click', closeYtModal);
-  document.querySelector('.yt-modal-backdrop').addEventListener('click', closeYtModal);
+  if (ytBackdrop) ytBackdrop.addEventListener('click', closeYtModal);
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeYtModal(); });
 
   // Form submit
