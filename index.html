@@ -523,6 +523,8 @@
   .tile-bg {
     position: absolute; inset: 0;
     background: linear-gradient(135deg, var(--dark) 0%, var(--mid) 100%);
+    background-size: cover;
+    background-position: center;
     transition: transform 0.6s ease;
   }
   .portfolio-tile:hover .tile-bg { transform: scale(1.04); }
@@ -982,7 +984,9 @@
   <p class="section-sub fade-up">Explore my work across different genres and styles.</p>
 
   <div class="portfolio-grid fade-up">
-    <a href="#contact" class="portfolio-tile">
+    <!-- VIDEO TILE 1: Cseréld le a href-et a YouTube videó linkjére, pl.: href="https://www.youtube.com/watch?v=VIDEO_ID" -->
+    <!-- Kép hozzáadása: add style="background-image: url('kepek/dokumentumfilm.jpg')" a tile-bg divhez -->
+    <a href="#contact" target="_blank" rel="noopener" class="portfolio-tile">
       <div class="tile-bg tile-pattern-1"></div>
       <div class="tile-overlay">
         <div class="tile-icon">▶</div>
@@ -993,7 +997,9 @@
         <div class="tile-label-type">Video</div>
       </div>
     </a>
-    <a href="#contact" class="portfolio-tile">
+    <!-- VIDEO TILE 2: Cseréld le a href-et a YouTube videó linkjére -->
+    <!-- Kép hozzáadása: add style="background-image: url('kepek/visual-storytelling.jpg')" a tile-bg divhez -->
+    <a href="#contact" target="_blank" rel="noopener" class="portfolio-tile">
       <div class="tile-bg tile-pattern-2"></div>
       <div class="tile-overlay">
         <div class="tile-icon">▶</div>
@@ -1004,7 +1010,9 @@
         <div class="tile-label-type">Video</div>
       </div>
     </a>
-    <a href="#contact" class="portfolio-tile">
+    <!-- VIDEO TILE 3: Cseréld le a href-et a YouTube videó linkjére -->
+    <!-- Kép hozzáadása: add style="background-image: url('kepek/weddings-video.jpg')" a tile-bg divhez -->
+    <a href="#contact" target="_blank" rel="noopener" class="portfolio-tile">
       <div class="tile-bg tile-pattern-3"></div>
       <div class="tile-overlay">
         <div class="tile-icon">▶</div>
@@ -1015,6 +1023,7 @@
         <div class="tile-label-type">Video</div>
       </div>
     </a>
+    <!-- PHOTO TILE 4: Gastro — Kép hozzáadása: add style="background-image: url('kepek/gastro.jpg')" a tile-bg divhez -->
     <a href="#contact" class="portfolio-tile">
       <div class="tile-bg tile-pattern-4"></div>
       <div class="tile-overlay">
@@ -1026,6 +1035,7 @@
         <div class="tile-label-type">Photography</div>
       </div>
     </a>
+    <!-- PHOTO TILE 5: Portraits — Kép hozzáadása: add style="background-image: url('kepek/portraits.jpg')" a tile-bg divhez -->
     <a href="#contact" class="portfolio-tile">
       <div class="tile-bg tile-pattern-5"></div>
       <div class="tile-overlay">
@@ -1037,6 +1047,7 @@
         <div class="tile-label-type">Photography</div>
       </div>
     </a>
+    <!-- PHOTO TILE 6: Event — Kép hozzáadása: add style="background-image: url('kepek/event.jpg')" a tile-bg divhez -->
     <a href="#contact" class="portfolio-tile">
       <div class="tile-bg tile-pattern-6"></div>
       <div class="tile-overlay">
@@ -1048,6 +1059,7 @@
         <div class="tile-label-type">Photography</div>
       </div>
     </a>
+    <!-- PHOTO TILE 7: Esküvő — Kép hozzáadása: add style="background-image: url('kepek/eskuvo.jpg')" a tile-bg divhez -->
     <a href="#contact" class="portfolio-tile">
       <div class="tile-bg tile-pattern-7"></div>
       <div class="tile-overlay">
@@ -1059,6 +1071,7 @@
         <div class="tile-label-type">Photography</div>
       </div>
     </a>
+    <!-- PHOTO TILE 8: Koncert — Kép hozzáadása: add style="background-image: url('kepek/koncert.jpg')" a tile-bg divhez -->
     <a href="#contact" class="portfolio-tile">
       <div class="tile-bg tile-pattern-8"></div>
       <div class="tile-overlay">
@@ -1103,17 +1116,19 @@
       </div>
 
       <form class="fade-up" onsubmit="handleSubmit(event)">
+        <input type="hidden" name="_subject" value="Új üzenet — Vidor Photography">
+        <input type="hidden" name="_captcha" value="false">
         <div class="form-group">
           <label class="form-label">Name *</label>
-          <input type="text" class="form-input" required placeholder="Your name">
+          <input type="text" name="name" class="form-input" required placeholder="Your name">
         </div>
         <div class="form-group">
           <label class="form-label">Email *</label>
-          <input type="email" class="form-input" required placeholder="email@example.com">
+          <input type="email" name="email" class="form-input" required placeholder="email@example.com">
         </div>
         <div class="form-group">
           <label class="form-label">Message *</label>
-          <textarea class="form-textarea" required placeholder="Tell me about your project..."></textarea>
+          <textarea name="message" class="form-textarea" required placeholder="Tell me about your project..."></textarea>
         </div>
         <button type="submit" class="btn-primary">Send Message</button>
         <p class="form-note">Your information is kept confidential. I'll respond within 24 hours.</p>
@@ -1264,12 +1279,42 @@
   faders.forEach(el => obs.observe(el));
 
   // Form submit
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const btn = e.target.querySelector('button[type="submit"]');
-    btn.textContent = 'Message sent ✓';
-    btn.style.background = '#3d6b50';
-    setTimeout(() => { btn.textContent = 'Send Message'; btn.style.background = ''; e.target.reset(); }, 3000);
+    const originalText = btn.textContent;
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/vidor.gergely@gmail.com', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(e.target)
+      });
+
+      if (response.ok) {
+        btn.textContent = 'Message sent ✓';
+        btn.style.background = '#3d6b50';
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.background = '';
+          btn.disabled = false;
+          e.target.reset();
+        }, 3000);
+      } else {
+        throw new Error('Server error');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      btn.textContent = 'Error — try again';
+      btn.style.background = '#6b3d3d';
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 3000);
+    }
   }
 </script>
 </body>
