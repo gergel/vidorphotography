@@ -869,6 +869,151 @@
     .footer-grid { grid-template-columns: 1fr; }
     .about-stats { grid-template-columns: 1fr; }
   }
+
+  /* Gallery Modal */
+  .gallery-modal {
+    display: none;
+    position: fixed; inset: 0;
+    z-index: 600;
+    align-items: center; justify-content: center;
+  }
+  .gallery-modal.open { display: flex; }
+  .gallery-modal-backdrop {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.92);
+    cursor: pointer;
+  }
+  .gallery-modal-content {
+    position: relative; z-index: 1;
+    width: min(1100px, 95vw);
+    max-height: 90vh;
+    background: var(--off-black);
+    border: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .gallery-modal-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 32px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .gallery-modal-title {
+    font-family: var(--serif);
+    font-size: 1.6rem; font-weight: 300;
+    color: var(--white);
+  }
+  .gallery-modal-close {
+    background: transparent; border: none;
+    color: rgba(255,255,255,0.7);
+    font-size: 1.4rem; cursor: pointer;
+    padding: 4px 10px; line-height: 1;
+    transition: color 0.2s;
+  }
+  .gallery-modal-close:hover { color: #fff; }
+  .gallery-grid-wrap {
+    overflow-y: auto;
+    padding: 28px 32px;
+    flex: 1;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .gallery-grid-item {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--dark);
+    position: relative;
+  }
+  .gallery-grid-item img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: transform 0.4s ease;
+  }
+  .gallery-grid-item:hover img { transform: scale(1.06); }
+  .gallery-grid-item::after {
+    content: '⊕';
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; color: white;
+    background: rgba(0,0,0,0.38);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .gallery-grid-item:hover::after { opacity: 1; }
+  .gallery-grid-item:focus { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .gallery-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.8;
+  }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed; inset: 0;
+    z-index: 700;
+    align-items: center; justify-content: center;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox-backdrop {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.96);
+    cursor: pointer;
+  }
+  .lightbox-img {
+    position: relative; z-index: 1;
+    max-width: 90vw; max-height: 85vh;
+    object-fit: contain; display: block;
+    user-select: none;
+  }
+  .lightbox-close {
+    position: absolute; top: 18px; right: 22px; z-index: 2;
+    background: transparent; border: none;
+    color: rgba(255,255,255,0.7);
+    font-size: 1.6rem; cursor: pointer;
+    padding: 4px 8px; line-height: 1;
+    transition: color 0.2s;
+  }
+  .lightbox-close:hover { color: #fff; }
+  .lightbox-prev, .lightbox-next {
+    position: absolute; top: 50%; z-index: 2;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    color: white; font-size: 1.8rem; cursor: pointer;
+    width: 48px; height: 72px;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .lightbox-prev:hover, .lightbox-next:hover { background: rgba(200,169,110,0.25); border-color: var(--gold); }
+  .lightbox-prev { left: 20px; }
+  .lightbox-next { right: 20px; }
+  .lightbox-counter {
+    position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+    z-index: 2;
+    font-size: 0.875rem; letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.55);
+  }
+
+  .gallery-empty-hint {
+    font-size: 0.8rem;
+    opacity: 0.6;
+    display: block;
+    margin-top: 6px;
+  }
+    .gallery-modal-content { width: 100%; max-height: 100dvh; border: none; border-radius: 0; }
+    .gallery-modal-header { padding: 16px 20px; }
+    .gallery-grid-wrap { padding: 16px; }
+    .lightbox-prev { left: 8px; }
+    .lightbox-next { right: 8px; }
+  }
 </style>
 </head>
 <body>
@@ -1077,60 +1222,60 @@
         <div class="tile-label-type">Video</div>
       </div>
     </a>
-    <!-- FOTÓ: Gastro — Töltsd fel: images/gastro.jpg -->
-    <a href="#contact" class="portfolio-tile">
+    <!-- FOTÓ: Gastro — Töltsd fel: images/gastro/ mappába -->
+    <a href="#" data-gallery="gastro" class="portfolio-tile">
       <div class="tile-bg tile-pattern-4" style="background-image: url('images/gastro.jpg');"></div>
       <div class="tile-overlay">
-        <div class="tile-icon">◎</div>
-        <div class="tile-action">View Slideshow</div>
+        <div class="tile-icon">⊞</div>
+        <div class="tile-action">View Gallery</div>
       </div>
       <div class="tile-label">
         <div class="tile-label-text">Gastro</div>
         <div class="tile-label-type">Photography</div>
       </div>
     </a>
-    <!-- FOTÓ: Portraits — Töltsd fel: images/portraits.jpg -->
-    <a href="#contact" class="portfolio-tile">
+    <!-- FOTÓ: Portraits — Töltsd fel: images/portraits/ mappába -->
+    <a href="#" data-gallery="portraits" class="portfolio-tile">
       <div class="tile-bg tile-pattern-5" style="background-image: url('images/portraits.jpg');"></div>
       <div class="tile-overlay">
-        <div class="tile-icon">◎</div>
-        <div class="tile-action">View Slideshow</div>
+        <div class="tile-icon">⊞</div>
+        <div class="tile-action">View Gallery</div>
       </div>
       <div class="tile-label">
         <div class="tile-label-text">Portraits</div>
         <div class="tile-label-type">Photography</div>
       </div>
     </a>
-    <!-- FOTÓ: Event — Töltsd fel: images/event.jpg -->
-    <a href="#contact" class="portfolio-tile">
+    <!-- FOTÓ: Event — Töltsd fel: images/event/ mappába -->
+    <a href="#" data-gallery="event" class="portfolio-tile">
       <div class="tile-bg tile-pattern-6" style="background-image: url('images/event.jpg');"></div>
       <div class="tile-overlay">
-        <div class="tile-icon">◎</div>
-        <div class="tile-action">View Slideshow</div>
+        <div class="tile-icon">⊞</div>
+        <div class="tile-action">View Gallery</div>
       </div>
       <div class="tile-label">
         <div class="tile-label-text">Event</div>
         <div class="tile-label-type">Photography</div>
       </div>
     </a>
-    <!-- FOTÓ: Esküvő — Töltsd fel: images/eskuvo.jpg -->
-    <a href="#contact" class="portfolio-tile">
+    <!-- FOTÓ: Esküvő — Töltsd fel: images/eskuvo/ mappába -->
+    <a href="#" data-gallery="eskuvo" class="portfolio-tile">
       <div class="tile-bg tile-pattern-7" style="background-image: url('images/eskuvo.jpg');"></div>
       <div class="tile-overlay">
-        <div class="tile-icon">◎</div>
-        <div class="tile-action">View Slideshow</div>
+        <div class="tile-icon">⊞</div>
+        <div class="tile-action">View Gallery</div>
       </div>
       <div class="tile-label">
         <div class="tile-label-text">Esküvő</div>
         <div class="tile-label-type">Photography</div>
       </div>
     </a>
-    <!-- FOTÓ: Koncert — Töltsd fel: images/koncert.jpg -->
-    <a href="#contact" class="portfolio-tile">
+    <!-- FOTÓ: Koncert — Töltsd fel: images/koncert/ mappába -->
+    <a href="#" data-gallery="koncert" class="portfolio-tile">
       <div class="tile-bg tile-pattern-8" style="background-image: url('images/koncert.jpg');"></div>
       <div class="tile-overlay">
-        <div class="tile-icon">◎</div>
-        <div class="tile-action">View Slideshow</div>
+        <div class="tile-icon">⊞</div>
+        <div class="tile-action">View Gallery</div>
       </div>
       <div class="tile-label">
         <div class="tile-label-text">Koncert</div>
@@ -1270,6 +1415,30 @@
   </div>
 </footer>
 
+<!-- Gallery Modal -->
+<div id="galleryModal" class="gallery-modal" role="dialog" aria-modal="true" aria-labelledby="galleryModalTitle">
+  <div class="gallery-modal-backdrop"></div>
+  <div class="gallery-modal-content">
+    <div class="gallery-modal-header">
+      <div class="gallery-modal-title" id="galleryModalTitle"></div>
+      <button class="gallery-modal-close" id="galleryModalClose" aria-label="Bezárás">✕</button>
+    </div>
+    <div class="gallery-grid-wrap">
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Kép nagyítva">
+  <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+  <button class="lightbox-close" id="lightboxClose" aria-label="Bezárás">✕</button>
+  <button class="lightbox-prev" id="lightboxPrev" aria-label="Előző">‹</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <button class="lightbox-next" id="lightboxNext" aria-label="Következő">›</button>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+</div>
+
 <!-- YouTube Modal -->
 <div id="ytModal" class="yt-modal" role="dialog" aria-modal="true" aria-label="Video lejátszó">
   <div class="yt-modal-backdrop"></div>
@@ -1379,7 +1548,163 @@
 
   ytClose.addEventListener('click', closeYtModal);
   if (ytBackdrop) ytBackdrop.addEventListener('click', closeYtModal);
-  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeYtModal(); });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      if (lightbox.classList.contains('open')) { closeLightbox(); return; }
+      if (galleryModal.classList.contains('open')) { closeGallery(); return; }
+      closeYtModal();
+    }
+    if (lightbox.classList.contains('open')) {
+      if (e.key === 'ArrowLeft') lightboxPrev();
+      if (e.key === 'ArrowRight') lightboxNext();
+    }
+  });
+
+  // ─── Gallery & Lightbox ──────────────────────────────────────────────────
+  //
+  // KÉPEK FELTÖLTÉSE:
+  // Minden kategóriához tölts fel képeket a megfelelő mappába (images/<kategória>/),
+  // majd add hozzá az elérési útjukat az alábbi GALLERIES objektumhoz.
+  //
+  // Példa: 'images/gastro/gastro-01.jpg'
+  //
+  const GALLERIES = {
+    gastro: {
+      title: 'Gastro',
+      images: [
+        // 'images/gastro/gastro-01.jpg',
+        // 'images/gastro/gastro-02.jpg',
+        // 'images/gastro/gastro-03.jpg',
+      ]
+    },
+    portraits: {
+      title: 'Portraits',
+      images: [
+        // 'images/portraits/portraits-01.jpg',
+        // 'images/portraits/portraits-02.jpg',
+        // 'images/portraits/portraits-03.jpg',
+      ]
+    },
+    event: {
+      title: 'Event',
+      images: [
+        // 'images/event/event-01.jpg',
+        // 'images/event/event-02.jpg',
+        // 'images/event/event-03.jpg',
+      ]
+    },
+    eskuvo: {
+      title: 'Esküvő',
+      images: [
+        // 'images/eskuvo/eskuvo-01.jpg',
+        // 'images/eskuvo/eskuvo-02.jpg',
+        // 'images/eskuvo/eskuvo-03.jpg',
+      ]
+    },
+    koncert: {
+      title: 'Koncert',
+      images: [
+        // 'images/koncert/koncert-01.jpg',
+        // 'images/koncert/koncert-02.jpg',
+        // 'images/koncert/koncert-03.jpg',
+      ]
+    }
+  };
+
+  const galleryModal = document.getElementById('galleryModal');
+  const galleryGrid = document.getElementById('galleryGrid');
+  const galleryModalTitle = document.getElementById('galleryModalTitle');
+  let currentGallery = [];
+
+  function openGallery(key) {
+    const gallery = GALLERIES[key];
+    if (!gallery) return;
+    currentGallery = gallery.images;
+    galleryModalTitle.textContent = gallery.title;
+    galleryGrid.innerHTML = '';
+    if (gallery.images.length === 0) {
+      galleryGrid.innerHTML = '<div class="gallery-empty">Hamarosan — a képek feltöltés alatt.<span class="gallery-empty-hint">Add hozzá a képeket a GALLERIES objektumhoz az index.html-ben.</span></div>';
+    } else {
+      gallery.images.forEach(function(src, idx) {
+        var item = document.createElement('div');
+        item.className = 'gallery-grid-item';
+        item.setAttribute('tabindex', '0');
+        item.setAttribute('aria-label', gallery.title + ' — ' + (idx + 1) + '. kép');
+        var img = document.createElement('img');
+        img.src = src;
+        img.alt = gallery.title + ' ' + (idx + 1);
+        img.loading = 'lazy';
+        item.appendChild(img);
+        item.addEventListener('click', function() { openLightbox(idx); });
+        item.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(idx); }
+        });
+        galleryGrid.appendChild(item);
+      });
+    }
+    galleryModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeGallery() {
+    galleryModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('galleryModalClose').addEventListener('click', closeGallery);
+  document.querySelector('.gallery-modal-backdrop').addEventListener('click', closeGallery);
+
+  // Photo tiles → open gallery
+  document.querySelectorAll('.portfolio-tile[data-gallery]').forEach(function(tile) {
+    tile.setAttribute('role', 'button');
+    tile.setAttribute('tabindex', '0');
+    tile.addEventListener('click', function(e) {
+      e.preventDefault();
+      openGallery(tile.dataset.gallery);
+    });
+    tile.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openGallery(tile.dataset.gallery); }
+    });
+  });
+
+  // Lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCounter = document.getElementById('lightboxCounter');
+  let currentLightboxIndex = 0;
+
+  function openLightbox(index) {
+    currentLightboxIndex = index;
+    updateLightboxImage();
+    lightbox.classList.add('open');
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightboxImg.src = '';
+    lightboxImg.alt = '';
+  }
+
+  function lightboxPrev() {
+    currentLightboxIndex = (currentLightboxIndex - 1 + currentGallery.length) % currentGallery.length;
+    updateLightboxImage();
+  }
+
+  function lightboxNext() {
+    currentLightboxIndex = (currentLightboxIndex + 1) % currentGallery.length;
+    updateLightboxImage();
+  }
+
+  function updateLightboxImage() {
+    lightboxImg.src = currentGallery[currentLightboxIndex];
+    lightboxImg.alt = galleryModalTitle.textContent + ' — ' + (currentLightboxIndex + 1) + '. kép';
+    lightboxCounter.textContent = (currentLightboxIndex + 1) + ' / ' + currentGallery.length;
+  }
+
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  document.getElementById('lightboxBackdrop').addEventListener('click', closeLightbox);
+  document.getElementById('lightboxPrev').addEventListener('click', lightboxPrev);
+  document.getElementById('lightboxNext').addEventListener('click', lightboxNext);
 
   // Form submit
   async function handleSubmit(e) {
