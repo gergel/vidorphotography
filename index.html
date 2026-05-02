@@ -229,6 +229,12 @@
     position: relative;
     overflow: hidden;
   }
+  .hero-img-placeholder img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
   .hero-img-inner {
     position: absolute; inset: 0;
     background:
@@ -364,6 +370,7 @@
     gap: 80px;
     align-items: start;
     max-width: 1200px;
+    margin-left: auto; margin-right: auto;
   }
   .about-year {
     font-family: var(--serif);
@@ -449,6 +456,7 @@
     background: var(--border);
     margin-bottom: 48px;
     max-width: 1200px;
+    margin-left: auto; margin-right: auto;
   }
   .service-card {
     background: var(--black);
@@ -507,6 +515,7 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 2px;
     max-width: 1200px;
+    margin-left: auto; margin-right: auto;
     margin-bottom: 48px;
   }
   .portfolio-tile {
@@ -522,7 +531,7 @@
   .portfolio-tile:nth-child(4) { grid-column: span 2; }
   .tile-bg {
     position: absolute; inset: 0;
-    background: linear-gradient(135deg, var(--dark) 0%, var(--mid) 100%);
+    background-color: var(--dark);
     background-size: cover;
     background-position: center;
     transition: transform 0.6s ease;
@@ -589,6 +598,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 80px;
     max-width: 1100px;
+    margin-left: auto; margin-right: auto;
     align-items: start;
   }
   .why-grid {
@@ -705,6 +715,7 @@
     gap: 48px;
     margin-bottom: 48px;
     max-width: 1200px;
+    margin-left: auto; margin-right: auto;
   }
   .footer-brand .logo { margin-bottom: 16px; }
   .footer-tagline {
@@ -865,6 +876,7 @@
   </div>
   <div class="hero-image-block">
     <div class="hero-img-placeholder">
+      <img src="koncert.jpg" alt="Vidor Photography — Koncert">
       <div class="hero-img-inner"></div>
       <div class="hero-img-badge">
         <span class="hero-img-badge-num">10+</span>
@@ -984,10 +996,9 @@
   <p class="section-sub fade-up">Explore my work across different genres and styles.</p>
 
   <div class="portfolio-grid fade-up">
-    <!-- VIDEO TILE 1: Cseréld le a href-et a YouTube videó linkjére, pl.: href="https://www.youtube.com/watch?v=VIDEO_ID" -->
-    <!-- Kép hozzáadása: add style="background-image: url('kepek/dokumentumfilm.jpg')" a tile-bg divhez -->
-    <a href="#contact" target="_blank" rel="noopener" class="portfolio-tile">
-      <div class="tile-bg tile-pattern-1"></div>
+    <!-- VIDEO 1: Cseréld le a href-ben a VIDEO_ID-t a YouTube videód azonosítójára -->
+    <a href="https://www.youtube.com/watch?v=VIDEO_ID_1" target="_blank" rel="noopener" class="portfolio-tile">
+      <div class="tile-bg tile-pattern-1" style="background-image: url('images/dokumentumfilm.jpg');"></div>
       <div class="tile-overlay">
         <div class="tile-icon">▶</div>
         <div class="tile-action">Watch Video</div>
@@ -997,10 +1008,9 @@
         <div class="tile-label-type">Video</div>
       </div>
     </a>
-    <!-- VIDEO TILE 2: Cseréld le a href-et a YouTube videó linkjére -->
-    <!-- Kép hozzáadása: add style="background-image: url('kepek/visual-storytelling.jpg')" a tile-bg divhez -->
-    <a href="#contact" target="_blank" rel="noopener" class="portfolio-tile">
-      <div class="tile-bg tile-pattern-2"></div>
+    <!-- VIDEO 2: Cseréld le a href-ben a VIDEO_ID-t a YouTube videód azonosítójára -->
+    <a href="https://www.youtube.com/watch?v=VIDEO_ID_2" target="_blank" rel="noopener" class="portfolio-tile">
+      <div class="tile-bg tile-pattern-2" style="background-image: url('images/visual-storytelling.jpg');"></div>
       <div class="tile-overlay">
         <div class="tile-icon">▶</div>
         <div class="tile-action">Watch Video</div>
@@ -1010,10 +1020,9 @@
         <div class="tile-label-type">Video</div>
       </div>
     </a>
-    <!-- VIDEO TILE 3: Cseréld le a href-et a YouTube videó linkjére -->
-    <!-- Kép hozzáadása: add style="background-image: url('kepek/weddings-video.jpg')" a tile-bg divhez -->
-    <a href="#contact" target="_blank" rel="noopener" class="portfolio-tile">
-      <div class="tile-bg tile-pattern-3"></div>
+    <!-- VIDEO 3: Cseréld le a href-ben a VIDEO_ID-t a YouTube videód azonosítójára -->
+    <a href="https://www.youtube.com/watch?v=VIDEO_ID_3" target="_blank" rel="noopener" class="portfolio-tile">
+      <div class="tile-bg tile-pattern-3" style="background-image: url('images/weddings-video.jpg');"></div>
       <div class="tile-overlay">
         <div class="tile-icon">▶</div>
         <div class="tile-action">Watch Video</div>
@@ -1023,9 +1032,9 @@
         <div class="tile-label-type">Video</div>
       </div>
     </a>
-    <!-- PHOTO TILE 4: Gastro — Kép hozzáadása: add style="background-image: url('kepek/gastro.jpg')" a tile-bg divhez -->
+    <!-- FOTÓ: Gastro — Töltsd fel: images/gastro.jpg -->
     <a href="#contact" class="portfolio-tile">
-      <div class="tile-bg tile-pattern-4"></div>
+      <div class="tile-bg tile-pattern-4" style="background-image: url('images/gastro.jpg');"></div>
       <div class="tile-overlay">
         <div class="tile-icon">◎</div>
         <div class="tile-action">View Slideshow</div>
@@ -1035,9 +1044,9 @@
         <div class="tile-label-type">Photography</div>
       </div>
     </a>
-    <!-- PHOTO TILE 5: Portraits — Kép hozzáadása: add style="background-image: url('kepek/portraits.jpg')" a tile-bg divhez -->
+    <!-- FOTÓ: Portraits — Töltsd fel: images/portraits.jpg -->
     <a href="#contact" class="portfolio-tile">
-      <div class="tile-bg tile-pattern-5"></div>
+      <div class="tile-bg tile-pattern-5" style="background-image: url('images/portraits.jpg');"></div>
       <div class="tile-overlay">
         <div class="tile-icon">◎</div>
         <div class="tile-action">View Slideshow</div>
@@ -1047,9 +1056,9 @@
         <div class="tile-label-type">Photography</div>
       </div>
     </a>
-    <!-- PHOTO TILE 6: Event — Kép hozzáadása: add style="background-image: url('kepek/event.jpg')" a tile-bg divhez -->
+    <!-- FOTÓ: Event — Töltsd fel: images/event.jpg -->
     <a href="#contact" class="portfolio-tile">
-      <div class="tile-bg tile-pattern-6"></div>
+      <div class="tile-bg tile-pattern-6" style="background-image: url('images/event.jpg');"></div>
       <div class="tile-overlay">
         <div class="tile-icon">◎</div>
         <div class="tile-action">View Slideshow</div>
@@ -1059,9 +1068,9 @@
         <div class="tile-label-type">Photography</div>
       </div>
     </a>
-    <!-- PHOTO TILE 7: Esküvő — Kép hozzáadása: add style="background-image: url('kepek/eskuvo.jpg')" a tile-bg divhez -->
+    <!-- FOTÓ: Esküvő — Töltsd fel: images/eskuvo.jpg -->
     <a href="#contact" class="portfolio-tile">
-      <div class="tile-bg tile-pattern-7"></div>
+      <div class="tile-bg tile-pattern-7" style="background-image: url('images/eskuvo.jpg');"></div>
       <div class="tile-overlay">
         <div class="tile-icon">◎</div>
         <div class="tile-action">View Slideshow</div>
@@ -1071,9 +1080,9 @@
         <div class="tile-label-type">Photography</div>
       </div>
     </a>
-    <!-- PHOTO TILE 8: Koncert — Kép hozzáadása: add style="background-image: url('kepek/koncert.jpg')" a tile-bg divhez -->
+    <!-- FOTÓ: Koncert — Töltsd fel: images/koncert.jpg -->
     <a href="#contact" class="portfolio-tile">
-      <div class="tile-bg tile-pattern-8"></div>
+      <div class="tile-bg tile-pattern-8" style="background-image: url('images/koncert.jpg');"></div>
       <div class="tile-overlay">
         <div class="tile-icon">◎</div>
         <div class="tile-action">View Slideshow</div>
