@@ -2,17 +2,56 @@
 
 Ide kell feltölteni a portfolio képeket. A fájlneveknek pontosan egyezniük kell!
 
-## Fotók (cover képek a portfolio tile-okhoz)
+## Cover képek (a portfolio tile-ok háttere)
 
 | Fájlnév | Portfolio tile |
 |---|---|
-| `gastro.jpg` | Gastro Photography |
-| `portraits.jpg` | Portraits Photography |
-| `event.jpg` | Event Photography |
-| `eskuvo.jpg` | Esküvő Photography |
-| `koncert.jpg` | Koncert Photography |
+| `gastro.jpg` | Gastro Photography (cover) |
+| `portraits.jpg` | Portraits Photography (cover) |
+| `event.jpg` | Event Photography (cover) |
+| `eskuvo.jpg` | Esküvő Photography (cover) |
+| `koncert.jpg` | Koncert Photography (cover) |
 
-## Videó thumbnail képek (opcionális — ha van borítókép a videóhoz)
+## Galéria képek (felugró galéria ablakhoz)
+
+Minden kategóriához külön almappa van. A képeket töltsd fel a megfelelő mappába, majd add hozzá az elérési útjukat az `index.html`-ben a `GALLERIES` objektumhoz.
+
+### Mappastruktúra
+
+```
+images/
+├── gastro/         ← gastro galéria képek
+├── portraits/      ← portré galéria képek
+├── event/          ← esemény galéria képek
+├── eskuvo/         ← esküvő galéria képek
+└── koncert/        ← koncert galéria képek
+```
+
+### Ajánlott fájlnév-konvenció
+
+```
+images/gastro/gastro-01.jpg
+images/gastro/gastro-02.jpg
+images/portraits/portraits-01.jpg
+...
+```
+
+### Képek hozzáadása az index.html-hez
+
+Nyisd meg az `index.html` fájlt, keresd meg a `GALLERIES` objektumot (kb. a JS szekció elején), és add hozzá a képeket:
+
+```js
+gastro: {
+  title: 'Gastro',
+  images: [
+    'images/gastro/gastro-01.jpg',
+    'images/gastro/gastro-02.jpg',
+    'images/gastro/gastro-03.jpg',
+  ]
+},
+```
+
+## Videó thumbnail képek (opcionális)
 
 | Fájlnév | Portfolio tile |
 |---|---|
@@ -20,24 +59,9 @@ Ide kell feltölteni a portfolio képeket. A fájlneveknek pontosan egyezniük k
 | `visual-storytelling.jpg` | Visual Storytelling videó |
 | `weddings-video.jpg` | Weddings videó |
 
-## Videó linkek módosítása
-
-Az `index.html` fájlban keresd meg ezt a részt és cseréld le a `VIDEO_ID_X` részeket a valódi YouTube videó azonosítóra:
-
-```html
-<!-- VIDEO 1 -->
-<a href="https://www.youtube.com/watch?v=VIDEO_ID_1" ...>
-<!-- VIDEO 2 -->
-<a href="https://www.youtube.com/watch?v=VIDEO_ID_2" ...>
-<!-- VIDEO 3 -->
-<a href="https://www.youtube.com/watch?v=VIDEO_ID_3" ...>
-```
-
-A YouTube videó azonosítója (VIDEO_ID) az URL-ben a `?v=` után található, pl.:
-`https://www.youtube.com/watch?v=`**dQw4w9WgXcQ** → azonosító: `dQw4w9WgXcQ`
-
 ## Tippek
 
-- Ajánlott képméret: minimum 800×600 px, lehetőleg 1200×900 px vagy nagyobb
-- Formátum: JPG vagy WebP ajánlott (kisebb fájlméret)
-- A képek automatikusan középre igazítva és kitöltő módban (`cover`) jelennek meg
+- **Cover képek**: legalább 800×600 px, ajánlott 1200×800 px
+- **Galéria képek**: legalább 1200×800 px, ajánlott 1920×1280 px vagy nagyobb
+- **Formátum**: JPG vagy WebP ajánlott (kisebb fájlméret)
+- A képek automatikusan középre igazítva jelennek meg (`object-fit: cover`)
