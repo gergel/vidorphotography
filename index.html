@@ -427,6 +427,15 @@
     color: var(--muted);
   }
   .about-right { padding-top: 20px; }
+  .about-photo {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    margin-bottom: 40px;
+    filter: grayscale(15%);
+  }
   .since-block {
     border-left: 1px solid var(--gold);
     padding-left: 24px;
@@ -1115,6 +1124,8 @@
       </div>
     </div>
     <div class="about-right fade-up delay-2">
+      <!-- FOTÓ: Saját kép — Töltsd fel ide: images/about-photo.jpg -->
+      <img src="images/about-photo.jpg" alt="Vidor Gergely" class="about-photo">
       <div class="since-block">
         <div class="since-number">2015</div>
         <div class="since-label">Óta a szakmában</div>
@@ -1604,8 +1615,8 @@
     koncert: {
       title: 'Koncert',
       images: [
-        // 'images/koncert/koncert-01.jpg',
-        // 'images/koncert/koncert-02.jpg',
+        'images/koncert/koncert-01.jpg',
+        'images/koncert/koncert-02.jpg',
         // 'images/koncert/koncert-03.jpg',
       ]
     }
