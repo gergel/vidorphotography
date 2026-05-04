@@ -1023,6 +1023,157 @@
     .lightbox-prev { left: 8px; }
     .lightbox-next { right: 8px; }
   }
+
+  /* Service Detail Modal */
+  .service-modal {
+    display: none;
+    position: fixed; inset: 0;
+    z-index: 610;
+    align-items: center; justify-content: center;
+    padding: 16px;
+  }
+  .service-modal.open { display: flex; }
+  .service-modal-backdrop {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.92);
+    cursor: pointer;
+  }
+  .service-modal-content {
+    position: relative; z-index: 1;
+    width: min(820px, 100%);
+    max-height: 90vh;
+    background: var(--off-black);
+    border: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .service-modal-header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    padding: 24px 32px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+    gap: 16px;
+  }
+  .service-modal-header-left { flex: 1; min-width: 0; }
+  .service-modal-num {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .service-modal-title {
+    font-family: var(--serif);
+    font-size: 1.6rem; font-weight: 300;
+    color: var(--white);
+    line-height: 1.2;
+  }
+  .service-modal-close {
+    background: transparent; border: none;
+    color: rgba(255,255,255,0.7);
+    font-size: 1.4rem; cursor: pointer;
+    padding: 4px 10px; line-height: 1;
+    transition: color 0.2s;
+    flex-shrink: 0;
+    margin-top: -4px;
+  }
+  .service-modal-close:hover { color: #fff; }
+  .service-modal-body { overflow-y: auto; flex: 1; }
+  .service-modal-images {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    padding: 24px 24px 0;
+  }
+  .service-modal-img-item {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    background: var(--dark);
+    position: relative;
+  }
+  .service-modal-img-item img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: transform 0.4s ease;
+  }
+  .service-modal-img-item:hover img { transform: scale(1.05); }
+  .service-modal-img-empty {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    padding: 24px 24px 0;
+  }
+  .service-modal-img-slot {
+    aspect-ratio: 4/3;
+    background: var(--dark);
+    border: 1px dashed rgba(255,255,255,0.07);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.12);
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .service-modal-info { padding: 28px 32px 32px; }
+  .service-modal-subtitle {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .service-modal-subtitle::before {
+    content: '';
+    display: block; width: 24px; height: 1px;
+    background: var(--gold);
+  }
+  .service-modal-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 24px;
+    max-width: 640px;
+  }
+  .service-modal-includes-title {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .service-modal-bullets {
+    list-style: none;
+    margin: 0 0 28px; padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 32px;
+  }
+  .service-modal-bullets li {
+    font-size: 0.85rem;
+    color: var(--muted);
+    display: flex; align-items: flex-start; gap: 10px;
+    line-height: 1.5;
+  }
+  .service-modal-bullets li::before {
+    content: '—';
+    color: var(--gold);
+    flex-shrink: 0;
+    font-family: var(--serif);
+  }
+  .service-modal-cta {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  @media (max-width: 640px) {
+    .service-modal-content { max-height: 100dvh; border: none; }
+    .service-modal-header { padding: 18px 20px; }
+    .service-modal-title { font-size: 1.3rem; }
+    .service-modal-images, .service-modal-img-empty { grid-template-columns: repeat(2, 1fr); padding: 16px 16px 0; }
+    .service-modal-info { padding: 20px 20px 24px; }
+    .service-modal-bullets { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -1149,37 +1300,37 @@
       <div class="service-num">01</div>
       <div class="service-title">Wedding Photography &amp; Videography</div>
       <p class="service-desc">Capture every moment of your special day in cinematic style, creating timeless memories.</p>
-      <a href="#contact" class="service-link">Details</a>
+      <a href="#" data-service="wedding" class="service-link">Details</a>
     </div>
     <div class="service-card">
       <div class="service-num">02</div>
       <div class="service-title">Event Photography</div>
       <p class="service-desc">Professional event photography capturing the energy and moments of corporate events, parties, and celebrations.</p>
-      <a href="#contact" class="service-link">Details</a>
+      <a href="#" data-service="event" class="service-link">Details</a>
     </div>
     <div class="service-card">
       <div class="service-num">03</div>
       <div class="service-title">Gastro Photography</div>
       <p class="service-desc">Appetizing food and beverage photography for restaurants, bars, and culinary brands.</p>
-      <a href="#contact" class="service-link">Details</a>
+      <a href="#" data-service="gastro" class="service-link">Details</a>
     </div>
     <div class="service-card">
       <div class="service-num">04</div>
       <div class="service-title">Portrait Photography</div>
       <p class="service-desc">Expressive, artistic portrait photos with unique lighting and atmospheric mood.</p>
-      <a href="#contact" class="service-link">Details</a>
+      <a href="#" data-service="portraits" class="service-link">Details</a>
     </div>
     <div class="service-card">
       <div class="service-num">05</div>
       <div class="service-title">Concert Photography</div>
       <p class="service-desc">Dynamic concert and live performance photography capturing the energy and atmosphere of music events.</p>
-      <a href="#contact" class="service-link">Details</a>
+      <a href="#" data-service="concert" class="service-link">Details</a>
     </div>
     <div class="service-card">
       <div class="service-num">06</div>
       <div class="service-title">Documentary Film</div>
       <p class="service-desc">Cinematic documentary filmmaking with authentic storytelling and professional production quality.</p>
-      <a href="#contact" class="service-link">Details</a>
+      <a href="#" data-service="documentary" class="service-link">Details</a>
     </div>
   </div>
 
@@ -1461,6 +1612,21 @@
   </div>
 </div>
 
+<!-- Service Detail Modal -->
+<div id="serviceModal" class="service-modal" role="dialog" aria-modal="true" aria-labelledby="serviceModalTitle">
+  <div class="service-modal-backdrop"></div>
+  <div class="service-modal-content">
+    <div class="service-modal-header">
+      <div class="service-modal-header-left">
+        <div class="service-modal-num" id="serviceModalNum"></div>
+        <div class="service-modal-title" id="serviceModalTitle"></div>
+      </div>
+      <button class="service-modal-close" id="serviceModalClose" aria-label="Bezárás">✕</button>
+    </div>
+    <div class="service-modal-body" id="serviceModalBody"></div>
+  </div>
+</div>
+
 <script>
   // Custom cursor
   const cursor = document.getElementById('cursor');
@@ -1586,12 +1752,211 @@
     if (e.key === 'Escape') {
       if (lightbox.classList.contains('open')) { closeLightbox(); return; }
       if (galleryModal.classList.contains('open')) { closeGallery(); return; }
+      if (serviceModal.classList.contains('open')) { closeServiceModal(); return; }
       closeYtModal();
     }
     if (lightbox.classList.contains('open')) {
       if (e.key === 'ArrowLeft') lightboxPrev();
       if (e.key === 'ArrowRight') lightboxNext();
     }
+  });
+
+  // ─── Service Detail Modal ────────────────────────────────────────────────
+  //
+  // KÉPEK FELTÖLTÉSE a service modalhoz:
+  // Minden szolgáltatáshoz tölts fel 4-6 képet a images/services/<kategória>/ mappába,
+  // majd vedd ki a kommentet az elérési utakról az alábbi SERVICES objektumban.
+  //
+  const SERVICES = {
+    wedding: {
+      num: '01',
+      title: 'Wedding Photography & Videography',
+      subtitle: 'Cinematic style · Storytelling workflow',
+      description: 'Your wedding day deserves more than snapshots — it deserves a film. I document every emotion, every glance, every fleeting moment with a cinematic eye and a storyteller\'s instinct. From the quiet morning preparations to the last dance, nothing goes unseen.',
+      bullets: [
+        'Full-day coverage (ceremony + reception)',
+        '2 operator (photo + video)',
+        'Drone footage (weather permitting)',
+        'Cinematic highlight film',
+        'Color grading & editing',
+        'Online gallery delivery',
+      ],
+      images: [
+        // 'images/services/wedding/wedding-01.jpg',
+        // 'images/services/wedding/wedding-02.jpg',
+        // 'images/services/wedding/wedding-03.jpg',
+        // 'images/services/wedding/wedding-04.jpg',
+        // 'images/services/wedding/wedding-05.jpg',
+        // 'images/services/wedding/wedding-06.jpg',
+      ]
+    },
+    event: {
+      num: '02',
+      title: 'Event Photography',
+      subtitle: 'Corporate & social events · Fast delivery',
+      description: 'Conferences, galas, school balls, graduations — I capture the energy and the details that make each event unique. Candid and portrait shots delivered quickly in a polished online gallery, ready for publication or social media.',
+      bullets: [
+        'Full event coverage',
+        'Candid & posed photography',
+        'Quick online gallery delivery',
+        'Print-ready resolution',
+        'Social media ready edits',
+        'Press & editorial use',
+      ],
+      images: [
+        // 'images/services/event/event-01.jpg',
+        // 'images/services/event/event-02.jpg',
+        // 'images/services/event/event-03.jpg',
+        // 'images/services/event/event-04.jpg',
+        // 'images/services/event/event-05.jpg',
+        // 'images/services/event/event-06.jpg',
+      ]
+    },
+    gastro: {
+      num: '03',
+      title: 'Gastro Photography',
+      subtitle: 'Food, drinks & atmosphere · Brand-ready',
+      description: 'Beautifully lit, styled, and composed — my gastro photography makes your menu and brand irresistible. Specialising in food, cocktails, interiors, and brand storytelling for restaurants, bars, and culinary entrepreneurs in Budapest.',
+      bullets: [
+        'Food & dish styling shots',
+        'Cocktails & beverages',
+        'Restaurant interior & ambiance',
+        'Retouched, ready-to-use files',
+        'Social media & menu formats',
+        'Brand identity consistency',
+      ],
+      images: [
+        // 'images/services/gastro/gastro-01.jpg',
+        // 'images/services/gastro/gastro-02.jpg',
+        // 'images/services/gastro/gastro-03.jpg',
+        // 'images/services/gastro/gastro-04.jpg',
+        // 'images/services/gastro/gastro-05.jpg',
+        // 'images/services/gastro/gastro-06.jpg',
+      ]
+    },
+    portraits: {
+      num: '04',
+      title: 'Portrait Photography',
+      subtitle: 'Studio & location · Cinematic mood',
+      description: 'Portraits that reveal character. Whether in-studio or on location in Budapest, I use natural and artificial light to craft atmospheric, expressive images — from actor headshots and personal branding to fine art portraits.',
+      bullets: [
+        'Studio or on-location sessions',
+        'Natural light & studio lighting',
+        'Retouched digital delivery',
+        'Multiple outfit changes',
+        'Personal branding & headshots',
+        'Print & digital usage rights',
+      ],
+      images: [
+        // 'images/services/portraits/portraits-01.jpg',
+        // 'images/services/portraits/portraits-02.jpg',
+        // 'images/services/portraits/portraits-03.jpg',
+        // 'images/services/portraits/portraits-04.jpg',
+        // 'images/services/portraits/portraits-05.jpg',
+        // 'images/services/portraits/portraits-06.jpg',
+      ]
+    },
+    concert: {
+      num: '05',
+      title: 'Concert Photography',
+      subtitle: 'Live performance · High-energy documentation',
+      description: 'Fast, reactive, and technically precise — concert photography is about capturing the peak moment in challenging light. I\'ve shot hundreds of live shows ranging from club nights to festival stages, always delivering editorial-quality results.',
+      bullets: [
+        'Low-light expertise',
+        'Stage & crowd dynamics',
+        'Artist press photos',
+        'Fast turnaround delivery',
+        'Editorial & promo quality',
+        'Festival & venue experience',
+      ],
+      images: [
+        // 'images/services/concert/concert-01.jpg',
+        // 'images/services/concert/concert-02.jpg',
+        // 'images/services/concert/concert-03.jpg',
+        // 'images/services/concert/concert-04.jpg',
+        // 'images/services/concert/concert-05.jpg',
+        // 'images/services/concert/concert-06.jpg',
+      ]
+    },
+    documentary: {
+      num: '06',
+      title: 'Documentary Film',
+      subtitle: 'Cinematic storytelling · Full production',
+      description: 'Long-form documentary filmmaking with a journalistic heart and a cinematic aesthetic. From concept to final cut, I handle the full production pipeline — researching, shooting, and editing stories that deserve to be told.',
+      bullets: [
+        '2× Canon C70 cinema cameras',
+        'DZO Cine premium optics',
+        '4K cinematic footage',
+        'Professional sound recording',
+        'Full color grading',
+        'Editing & post-production',
+      ],
+      images: [
+        // 'images/services/documentary/documentary-01.jpg',
+        // 'images/services/documentary/documentary-02.jpg',
+        // 'images/services/documentary/documentary-03.jpg',
+        // 'images/services/documentary/documentary-04.jpg',
+        // 'images/services/documentary/documentary-05.jpg',
+        // 'images/services/documentary/documentary-06.jpg',
+      ]
+    }
+  };
+
+  const serviceModal = document.getElementById('serviceModal');
+  const serviceModalBody = document.getElementById('serviceModalBody');
+  const serviceModalNum = document.getElementById('serviceModalNum');
+  const serviceModalTitle = document.getElementById('serviceModalTitle');
+
+  function openServiceModal(key) {
+    var svc = SERVICES[key];
+    if (!svc) return;
+    serviceModalNum.textContent = svc.num;
+    serviceModalTitle.textContent = svc.title;
+
+    var imagesHtml = '';
+    var imgs = svc.images.filter(Boolean).slice(0, 6);
+    if (imgs.length > 0) {
+      imagesHtml = '<div class="service-modal-images">' +
+        imgs.map(function(src) {
+          return '<div class="service-modal-img-item"><img src="' + src + '" alt="' + svc.title + '" loading="lazy"></div>';
+        }).join('') +
+        '</div>';
+    } else {
+      var slots = Array(6).fill('<div class="service-modal-img-slot">Photo</div>').join('');
+      imagesHtml = '<div class="service-modal-img-empty">' + slots + '</div>';
+    }
+
+    var bulletsHtml = svc.bullets.map(function(b) { return '<li>' + b + '</li>'; }).join('');
+    serviceModalBody.innerHTML =
+      imagesHtml +
+      '<div class="service-modal-info">' +
+        '<div class="service-modal-subtitle">' + svc.subtitle + '</div>' +
+        '<p class="service-modal-desc">' + svc.description + '</p>' +
+        '<div class="service-modal-includes-title">What\'s included</div>' +
+        '<ul class="service-modal-bullets">' + bulletsHtml + '</ul>' +
+        '<div class="service-modal-cta">' +
+          '<a href="#contact" class="btn-primary" onclick="closeServiceModal()">Get in touch</a>' +
+          '<a href="#contact" class="btn-outline" onclick="closeServiceModal()">Book now</a>' +
+        '</div>' +
+      '</div>';
+
+    serviceModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeServiceModal() {
+    serviceModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('serviceModalClose').addEventListener('click', closeServiceModal);
+  document.querySelector('.service-modal-backdrop').addEventListener('click', closeServiceModal);
+
+  document.querySelectorAll('.service-link[data-service]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      openServiceModal(link.dataset.service);
+    });
   });
 
   // ─── Gallery & Lightbox ──────────────────────────────────────────────────
