@@ -59,6 +59,22 @@ gastro: {
 | `visual-storytelling.jpg` | Visual Storytelling videó |
 | `weddings-video.jpg` | Weddings videó |
 
+## Service Modal képek (Details popup)
+
+A Services szekció "Details" gombjára kattintva felugró modalhoz külön almappa van:
+
+```
+images/services/
+├── wedding/
+├── event/
+├── gastro/
+├── portraits/
+├── concert/
+└── documentary/
+```
+
+Részletes leírás: [`images/services/README.md`](services/README.md)
+
 ## Tippek
 
 - **Cover képek**: legalább 800×600 px, ajánlott 1200×800 px
