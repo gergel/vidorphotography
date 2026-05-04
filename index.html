@@ -1621,7 +1621,7 @@
         <div class="service-modal-num" id="serviceModalNum"></div>
         <div class="service-modal-title" id="serviceModalTitle"></div>
       </div>
-      <button class="service-modal-close" id="serviceModalClose" aria-label="Bezárás">✕</button>
+      <button class="service-modal-close" id="serviceModalClose" aria-label="Close">✕</button>
     </div>
     <div class="service-modal-body" id="serviceModalBody"></div>
   </div>
@@ -1907,31 +1907,35 @@
   const serviceModalNum = document.getElementById('serviceModalNum');
   const serviceModalTitle = document.getElementById('serviceModalTitle');
 
+  function escHtml(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
   function openServiceModal(key) {
-    var svc = SERVICES[key];
+    const svc = SERVICES[key];
     if (!svc) return;
     serviceModalNum.textContent = svc.num;
     serviceModalTitle.textContent = svc.title;
 
-    var imagesHtml = '';
-    var imgs = svc.images.filter(Boolean).slice(0, 6);
+    let imagesHtml = '';
+    const imgs = svc.images.filter(Boolean).slice(0, 6);
     if (imgs.length > 0) {
       imagesHtml = '<div class="service-modal-images">' +
         imgs.map(function(src) {
-          return '<div class="service-modal-img-item"><img src="' + src + '" alt="' + svc.title + '" loading="lazy"></div>';
+          return '<div class="service-modal-img-item"><img src="' + escHtml(src) + '" alt="' + escHtml(svc.title) + '" loading="lazy"></div>';
         }).join('') +
         '</div>';
     } else {
-      var slots = Array(6).fill('<div class="service-modal-img-slot">Photo</div>').join('');
+      const slots = Array(6).fill('<div class="service-modal-img-slot">Photo</div>').join('');
       imagesHtml = '<div class="service-modal-img-empty">' + slots + '</div>';
     }
 
-    var bulletsHtml = svc.bullets.map(function(b) { return '<li>' + b + '</li>'; }).join('');
+    const bulletsHtml = svc.bullets.map(function(b) { return '<li>' + escHtml(b) + '</li>'; }).join('');
     serviceModalBody.innerHTML =
       imagesHtml +
       '<div class="service-modal-info">' +
-        '<div class="service-modal-subtitle">' + svc.subtitle + '</div>' +
-        '<p class="service-modal-desc">' + svc.description + '</p>' +
+        '<div class="service-modal-subtitle">' + escHtml(svc.subtitle) + '</div>' +
+        '<p class="service-modal-desc">' + escHtml(svc.description) + '</p>' +
         '<div class="service-modal-includes-title">What\'s included</div>' +
         '<ul class="service-modal-bullets">' + bulletsHtml + '</ul>' +
         '<div class="service-modal-cta">' +
