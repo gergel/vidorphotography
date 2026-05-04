@@ -511,6 +511,9 @@
     text-transform: uppercase;
     color: var(--gold);
     text-decoration: none;
+    background: none; border: none; padding: 0;
+    font-family: var(--sans); font-weight: 300;
+    cursor: pointer;
     display: flex; align-items: center; gap: 8px;
     transition: gap 0.2s;
   }
@@ -1032,7 +1035,8 @@
     align-items: center; justify-content: center;
     padding: 16px;
   }
-  .service-modal.open { display: flex; }
+  .service-modal.open { display: flex; animation: svcFadeIn 0.25s ease; }
+  @keyframes svcFadeIn { from { opacity: 0; } to { opacity: 1; } }
   .service-modal-backdrop {
     position: absolute; inset: 0;
     background: rgba(0,0,0,0.92);
@@ -1300,37 +1304,37 @@
       <div class="service-num">01</div>
       <div class="service-title">Wedding Photography &amp; Videography</div>
       <p class="service-desc">Capture every moment of your special day in cinematic style, creating timeless memories.</p>
-      <a href="#" data-service="wedding" class="service-link">Details</a>
+      <button type="button" data-service="wedding" class="service-link">Details</button>
     </div>
     <div class="service-card">
       <div class="service-num">02</div>
       <div class="service-title">Event Photography</div>
       <p class="service-desc">Professional event photography capturing the energy and moments of corporate events, parties, and celebrations.</p>
-      <a href="#" data-service="event" class="service-link">Details</a>
+      <button type="button" data-service="event" class="service-link">Details</button>
     </div>
     <div class="service-card">
       <div class="service-num">03</div>
       <div class="service-title">Gastro Photography</div>
       <p class="service-desc">Appetizing food and beverage photography for restaurants, bars, and culinary brands.</p>
-      <a href="#" data-service="gastro" class="service-link">Details</a>
+      <button type="button" data-service="gastro" class="service-link">Details</button>
     </div>
     <div class="service-card">
       <div class="service-num">04</div>
       <div class="service-title">Portrait Photography</div>
       <p class="service-desc">Expressive, artistic portrait photos with unique lighting and atmospheric mood.</p>
-      <a href="#" data-service="portraits" class="service-link">Details</a>
+      <button type="button" data-service="portraits" class="service-link">Details</button>
     </div>
     <div class="service-card">
       <div class="service-num">05</div>
       <div class="service-title">Concert Photography</div>
       <p class="service-desc">Dynamic concert and live performance photography capturing the energy and atmosphere of music events.</p>
-      <a href="#" data-service="concert" class="service-link">Details</a>
+      <button type="button" data-service="concert" class="service-link">Details</button>
     </div>
     <div class="service-card">
       <div class="service-num">06</div>
       <div class="service-title">Documentary Film</div>
       <p class="service-desc">Cinematic documentary filmmaking with authentic storytelling and professional production quality.</p>
-      <a href="#" data-service="documentary" class="service-link">Details</a>
+      <button type="button" data-service="documentary" class="service-link">Details</button>
     </div>
   </div>
 
@@ -1661,10 +1665,13 @@
   }, { threshold: 0.35 });
   sections.forEach(s => observerNav.observe(s));
 
-  // Smooth scroll for ALL internal anchor links
+  // Smooth scroll for ALL internal anchor links (skip action-only links like href="#")
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', e => {
-      const target = document.querySelector(link.getAttribute('href'));
+      const href = link.getAttribute('href');
+      if (!href || href === '#') return;
+      let target;
+      try { target = document.querySelector(href); } catch (_) { return; /* invalid selector, skip */ }
       if (target) {
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1957,8 +1964,7 @@
   document.querySelector('.service-modal-backdrop').addEventListener('click', closeServiceModal);
 
   document.querySelectorAll('.service-link[data-service]').forEach(function(link) {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
+    link.addEventListener('click', function() {
       openServiceModal(link.dataset.service);
     });
   });
