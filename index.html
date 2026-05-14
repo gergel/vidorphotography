@@ -203,9 +203,10 @@
   #hero {
     min-height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 620px) minmax(0, 540px);
     grid-template-rows: 1fr;
     align-items: center;
+    justify-content: center;
     padding: 120px 48px 80px;
     position: relative;
     overflow: hidden;
@@ -244,7 +245,7 @@
     display: flex; align-items: center; justify-content: center;
   }
   .hero-img-placeholder {
-    width: 100%; max-width: 480px;
+    width: 100%; max-width: 540px;
     aspect-ratio: 4/5;
     background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #111 100%);
     position: relative;
