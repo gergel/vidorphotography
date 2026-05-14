@@ -510,20 +510,18 @@
     line-height: 1.7;
     margin-bottom: 20px;
   }
-  .service-link {
+  .service-link-label {
     font-size: 0.68rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--gold);
     text-decoration: none;
-    background: none; border: none; padding: 0;
     font-family: var(--sans); font-weight: 300;
-    cursor: pointer;
     display: flex; align-items: center; gap: 8px;
     transition: gap 0.2s;
   }
-  .service-link:hover { gap: 14px; }
-  .service-link::after { content: '→'; }
+  .service-card:hover .service-link-label { gap: 14px; }
+  .service-link-label::after { content: '→'; }
 
   /* Portfolio */
   #portfolio { background: var(--off-black); }
@@ -1309,37 +1307,37 @@
       <div class="service-num">01</div>
       <div class="service-title">Wedding Photography &amp; Videography</div>
       <p class="service-desc">Capture every moment of your special day in cinematic style, creating timeless memories.</p>
-      <span class="service-link">Details</span>
+      <span class="service-link-label">Details</span>
     </div>
     <div class="service-card" data-reference-action="gallery" data-reference-key="event">
       <div class="service-num">02</div>
       <div class="service-title">Event Photography</div>
       <p class="service-desc">Professional event photography capturing the energy and moments of corporate events, parties, and celebrations.</p>
-      <span class="service-link">Details</span>
+      <span class="service-link-label">Details</span>
     </div>
     <div class="service-card" data-reference-action="gallery" data-reference-key="gastro">
       <div class="service-num">03</div>
       <div class="service-title">Gastro Photography</div>
       <p class="service-desc">Appetizing food and beverage photography for restaurants, bars, and culinary brands.</p>
-      <span class="service-link">Details</span>
+      <span class="service-link-label">Details</span>
     </div>
     <div class="service-card" data-reference-action="gallery" data-reference-key="portraits">
       <div class="service-num">04</div>
       <div class="service-title">Portrait Photography</div>
       <p class="service-desc">Expressive, artistic portrait photos with unique lighting and atmospheric mood.</p>
-      <span class="service-link">Details</span>
+      <span class="service-link-label">Details</span>
     </div>
     <div class="service-card" data-reference-action="gallery" data-reference-key="koncert">
       <div class="service-num">05</div>
       <div class="service-title">Concert Photography</div>
       <p class="service-desc">Dynamic concert and live performance photography capturing the energy and atmosphere of music events.</p>
-      <span class="service-link">Details</span>
+      <span class="service-link-label">Details</span>
     </div>
     <div class="service-card" data-reference-action="vimeo" data-reference-key="1188963244">
       <div class="service-num">06</div>
       <div class="service-title">Documentary Film</div>
       <p class="service-desc">Cinematic documentary filmmaking with authentic storytelling and professional production quality.</p>
-      <span class="service-link">Details</span>
+      <span class="service-link-label">Details</span>
     </div>
   </div>
 
@@ -1994,10 +1992,8 @@
       openServiceReference(card.dataset.referenceAction, card.dataset.referenceKey);
     });
     card.addEventListener('keydown', function(e) {
-      if (e.key === ' ') {
-        e.preventDefault();
-      }
       if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
         openServiceReference(card.dataset.referenceAction, card.dataset.referenceKey);
       }
     });
