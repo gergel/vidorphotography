@@ -1892,7 +1892,9 @@
       const trimmed = source.trim();
       if (!trimmed) continue;
       const translated = currentLang === 'hu' ? (LANG_TEXT_HU[trimmed] || trimmed) : trimmed;
-      node.textContent = source.replace(trimmed, translated);
+      const leadingWhitespace = source.match(/^\s*/)[0];
+      const trailingWhitespace = source.match(/\s*$/)[0];
+      node.textContent = leadingWhitespace + translated + trailingWhitespace;
     }
   }
   function applyAttributeTranslations() {
