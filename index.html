@@ -1984,8 +1984,12 @@
   }
 
   document.querySelectorAll('.service-card[data-reference-action]').forEach(function(card) {
+    const titleEl = card.querySelector('.service-title');
+    const serviceTitle = titleEl ? titleEl.textContent.trim() : 'Service';
+    const actionLabel = card.dataset.referenceAction === 'gallery' ? 'View gallery' : 'Watch video';
     card.setAttribute('role', 'button');
     card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', actionLabel + ': ' + serviceTitle);
     card.addEventListener('click', function() {
       openServiceReference(card.dataset.referenceAction, card.dataset.referenceKey);
     });
