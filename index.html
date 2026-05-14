@@ -93,6 +93,27 @@
     font-weight: 500;
   }
   nav { display: flex; align-items: center; gap: 40px; }
+  .header-right { display: flex; align-items: center; gap: 14px; }
+  .lang-switch {
+    display: inline-flex;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(13,13,15,0.6);
+  }
+  .lang-btn {
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 8px 10px;
+    cursor: pointer;
+    font-family: var(--sans);
+  }
+  .lang-btn.active {
+    color: var(--white);
+    background: rgba(200,169,110,0.16);
+  }
   nav a {
     font-size: 0.75rem;
     font-weight: 400;
@@ -861,6 +882,8 @@
     header { padding: 20px 24px; }
     header.scrolled { padding: 14px 24px; }
     nav, .header-cta { display: none; }
+    .header-right { gap: 8px; }
+    .lang-btn { padding: 8px 8px; }
     .hamburger { display: flex; }
     .mobile-close { right: 24px; }
     section { padding: 80px 24px; }
@@ -1210,7 +1233,13 @@
     <a href="#portfolio">Portfolio</a>
     <a href="#contact">Contact</a>
   </nav>
-  <a href="#contact" class="btn-primary header-cta">Book Now</a>
+  <div class="header-right">
+    <div class="lang-switch" aria-label="Language switcher">
+      <button type="button" class="lang-btn active" data-lang="en">EN</button>
+      <button type="button" class="lang-btn" data-lang="hu">HU</button>
+    </div>
+    <a href="#contact" class="btn-primary header-cta">Book Now</a>
+  </div>
   <button class="hamburger" id="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -1358,7 +1387,7 @@
         <div class="tile-action">Watch Video</div>
       </div>
       <div class="tile-label">
-        <div class="tile-label-text">Dokumentumfilm</div>
+        <div class="tile-label-text">Documentary Film</div>
         <div class="tile-label-type">Video</div>
       </div>
     </a>
@@ -1442,7 +1471,7 @@
         <div class="tile-action">View Gallery</div>
       </div>
       <div class="tile-label">
-        <div class="tile-label-text">Koncert</div>
+        <div class="tile-label-text">Concert</div>
         <div class="tile-label-type">Photography</div>
       </div>
     </a>
@@ -1479,7 +1508,7 @@
       </div>
 
       <form class="fade-up" onsubmit="handleSubmit(event)">
-        <input type="hidden" name="_subject" value="Új üzenet — Vidor Photography">
+        <input type="hidden" name="_subject" value="New message — Vidor Photography">
         <input type="hidden" name="_captcha" value="false">
         <div class="form-group">
           <label class="form-label">Name *</label>
@@ -1585,7 +1614,7 @@
   <div class="gallery-modal-content">
     <div class="gallery-modal-header">
       <div class="gallery-modal-title" id="galleryModalTitle"></div>
-      <button class="gallery-modal-close" id="galleryModalClose" aria-label="Bezárás">✕</button>
+      <button class="gallery-modal-close" id="galleryModalClose" aria-label="Close">✕</button>
     </div>
     <div class="gallery-grid-wrap">
       <div class="gallery-grid" id="galleryGrid"></div>
@@ -1594,20 +1623,20 @@
 </div>
 
 <!-- Lightbox -->
-<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Kép nagyítva">
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
   <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
-  <button class="lightbox-close" id="lightboxClose" aria-label="Bezárás">✕</button>
-  <button class="lightbox-prev" id="lightboxPrev" aria-label="Előző">‹</button>
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
+  <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous">‹</button>
   <img class="lightbox-img" id="lightboxImg" src="" alt="">
-  <button class="lightbox-next" id="lightboxNext" aria-label="Következő">›</button>
+  <button class="lightbox-next" id="lightboxNext" aria-label="Next">›</button>
   <div class="lightbox-counter" id="lightboxCounter"></div>
 </div>
 
 <!-- Video Modal (YouTube & Vimeo) -->
-<div id="ytModal" class="yt-modal" role="dialog" aria-modal="true" aria-label="Video lejátszó">
+<div id="ytModal" class="yt-modal" role="dialog" aria-modal="true" aria-label="Video player">
   <div class="yt-modal-backdrop"></div>
   <div class="yt-modal-content">
-    <button class="yt-modal-close" id="ytModalClose" aria-label="Bezárás">✕</button>
+    <button class="yt-modal-close" id="ytModalClose" aria-label="Close">✕</button>
     <div class="yt-embed-wrap">
       <iframe id="ytIframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
@@ -1642,6 +1671,259 @@
     requestAnimationFrame(animCursor);
   }
   animCursor();
+
+  const LANG_STORAGE_KEY = 'vidor_lang';
+  const originalTextNodes = new WeakMap();
+  let currentLang = 'en';
+  let currentGalleryTitle = '';
+  const LANG_TEXT_HU = {
+    'About': 'Rólam',
+    'Services': 'Szolgáltatások',
+    'Portfolio': 'Portfólió',
+    'Contact': 'Kapcsolat',
+    'Book Now': 'Foglalás',
+    'Budapest, Hungary': 'Budapest, Magyarország',
+    'Cinematic': 'Filmszerű',
+    'storytelling': 'történetmesélés',
+    'through photo & video': 'fotón és videón keresztül',
+    'Professional photography and videography for events, weddings, portraits, and gastro — based in Budapest.': 'Professzionális fotó- és videós szolgáltatás rendezvényekre, esküvőkre, portrékhoz és gasztró projektekhez — Budapesten.',
+    'View My Work': 'Munkáim',
+    'Get In Touch': 'Kapcsolatfelvétel',
+    'Events · Weddings · Portraits · Gastro · Concerts': 'Rendezvények · Esküvők · Portrék · Gasztró · Koncertek',
+    'Scroll': 'Görgess',
+    'Photographer & Videographer': 'Fotós és videós',
+    'Photography has been part of my life since childhood, when I first picked up my grandfather’s camera and started capturing the world around me. What began as curiosity slowly turned into a passion for storytelling — first through photos, then through cinematic filmmaking.': 'A fotózás gyerekkorom óta az életem része: amikor először kézbe vettem nagyapám fényképezőgépét, elkezdtem megörökíteni a világot magam körül. Ami kíváncsiságként indult, fokozatosan történetmesélő szenvedéllyé vált — előbb fotókon, majd filmes képi világgal.',
+    'Today, I work as a photographer and cinematographer, creating emotional, atmosphere-driven visuals for weddings, events, brands, and documentaries. For me, the most important part of every project is not just how it looks, but how it feels years later.': 'Ma fotósként és operatőrként dolgozom, érzelmes, hangulatalapú vizuális anyagokat készítve esküvőkre, rendezvényekre, márkáknak és dokumentumfilmekhez. Számomra minden projektben nem csak az a fontos, hogyan néz ki, hanem az is, mit érez vele kapcsolatban az ember évekkel később.',
+    'I love capturing real moments — the small gestures, the energy of a crowd, the quiet in-between scenes, and the emotions people often don’t even notice in the moment. My goal is always to create timeless visuals that feel honest, cinematic, and deeply personal.': 'Szeretem elkapni a valódi pillanatokat — az apró gesztusokat, a tömeg energiáját, a csendes átmeneteket és azokat az érzelmeket, amelyeket sokszor észre sem veszünk az adott pillanatban. A célom mindig az, hogy őszinte, filmszerű és személyes, időtálló vizuális világot alkossak.',
+    'Real moments': 'Valódi pillanatok',
+    'Since 2015': '2015 óta',
+    'Cinematic mood': 'Filmszerű hangulat',
+    'Small details': 'Apró részletek',
+    'HONEST STORYTELLING': 'ŐSZINTE TÖRTÉNETMESÉLÉS',
+    'DAILY CREATIVE WORK': 'NAPI KREATÍV MUNKA',
+    'TIMELESS VISUALS': 'IDŐTLEN KÉPI VILÁG',
+    'BIG STORIES': 'NAGY TÖRTÉNETEK',
+    'Contact Me': 'Írj nekem',
+    'Professional photo': 'Professzionális fotó',
+    'video services': 'videós szolgáltatások',
+    'For various events, weddings, portrait photography, and travel content creation.': 'Különféle rendezvényekhez, esküvőkhöz, portréfotózáshoz és tartalomgyártáshoz.',
+    'Wedding Photography & Videography': 'Esküvőfotózás és videózás',
+    'Capture every moment of your special day in cinematic style, creating timeless memories.': 'Örökítsük meg a nagy nap minden pillanatát filmszerű stílusban, időtálló emlékeket alkotva.',
+    'View Work': 'Munkák megtekintése',
+    'Event Photography': 'Rendezvényfotózás',
+    'Professional event photography capturing the energy and moments of corporate events, parties, and celebrations.': 'Professzionális rendezvényfotók, amelyek megörökítik céges események, bulik és ünnepek hangulatát.',
+    'Gastro Photography': 'Gasztrofotózás',
+    'Appetizing food and beverage photography for restaurants, bars, and culinary brands.': 'Étvágygerjesztő étel- és italfotók éttermeknek, bároknak és gasztronómiai márkáknak.',
+    'Portrait Photography': 'Portréfotózás',
+    'Expressive, artistic portrait photos with unique lighting and atmospheric mood.': 'Kifejező, művészi portrék egyedi fényeléssel és hangulattal.',
+    'Concert Photography': 'Koncertfotózás',
+    'Dynamic concert and live performance photography capturing the energy and atmosphere of music events.': 'Dinamikus koncert- és élő előadásfotók, amelyek visszaadják a zenei események energiáját.',
+    'Documentary Film': 'Dokumentumfilm',
+    'Cinematic documentary filmmaking with authentic storytelling and professional production quality.': 'Filmszerű dokumentumfilmes munka hiteles történetmeséléssel és professzionális kivitelezéssel.',
+    'Get Started': 'Kezdjük el',
+    'Selected': 'Válogatott',
+    'work': 'munkák',
+    'Explore my work across different genres and styles.': 'Nézd meg a munkáimat különböző műfajokban és stílusokban.',
+    'Watch Video': 'Videó megtekintése',
+    'Video': 'Videó',
+    'Visual Storytelling': 'Vizuális történetmesélés',
+    'Weddings Video': 'Esküvői videó',
+    'View Gallery': 'Galéria megtekintése',
+    'Gastro': 'Gasztró',
+    'Portraits': 'Portrék',
+    'Event': 'Rendezvény',
+    'Photography': 'Fotózás',
+    'Wedding': 'Esküvő',
+    'Concert': 'Koncert',
+    "Let's work": 'Dolgozzunk',
+    'together': 'együtt',
+    "Have a project in mind? Let's talk about how I can help capture your special moments.": 'Van egy ötleted? Beszéljünk róla, hogyan örökíthetem meg a különleges pillanataidat.',
+    'Professional equipment': 'Professzionális felszerelés',
+    '2× Canon C70, RF lenses, DZO Cine optics & Canon R6II': '2× Canon C70, RF objektívek, DZO Cine optikák és Canon R6II',
+    'Years of experience': 'Évek tapasztalata',
+    'Daily work as cinematographer and photographer since 2015': 'Napi munka operatőrként és fotósként 2015 óta',
+    'Cinematic style': 'Filmszerű stílus',
+    'Unique visual storytelling in every project': 'Egyedi vizuális történetmesélés minden projektben',
+    'Full service': 'Teljes szolgáltatás',
+    'From shooting to post-production, I cover everything': 'A forgatástól az utómunkáig mindent lefedek',
+    'Name *': 'Név *',
+    'Your name': 'Neved',
+    'Email *': 'E-mail *',
+    'Message *': 'Üzenet *',
+    'Tell me about your project...': 'Mesélj a projektedről...',
+    'Send Message': 'Üzenet küldése',
+    "Your information is kept confidential. I'll respond within 24 hours.": 'Adataidat bizalmasan kezelem. 24 órán belül válaszolok.',
+    'Contact Information': 'Elérhetőségek',
+    'Phone': 'Telefon',
+    'Location': 'Helyszín',
+    'Follow on social media': 'Kövess közösségi médiában',
+    "Professional photography and videography services with a cinematic approach. Let's transform your moments into art.": 'Professzionális fotós és videós szolgáltatások filmszerű megközelítéssel. Tegyük művészetté a pillanataidat.',
+    'Quick Links': 'Gyors linkek',
+    'Work together': 'Dolgozzunk együtt',
+    'Ready to create something cinematic?': 'Készen állsz valami filmszerűre?',
+    "Let's Collaborate": 'Működjünk együtt',
+    '© 2025 Vidor Photography. All rights reserved.': '© 2025 Vidor Photography. Minden jog fenntartva.',
+    'All rights reserved.': 'Minden jog fenntartva.',
+    'Privacy Policy': 'Adatvédelmi irányelvek',
+    'Terms of Service': 'Felhasználási feltételek'
+  };
+  const UI_STRINGS = {
+    en: {
+      menu: 'Menu',
+      close: 'Close',
+      previous: 'Previous',
+      next: 'Next',
+      imagePreview: 'Image preview',
+      videoPlayer: 'Video player',
+      sending: 'Sending…',
+      sent: 'Message sent ✓',
+      submitError: 'Error — try again',
+      serverError: 'Server error',
+      galleryEmpty: 'Coming soon — images are being uploaded.',
+      galleryHint: 'Add images to the GALLERIES object in index.html.',
+      imageWord: 'image',
+      serviceFallback: 'Service',
+      viewGallery: 'View gallery',
+      watchVideo: 'Watch video',
+      photoSlot: 'Photo',
+      whatsIncluded: "What's included",
+      getInTouch: 'Get in touch',
+      bookNow: 'Book now',
+      subject: 'New message — Vidor Photography',
+      languageLabel: 'Language switcher',
+      pageTitle: 'Vidor Photography — Budapest'
+    },
+    hu: {
+      menu: 'Menü',
+      close: 'Bezárás',
+      previous: 'Előző',
+      next: 'Következő',
+      imagePreview: 'Kép nagyítva',
+      videoPlayer: 'Videó lejátszó',
+      sending: 'Küldés…',
+      sent: 'Üzenet elküldve ✓',
+      submitError: 'Hiba — próbáld újra',
+      serverError: 'Szerverhiba',
+      galleryEmpty: 'Hamarosan — a képek feltöltés alatt.',
+      galleryHint: 'Add hozzá a képeket a GALLERIES objektumhoz az index.html-ben.',
+      imageWord: 'kép',
+      serviceFallback: 'Szolgáltatás',
+      viewGallery: 'Galéria megtekintése',
+      watchVideo: 'Videó megtekintése',
+      photoSlot: 'Fotó',
+      whatsIncluded: 'Mit tartalmaz',
+      getInTouch: 'Kapcsolatfelvétel',
+      bookNow: 'Foglalás',
+      subject: 'Új üzenet — Vidor Photography',
+      languageLabel: 'Nyelvváltó',
+      pageTitle: 'Vidor Photography — Budapest'
+    }
+  };
+  const ATTR_TRANSLATIONS = [
+    { selector: '#hamburger', attr: 'aria-label', en: 'Menu', hu: 'Menü' },
+    { selector: '#galleryModalClose', attr: 'aria-label', en: 'Close', hu: 'Bezárás' },
+    { selector: '#lightbox', attr: 'aria-label', en: 'Image preview', hu: 'Kép nagyítva' },
+    { selector: '#lightboxClose', attr: 'aria-label', en: 'Close', hu: 'Bezárás' },
+    { selector: '#lightboxPrev', attr: 'aria-label', en: 'Previous', hu: 'Előző' },
+    { selector: '#lightboxNext', attr: 'aria-label', en: 'Next', hu: 'Következő' },
+    { selector: '#ytModal', attr: 'aria-label', en: 'Video player', hu: 'Videó lejátszó' },
+    { selector: '#ytModalClose', attr: 'aria-label', en: 'Close', hu: 'Bezárás' },
+    { selector: '#serviceModalClose', attr: 'aria-label', en: 'Close', hu: 'Bezárás' },
+    { selector: '.lang-switch', attr: 'aria-label', en: 'Language switcher', hu: 'Nyelvváltó' },
+    { selector: 'input[name="name"]', attr: 'placeholder', en: 'Your name', hu: 'Neved' },
+    { selector: 'input[name="email"]', attr: 'placeholder', en: 'email@example.com', hu: 'email@example.com' },
+    { selector: 'textarea[name="message"]', attr: 'placeholder', en: 'Tell me about your project...', hu: 'Mesélj a projektedről...' },
+    { selector: 'input[name="_subject"]', attr: 'value', en: 'New message — Vidor Photography', hu: 'Új üzenet — Vidor Photography' }
+  ];
+  const GALLERY_TITLES_HU = {
+    gastro: 'Gasztró',
+    portraits: 'Portrék',
+    event: 'Rendezvény',
+    eskuvo: 'Esküvő',
+    koncert: 'Koncert'
+  };
+  const SERVICE_TRANSLATIONS_HU = {
+    wedding: {
+      title: 'Esküvőfotózás és videózás',
+      subtitle: 'Filmszerű stílus · Történetmesélő munkafolyamat',
+      description: 'Az esküvőd többet érdemel egyszerű pillanatképeknél — egy filmet érdemel. Minden érzelmet, pillantást és múló pillanatot filmszerű szemmel és történetmesélő érzékenységgel örökítek meg. A reggeli készülődéstől az utolsó táncig semmi sem marad le.',
+      bullets: ['Egész napos lefedettség (szertartás + lagzi)', '2 fős stáb (fotó + videó)', 'Drónfelvételek (időjárásfüggő)', 'Filmszerű highlight film', 'Színkorrekció és vágás', 'Online galéria átadás']
+    },
+    event: {
+      title: 'Rendezvényfotózás',
+      subtitle: 'Céges és társasági események · Gyors átadás',
+      description: 'Konferenciák, gálák, szalagavatók, ballagások — megörökítem az energiát és a részleteket, amelyek egyedivé teszik az eseményt. Természetes és beállított képek gyors átadással, publikálásra és social media használatra készen.',
+      bullets: ['Teljes rendezvény-lefedettség', 'Természetes és beállított fotók', 'Gyors online galéria átadás', 'Nyomdai felbontás', 'Közösségi médiára optimalizált képek', 'Sajtó- és szerkesztőségi felhasználás']
+    },
+    gastro: {
+      title: 'Gasztrofotózás',
+      subtitle: 'Ételek, italok és hangulat · Márkára szabva',
+      description: 'Esztétikusan világított, komponált és stylingolt képek — a gasztrofotók vonzóvá teszik az étlapod és márkád. Éttermek, bárok és gasztronómiai vállalkozások vizuális történetmesélésére specializálódtam Budapesten.',
+      bullets: ['Étel- és tálalásfotók', 'Koktélok és italok', 'Enteriőr és hangulatképek', 'Retusált, azonnal használható fájlok', 'Social media és menüformátumok', 'Következetes márkaidentitás']
+    },
+    portraits: {
+      title: 'Portréfotózás',
+      subtitle: 'Stúdió és helyszín · Filmszerű hangulat',
+      description: 'Portrék, amelyek karaktert mutatnak. Stúdióban vagy budapesti helyszíneken természetes és mesterséges fénnyel készítek atmoszférikus, kifejező képeket — színész portréktól personal brandingig.',
+      bullets: ['Stúdiós vagy helyszíni fotózás', 'Természetes és stúdiófény', 'Retusált digitális átadás', 'Több szett ruha', 'Personal branding és headshot', 'Nyomtatási és digitális felhasználási jogok']
+    },
+    concert: {
+      title: 'Koncertfotózás',
+      subtitle: 'Élő előadások · Nagy energiájú dokumentálás',
+      description: 'Gyors, pontos és technikailag precíz — a koncertfotózás a csúcspillanat elkapásáról szól nehéz fényviszonyok között. Több száz élő koncertet fotóztam kluboktól fesztiválszínpadokig, mindig szerkesztőségi minőségű eredménnyel.',
+      bullets: ['Gyenge fényben szerzett tapasztalat', 'Színpad és közönség dinamikája', 'Előadói sajtófotók', 'Gyors kézbesítés', 'Szerkesztőségi és promó minőség', 'Fesztivál- és helyszíntapasztalat']
+    },
+    documentary: {
+      title: 'Dokumentumfilm',
+      subtitle: 'Filmszerű történetmesélés · Teljes gyártás',
+      description: 'Hosszú formátumú dokumentumfilmes munka újságírói szemlélettel és filmszerű esztétikával. A koncepciótól a végső vágásig végigviszem a teljes gyártási folyamatot — kutatás, forgatás, utómunka.',
+      bullets: ['2× Canon C70 cinema kamera', 'DZO Cine prémium optikák', '4K filmszerű felvétel', 'Professzionális hangrögzítés', 'Teljes színkorrekció', 'Vágás és utómunka']
+    }
+  };
+  function translateTextNodes() {
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      const parent = node.parentElement;
+      if (!parent) continue;
+      if (parent.tagName === 'SCRIPT' || parent.tagName === 'STYLE') continue;
+      if (!originalTextNodes.has(node)) originalTextNodes.set(node, node.textContent);
+      const source = originalTextNodes.get(node);
+      const trimmed = source.trim();
+      if (!trimmed) continue;
+      const translated = currentLang === 'hu' ? (LANG_TEXT_HU[trimmed] || trimmed) : trimmed;
+      const leadingWhitespace = source.match(/^\s*/)[0];
+      const trailingWhitespace = source.match(/\s*$/)[0];
+      node.textContent = leadingWhitespace + translated + trailingWhitespace;
+    }
+  }
+  function applyAttributeTranslations() {
+    ATTR_TRANSLATIONS.forEach(function(item) {
+      const element = document.querySelector(item.selector);
+      if (!element) return;
+      element.setAttribute(item.attr, currentLang === 'hu' ? item.hu : item.en);
+    });
+  }
+  function updateServiceCardAriaLabels() {
+    document.querySelectorAll('.service-card[data-reference-action]').forEach(function(card) {
+      const titleEl = card.querySelector('.service-title');
+      const serviceTitle = titleEl ? titleEl.textContent.trim() : UI_STRINGS[currentLang].serviceFallback;
+      const actionLabel = card.dataset.referenceAction === 'gallery' ? UI_STRINGS[currentLang].viewGallery : UI_STRINGS[currentLang].watchVideo;
+      card.setAttribute('aria-label', actionLabel + ': ' + serviceTitle);
+    });
+  }
+  function applyLanguage(lang) {
+    currentLang = lang === 'hu' ? 'hu' : 'en';
+    document.documentElement.lang = currentLang;
+    document.title = UI_STRINGS[currentLang].pageTitle;
+    localStorage.setItem(LANG_STORAGE_KEY, currentLang);
+    document.querySelectorAll('.lang-btn').forEach(function(btn) {
+      btn.classList.toggle('active', btn.dataset.lang === currentLang);
+    });
+    translateTextNodes();
+    applyAttributeTranslations();
+    updateServiceCardAriaLabels();
+  }
 
   // Header scroll
   const header = document.getElementById('header');
@@ -1686,6 +1968,12 @@
   document.getElementById('mobileClose').addEventListener('click', () => {
     document.getElementById('mobileNav').classList.remove('open');
   });
+  document.querySelectorAll('.lang-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      applyLanguage(btn.dataset.lang);
+    });
+  });
+  applyLanguage(localStorage.getItem(LANG_STORAGE_KEY) || 'en');
 
   // Fade-up on scroll
   const faders = document.querySelectorAll('.fade-up');
@@ -1917,7 +2205,13 @@
   }
 
   function openServiceModal(key) {
-    const svc = SERVICES[key];
+    const svcBase = SERVICES[key];
+    const svcHu = SERVICE_TRANSLATIONS_HU[key];
+    const svc = (currentLang === 'hu' && svcHu) ? {
+      ...svcBase,
+      ...svcHu,
+      bullets: svcHu.bullets || svcBase.bullets
+    } : svcBase;
     if (!svc) return;
     serviceModalNum.textContent = svc.num;
     serviceModalTitle.textContent = svc.title;
@@ -1931,7 +2225,7 @@
         }).join('') +
         '</div>';
     } else {
-      const slots = Array(6).fill('<div class="service-modal-img-slot">Photo</div>').join('');
+      const slots = Array(6).fill('<div class="service-modal-img-slot">' + UI_STRINGS[currentLang].photoSlot + '</div>').join('');
       imagesHtml = '<div class="service-modal-img-empty">' + slots + '</div>';
     }
 
@@ -1941,11 +2235,11 @@
       '<div class="service-modal-info">' +
         '<div class="service-modal-subtitle">' + escHtml(svc.subtitle) + '</div>' +
         '<p class="service-modal-desc">' + escHtml(svc.description) + '</p>' +
-        '<div class="service-modal-includes-title">What\'s included</div>' +
+        '<div class="service-modal-includes-title">' + UI_STRINGS[currentLang].whatsIncluded + '</div>' +
         '<ul class="service-modal-bullets">' + bulletsHtml + '</ul>' +
         '<div class="service-modal-cta">' +
-          '<a href="#contact" class="btn-primary" onclick="closeServiceModal()">Get in touch</a>' +
-          '<a href="#contact" class="btn-outline" onclick="closeServiceModal()">Book now</a>' +
+          '<a href="#contact" class="btn-primary" onclick="closeServiceModal()">' + UI_STRINGS[currentLang].getInTouch + '</a>' +
+          '<a href="#contact" class="btn-outline" onclick="closeServiceModal()">' + UI_STRINGS[currentLang].bookNow + '</a>' +
         '</div>' +
       '</div>';
 
@@ -1977,12 +2271,8 @@
   }
 
   document.querySelectorAll('.service-card[data-reference-action]').forEach(function(card) {
-    const titleEl = card.querySelector('.service-title');
-    const serviceTitle = titleEl ? titleEl.textContent.trim() : 'Service';
-    const actionLabel = card.dataset.referenceAction === 'gallery' ? 'View gallery' : 'Watch video';
     card.setAttribute('role', 'button');
     card.setAttribute('tabindex', '0');
-    card.setAttribute('aria-label', actionLabel + ': ' + serviceTitle);
     card.addEventListener('click', function() {
       openServiceReference(card.dataset.referenceAction, card.dataset.referenceKey);
     });
@@ -1993,6 +2283,7 @@
       }
     });
   });
+  updateServiceCardAriaLabels();
 
   // ─── Gallery & Lightbox ──────────────────────────────────────────────────
   //
@@ -2036,7 +2327,7 @@
       ]
     },
     koncert: {
-      title: 'Koncert',
+      title: 'Concert',
       images: [
         'images/koncert/koncert-01.jpg',
         'images/koncert/koncert-02.jpg',
@@ -2054,19 +2345,20 @@
     const gallery = GALLERIES[key];
     if (!gallery) return;
     currentGallery = gallery.images;
-    galleryModalTitle.textContent = gallery.title;
+    currentGalleryTitle = currentLang === 'hu' ? (GALLERY_TITLES_HU[key] || gallery.title) : gallery.title;
+    galleryModalTitle.textContent = currentGalleryTitle;
     galleryGrid.innerHTML = '';
     if (gallery.images.length === 0) {
-      galleryGrid.innerHTML = '<div class="gallery-empty">Hamarosan — a képek feltöltés alatt.<span class="gallery-empty-hint">Add hozzá a képeket a GALLERIES objektumhoz az index.html-ben.</span></div>';
+      galleryGrid.innerHTML = '<div class="gallery-empty">' + UI_STRINGS[currentLang].galleryEmpty + '<span class="gallery-empty-hint">' + UI_STRINGS[currentLang].galleryHint + '</span></div>';
     } else {
       gallery.images.forEach(function(src, idx) {
         var item = document.createElement('div');
         item.className = 'gallery-grid-item';
         item.setAttribute('tabindex', '0');
-        item.setAttribute('aria-label', gallery.title + ' — ' + (idx + 1) + '. kép');
+        item.setAttribute('aria-label', currentGalleryTitle + ' — ' + (idx + 1) + '. ' + UI_STRINGS[currentLang].imageWord);
         var img = document.createElement('img');
         img.src = src;
-        img.alt = gallery.title + ' ' + (idx + 1);
+        img.alt = currentGalleryTitle + ' ' + (idx + 1);
         img.loading = 'lazy';
         item.appendChild(img);
         item.addEventListener('click', function() { openLightbox(idx); });
@@ -2131,7 +2423,7 @@
 
   function updateLightboxImage() {
     lightboxImg.src = currentGallery[currentLightboxIndex];
-    lightboxImg.alt = galleryModalTitle.textContent + ' — ' + (currentLightboxIndex + 1) + '. kép';
+    lightboxImg.alt = currentGalleryTitle + ' — ' + (currentLightboxIndex + 1) + '. ' + UI_STRINGS[currentLang].imageWord;
     lightboxCounter.textContent = (currentLightboxIndex + 1) + ' / ' + currentGallery.length;
   }
 
@@ -2145,7 +2437,7 @@
     e.preventDefault();
     const btn = e.target.querySelector('button[type="submit"]');
     const originalText = btn.textContent;
-    btn.textContent = 'Sending…';
+    btn.textContent = UI_STRINGS[currentLang].sending;
     btn.disabled = true;
 
     try {
@@ -2156,7 +2448,7 @@
       });
 
       if (response.ok) {
-        btn.textContent = 'Message sent ✓';
+        btn.textContent = UI_STRINGS[currentLang].sent;
         btn.style.background = '#3d6b50';
         setTimeout(() => {
           btn.textContent = originalText;
@@ -2165,11 +2457,11 @@
           e.target.reset();
         }, 3000);
       } else {
-        throw new Error('Server error');
+        throw new Error(UI_STRINGS[currentLang].serverError);
       }
     } catch (error) {
       console.error('Form submission error:', error);
-      btn.textContent = 'Error — try again';
+      btn.textContent = UI_STRINGS[currentLang].submitError;
       btn.style.background = '#6b3d3d';
       setTimeout(() => {
         btn.textContent = originalText;
