@@ -34,8 +34,8 @@ window.VP_CONTENT = {
       title: { hu: 'Portré', en: 'Portraits' },
       note: { hu: 'Egyéni portrék', en: 'Individual portraits' },
       images: [
-        { src: 'images/portraits/portre-03.jpg', alt: { hu: 'Öltönyös férfi ül egy irodában, mögötte neonfelirat', en: 'Man in a suit seated in an office with a neon sign behind him' } },
         { src: 'images/portraits/portre-01.jpg', alt: { hu: 'Szakállas, tetovált férfi összefont karral, sötét háttér előtt', en: 'Bearded, tattooed man with folded arms against a dark background' } },
+        { src: 'images/portraits/portre-03.jpg', alt: { hu: 'Öltönyös férfi ül egy irodában, mögötte neonfelirat', en: 'Man in a suit seated in an office with a neon sign behind him' } },
         { src: 'images/portraits/portre-02.jpg', alt: { hu: 'Nő bőrkabátban és piros maszkban, sötét háttér előtt', en: 'Woman in a leather jacket and red mask against a dark background' } },
         { src: 'images/portraits/portre-04.jpg', alt: { hu: 'Szakállas férfi sétál egy belvárosi utcán', en: 'Bearded man walking down a city street' } },
         { src: 'images/portraits/portre-05.jpg', alt: { hu: 'Nő ül egy sziklán viharos égbolt alatt', en: 'Woman sitting on a rock under a stormy sky' } },
@@ -46,12 +46,12 @@ window.VP_CONTENT = {
       title: { hu: 'Gasztro', en: 'Food & drink' },
       note: { hu: 'Ételek, italok, helyek', en: 'Food, drinks and venues' },
       images: [
+        { src: 'images/gastro/gastro-06.jpg', alt: { hu: 'Leves fatálcán, fahéjjal és fenyőtobozokkal', en: 'Soup on a wooden tray with cinnamon and pine cones' } },
         { src: 'images/gastro/gastro-04.jpg', alt: { hu: 'Forró csokoládé fatálcán, fenyőtobozokkal, felülnézetből', en: 'Hot chocolate on a wooden tray with pine cones, from above' } },
         { src: 'images/gastro.jpg', alt: { hu: 'Kéz nyúl egy pohár fehérborért, mellette sonkás-sajtos tál', en: 'A hand reaching for a glass of white wine beside a charcuterie plate' } },
         { src: 'images/gastro/gastro-02.jpg', alt: { hu: 'Tálalt főétel terített asztalon, vörösborral', en: 'Plated main course on a set table with red wine' } },
         { src: 'images/gastro/gastro-03.jpg', alt: { hu: 'Espresso martini koktélpohárban, márványháttér előtt', en: 'Espresso martini in a cocktail glass against marble' } },
         { src: 'images/gastro/gastro-05.jpg', alt: { hu: 'Fehérbor és hidegtál gyertyafényben', en: 'White wine and a cold platter by candlelight' } },
-        { src: 'images/gastro/gastro-06.jpg', alt: { hu: 'Leves fatálcán, fahéjjal és fenyőtobozokkal', en: 'Soup on a wooden tray with cinnamon and pine cones' } },
         { src: 'images/gastro/gastro-07.jpg', alt: { hu: 'Steak zöldségekkel fehér tányéron', en: 'Steak with vegetables on a white plate' } }
       ]
     },
@@ -59,11 +59,11 @@ window.VP_CONTENT = {
       title: { hu: 'Koncert', en: 'Concerts' },
       note: { hu: 'Koncertek és fesztiválok', en: 'Concerts and festivals' },
       images: [
+        { src: 'images/koncert/koncert-02.jpg', alt: { hu: 'Rapper a közönség fölött, zöld színpadfények előtt', en: 'Rapper above the crowd in front of green stage lights' } },
         { src: 'images/koncert/koncert-03.jpg', alt: { hu: 'Előadó sziluettje füstben és reflektorfényben a közönség felett', en: 'Performer silhouetted in smoke and spotlights above the crowd' } },
         { src: 'images/koncert/koncert-01.jpg', alt: { hu: 'Előadó mikrofonnal a színpadon, mögötte a fesztivál közönsége', en: 'Performer with a microphone on stage, festival crowd behind' } },
         { src: 'images/koncert.jpg', alt: { hu: 'Esti fesztiválkoncert, óriáskerék és tömeg viharos ég alatt', en: 'Evening festival concert with a Ferris wheel and crowd under a stormy sky' } },
         { src: 'images/koncert/koncert-04.jpg', alt: { hu: 'Óriáskerék és felemelt kezű közönség szürkületben', en: 'Ferris wheel and a crowd with raised hands at dusk' } },
-        { src: 'images/koncert/koncert-02.jpg', alt: { hu: 'Rapper a közönség fölött, zöld színpadfények előtt', en: 'Rapper above the crowd in front of green stage lights' } },
         { src: 'images/koncert/koncert-05.jpg', alt: { hu: 'Fiatal nő a fesztiválon lemenő napfényben', en: 'Young woman at a festival in low evening sun' } },
         { src: 'images/koncert/koncert-06.jpg', alt: { hu: 'Színpad és hatalmas tömeg éjszaka, a színpad mögül', en: 'Stage and a huge crowd at night, seen from behind the stage' } },
         { src: 'images/koncert/koncert-07.jpg', alt: { hu: 'Énekes kék fényben, két kézzel fogja a mikrofont', en: 'Singer in blue light holding the microphone with both hands' } }

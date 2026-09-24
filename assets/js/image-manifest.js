@@ -1,5 +1,15 @@
 /* Automatikusan generálva: python3 tools/build-images.py — ne szerkeszd kézzel. */
 window.VP_IMAGES = {
+ "images/hero/eskuvo-mezo.jpg": {
+  "w": 2144,
+  "h": 1556,
+  "sizes": [
+   480,
+   960,
+   1600
+  ],
+  "base": "images/web/hero/eskuvo-mezo"
+ },
  "images/eskuvo/eskuvo-01.jpg": {
   "w": 2400,
   "h": 1600,
@@ -379,6 +389,25 @@ window.VP_IMAGES = {
    1600
   ],
   "base": "images/web/film/dokumentumfilm-borito"
+ },
+ "images/about/forgatas-tengerpart.jpg": {
+  "w": 2400,
+  "h": 3600,
+  "sizes": [
+   480,
+   960,
+   1600,
+   2400
+  ],
+  "base": "images/web/about/forgatas-tengerpart"
+ },
+ "images/about/kamera-reszlet.jpg": {
+  "w": 880,
+  "h": 1232,
+  "sizes": [
+   480
+  ],
+  "base": "images/web/about/kamera-reszlet"
  },
  "headline.jpg": {
   "w": 5497,

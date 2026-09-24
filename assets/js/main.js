@@ -59,7 +59,6 @@
     }
     updateCounts();
     updateMenuLabel();
-    if (typeof fitHero === 'function') fitHero();
     if (viewer.key) renderViewer();
     if (persist) { try { localStorage.setItem('vp-lang', lang); } catch (e) {} }
   }
@@ -89,6 +88,7 @@
     if (!toggle) return;
     toggle.setAttribute('aria-expanded', String(open));
     header.classList.toggle('is-open', open);
+    root.classList.toggle('menu-open', open);
     updateMenuLabel();
   }
   if (toggle) {
@@ -100,38 +100,8 @@
     document.addEventListener('click', function (e) {
       if (header.classList.contains('is-open') && !header.contains(e.target)) setMenu(false);
     });
-    window.matchMedia('(min-width: 961px)').addEventListener('change', function (mq) { if (mq.matches) setMenu(false); });
+    window.matchMedia('(min-width: 768px)').addEventListener('change', function (mq) { if (mq.matches) setMenu(false); });
   }
-
-  // Hero-kivágás asztali nézetben: a legkisebb olyan függőleges eltolás, amelynél az előadó
-  // (a koncertfotón ~58% magasságig) a szövegblokk fölött marad — így a legtöbb látszik az óriáskerékből.
-  var heroImg = $('.hero__media img');
-  var heroText = $('.hero__inner');
-  var HERO_SUBJECT_BOTTOM = 0.59; // az előadó lába a kép magasságához képest
-  function fitHero() {
-    if (!heroImg || !heroText || !heroImg.naturalWidth) return;
-    var hero = heroImg.closest('.hero');
-    if (window.matchMedia('(max-width: 760px)').matches) { hero.style.removeProperty('--hero-y'); return; }
-    var box = heroImg.getBoundingClientRect();
-    var scale = Math.max(box.width / heroImg.naturalWidth, box.height / heroImg.naturalHeight);
-    var drawH = heroImg.naturalHeight * scale;
-    var spare = drawH - box.height;
-    if (spare < 1) return;
-    var textTop = heroText.getBoundingClientRect().top - box.top;
-    var needed = (HERO_SUBJECT_BOTTOM * drawH - (textTop - 20)) / spare;
-    var p = Math.min(1, Math.max(0.3, needed));
-    hero.style.setProperty('--hero-y', (p * 100).toFixed(1) + '%');
-  }
-  if (heroImg) {
-    if (heroImg.complete) fitHero(); else heroImg.addEventListener('load', fitHero);
-    window.addEventListener('resize', fitHero);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitHero);
-  }
-
-  // Fejléc: a hero tetején átlátszó, görgetés után tömör grafitszürke.
-  function updateHeader() { if (header) header.classList.toggle('is-solid', window.scrollY > 24); }
-  window.addEventListener('scroll', updateHeader, { passive: true });
-  updateHeader();
 
   /* ---------------- Közös párbeszédablak-kezelés ---------------- */
   function openDialog(dlg, trigger) {
@@ -347,6 +317,11 @@
       c.el.addEventListener('input', function () { if (c.el.getAttribute('aria-invalid') === 'true' && fieldValid(c)) showError(c, false); });
     });
 
+    // Az üzenetmező egysoros alapállapotból a tartalommal együtt nő.
+    var msg = form.elements.uzenet;
+    function growMessage() { msg.style.height = 'auto'; msg.style.height = (msg.scrollHeight + 1) + 'px'; }
+    msg.addEventListener('input', growMessage);
+
     function setStatus(type, text, withEmail) {
       status.hidden = false;
       status.className = 'form__status form__status--' + type;
@@ -388,6 +363,7 @@
           var ok = r.ok && (r.data.success === true || r.data.success === 'true');
           if (!ok) throw new Error((r.data && r.data.message) || 'FormSubmit error');
           form.reset();
+          growMessage();
           form.elements.nyelv.value = lang;
           form.elements._subject.value = t('form.subject');
           setStatus('success', t('form.success'));
@@ -413,7 +389,7 @@
   // Finom megjelenés görgetéskor (csak ha a felhasználó nem kért csökkentett mozgást).
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!reduce && 'IntersectionObserver' in window) {
-    var targets = $$('.section-head, .work, .film, .service, .about__figure, .about__text, .contact__intro, .form');
+    var targets = $$('.section-head, .work, .film, .services__list, .approach__text, .about__photos, .about__text, .contact__intro, .form');
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) { en.target.classList.add('is-visible'); io.unobserve(en.target); }

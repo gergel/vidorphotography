@@ -31,7 +31,7 @@ OUT = ROOT / "images" / "web"
 MANIFEST = ROOT / "assets" / "js" / "image-manifest.js"
 
 # Ezekben a mappákban lévő képekből készülnek webes változatok.
-SOURCE_DIRS = ["eskuvo", "event", "koncert", "portraits", "gastro", "film"]
+SOURCE_DIRS = ["hero", "eskuvo", "event", "koncert", "portraits", "gastro", "film", "about"]
 # Egyedi fájlok (borítók, portré).
 SOURCE_FILES = [
     "headline.jpg",
@@ -46,8 +46,8 @@ WIDTHS = [480, 960, 1600, 2400]
 QUALITY = 80
 
 # Megosztási kép: forrás és a kivágás vízszintes/függőleges fókuszpontja (0–1).
-OG_SOURCE = "images/koncert.jpg"
-OG_FOCUS = (0.42, 0.5)
+OG_SOURCE = "images/hero/eskuvo-mezo.jpg"
+OG_FOCUS = (0.5, 0.5)
 
 
 def out_base(src: Path) -> Path:

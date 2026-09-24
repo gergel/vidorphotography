@@ -3,32 +3,32 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vidor Photography — fotós és operatőr, Budapest</title>
-<meta name="description" content="Vidor Gergely budapesti fotós és operatőr. Esküvői fotó és film, rendezvény-, koncert-, portré- és gasztrofotózás, dokumentumfilm.">
+<title>VIDOR Photo &amp; Film — Vidor Gergely fotós és operatőr, Budapest</title>
+<meta name="description" content="Vidor Gergely budapesti fotós és operatőr. Esküvő, portré, koncert, rendezvény és gasztro fotó, valamint dokumentum- és esküvői film.">
 <link rel="canonical" href="https://www.vidorphotography.com/">
-<meta name="theme-color" content="#111315">
+<meta name="theme-color" content="#11110F">
 
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Vidor Photography">
-<meta property="og:title" content="Vidor Photography — fotós és operatőr, Budapest">
-<meta property="og:description" content="Fotók és filmek. Saját látásmóddal. Esküvők, emberek, események.">
+<meta property="og:site_name" content="VIDOR Photo &amp; Film">
+<meta property="og:title" content="VIDOR Photo &amp; Film — Vidor Gergely fotós és operatőr">
+<meta property="og:description" content="Fotók és filmek. Saját látásmóddal. Esküvők, emberek, események — ahogyan én látom.">
 <meta property="og:url" content="https://www.vidorphotography.com/">
 <meta property="og:image" content="https://www.vidorphotography.com/images/web/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Esti fesztiválkoncert óriáskerékkel és tömeggel">
+<meta property="og:image:alt" content="Ifjú pár kéz a kézben sétál egy napsütötte mezőn">
 <meta property="og:locale" content="hu_HU">
 <meta property="og:locale:alternate" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
-<link rel="preload" as="image" href="images/web/koncert-1600.webp"
-      imagesrcset="images/web/koncert-960.webp 960w, images/web/koncert-1600.webp 1600w, images/web/koncert-2400.webp 2400w"
-      imagesizes="(max-width: 760px) 200vw, 100vw" fetchpriority="high">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@400;500;600&display=swap">
+<link rel="preload" as="image" href="images/web/hero/eskuvo-mezo-1600.webp"
+      imagesrcset="images/web/hero/eskuvo-mezo-960.webp 960w, images/web/hero/eskuvo-mezo-1600.webp 1600w"
+      imagesizes="(max-width: 767px) 260vw, 100vw" fetchpriority="high">
 <link rel="stylesheet" href="assets/css/style.css">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111315'/%3E%3Ctext x='16' y='22.5' font-family='Arial,sans-serif' font-weight='700' font-size='18' text-anchor='middle' fill='%23F2F3F3'%3EV%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2311110F'/%3E%3Ctext x='16' y='22.5' font-family='Arial,sans-serif' font-weight='700' font-size='18' text-anchor='middle' fill='%23FAFAF7'%3EV%3C/text%3E%3C/svg%3E">
 <script>
   // Nyelv beállítása még a megjelenítés előtt, hogy ne villanjon a magyar szöveg.
   try { if (localStorage.getItem('vp-lang') === 'en') document.documentElement.lang = 'en'; } catch (e) {}
@@ -38,12 +38,12 @@
 <body>
 <a class="skip-link" href="#main" data-i18n="a11y.skip">Ugrás a tartalomra</a>
 
-<!-- ================= FEJLÉC ================= -->
+<!-- ================= FEJLÉC (a hero képen) ================= -->
 <header class="site-header" id="top">
   <div class="wrap header__inner">
-    <a class="wordmark" href="#main" aria-label="Vidor Photography — az oldal eleje" data-i18n-attr="aria-label:a11y.home">
-      <span class="wordmark__name">VIDOR</span>
-      <span class="wordmark__sub">PHOTO &amp; FILM</span>
+    <a class="logo" href="#top" aria-label="VIDOR Photo &amp; Film — az oldal eleje" data-i18n-attr="aria-label:a11y.home">
+      <span class="logo__name">VIDOR</span>
+      <span class="logo__sub">PHOTO &amp; FILM</span>
     </a>
 
     <nav class="nav" id="site-nav" aria-label="Főmenü" data-i18n-attr="aria-label:a11y.mainNav">
@@ -53,137 +53,149 @@
         <li><a href="#rolam" data-i18n="nav.about">Rólam</a></li>
         <li><a href="#kapcsolat" data-i18n="nav.contact">Kapcsolat</a></li>
       </ul>
-      <a class="btn btn--primary nav__cta-mobile" href="#kapcsolat" data-i18n="nav.cta">Beszéljünk</a>
     </nav>
 
-    <div class="header__actions">
-      <div class="lang" role="group" aria-label="Nyelv" data-i18n-attr="aria-label:a11y.language">
-        <button type="button" class="lang__btn" data-lang="hu" aria-pressed="true" lang="hu" aria-label="Magyar">HU</button>
-        <button type="button" class="lang__btn" data-lang="en" aria-pressed="false" lang="en" aria-label="English">EN</button>
-      </div>
-      <a class="btn btn--primary btn--sm header__cta" href="#kapcsolat" data-i18n="nav.cta">Beszéljünk</a>
-      <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="site-nav">
-        <span class="menu-toggle__label" data-i18n="nav.menu">Menü</span>
-        <span class="menu-toggle__icon" aria-hidden="true"></span>
-      </button>
+    <div class="lang" role="group" aria-label="Nyelv" data-i18n-attr="aria-label:a11y.language">
+      <button type="button" class="lang__btn" data-lang="hu" aria-pressed="true" lang="hu" aria-label="Magyar">HU</button>
+      <button type="button" class="lang__btn" data-lang="en" aria-pressed="false" lang="en" aria-label="English">EN</button>
     </div>
+
+    <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="site-nav">
+      <span class="menu-toggle__label" data-i18n="nav.menu">Menü</span>
+      <span class="menu-toggle__icon" aria-hidden="true"></span>
+    </button>
   </div>
 </header>
 
 <main id="main">
 
-  <!-- ================= NYITÓSZEKCIÓ =================
-       A kivágást a style.css .hero --hero-x / --hero-y értékei állítják. -->
+  <!-- ================= HERO ================= -->
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero__media">
-      <img src="images/web/koncert-1600.webp"
-           srcset="images/web/koncert-480.webp 480w, images/web/koncert-960.webp 960w, images/web/koncert-1600.webp 1600w, images/web/koncert-2400.webp 2400w"
-           sizes="(max-width: 760px) 200vw, 100vw"
-           width="6000" height="4000" fetchpriority="high" decoding="async"
-           alt="Esti fesztiválkoncert: az előadó a színpad szélén, mögötte óriáskerék és a közönség viharos ég alatt"
-           data-i18n-attr="alt:hero.imageAlt">
+      <img src="images/web/hero/eskuvo-mezo-960.webp"
+             srcset="images/web/hero/eskuvo-mezo-480.webp 480w, images/web/hero/eskuvo-mezo-960.webp 960w, images/web/hero/eskuvo-mezo-1600.webp 1600w"
+             sizes="(max-width: 767px) 260vw, 100vw"
+             width="2144" height="1556"
+             fetchpriority="high" decoding="async"
+             alt="Ifjú pár kéz a kézben sétál egy napsütötte mezőn, a háttérben egy vidéki ház"
+             data-i18n-attr="alt:hero.imageAlt">
     </div>
-    <div class="hero__shade" aria-hidden="true"></div>
     <div class="wrap hero__content">
-      <div class="hero__inner">
-        <p class="hero__eyebrow" data-i18n="hero.eyebrow">Vidor Gergely · Fotós és operatőr</p>
-        <h1 class="hero__title" id="hero-title">
-          <span data-i18n="hero.title1">Fotók és filmek.</span>
-          <span data-i18n="hero.title2">Saját látásmóddal.</span>
-        </h1>
-        <div class="hero__row">
-          <p class="hero__lead" data-i18n="hero.lead">Esküvők, emberek, események — ahogyan én látom.</p>
-          <div class="hero__actions">
-            <a class="btn btn--primary" href="#munkak" data-i18n="hero.ctaPrimary">Munkáim</a>
-            <a class="text-link" href="#kapcsolat"><span data-i18n="hero.ctaSecondary">Kapcsolat</span> <span aria-hidden="true">↗</span></a>
-          </div>
+      <h1 class="hero__title" id="hero-title">
+        <span data-i18n="hero.title1">Fotók és filmek.</span>
+        <span data-i18n="hero.title2">Saját látásmóddal.</span>
+      </h1>
+      <div class="hero__row">
+        <p class="hero__lead" data-i18n="hero.lead">Esküvők, emberek, események — ahogyan én látom.</p>
+        <div class="hero__actions">
+          <a class="btn btn--light" href="#munkak"><span data-i18n="hero.ctaPrimary">Munkáim</span> <span class="btn__arrow" aria-hidden="true">→</span></a>
+          <a class="hero__link" href="#kapcsolat"><span data-i18n="hero.ctaSecondary">Kapcsolat</span> <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= VÁLOGATOTT MUNKÁK =================
-       Borítókép cseréje: írd át az <img> src/srcset útvonalát (images/web/...).
+  <!-- ================= VÁLOGATOTT MUNKÁK — 01 =================
+       Borítókép cseréje: <img> src/srcset (images/web/...), kivágás: style="object-position".
        data-gallery="kulcs" → assets/js/content.js galleries.kulcs -->
   <section class="section works" id="munkak" aria-labelledby="works-title">
     <div class="wrap">
       <header class="section-head">
-        <h2 class="section-title" id="works-title" data-i18n="works.title">Válogatott munkák</h2>
+        <div>
+          <p class="label"><span data-i18n="works.label">Válogatott munkák</span> — 01</p>
+          <h2 class="title-l" id="works-title"><span data-i18n="works.title1">Képek, amelyek tovább élnek</span> <span data-i18n="works.title2">a pillanatnál.</span></h2>
+        </div>
+        <p class="section-head__intro" data-i18n="works.intro">Emberek, helyzetek és részletek — őszintén, érzékenyen, felesleges pózok nélkül.</p>
       </header>
 
       <ul class="works__grid" role="list">
-        <li class="work">
+        <li class="work work--wedding">
           <a class="work__link" href="images/web/eskuvo/eskuvo-01-2400.webp" data-gallery="eskuvo">
             <div class="work__media">
               <img src="images/web/eskuvo/eskuvo-01-960.webp"
-                   srcset="images/web/eskuvo/eskuvo-01-480.webp 480w, images/web/eskuvo/eskuvo-01-960.webp 960w, images/web/eskuvo/eskuvo-01-1600.webp 1600w"
-                   sizes="(max-width: 700px) 92vw, (min-width: 1528px) 700px, 46vw"
-                   width="2400" height="1600" loading="lazy" decoding="async"
-                   alt="Csókolózó jegyespár esti fényfüzérek alatt, szálló szirmokkal" data-i18n-attr="alt:works.wedding.alt">
+             srcset="images/web/eskuvo/eskuvo-01-480.webp 480w, images/web/eskuvo/eskuvo-01-960.webp 960w, images/web/eskuvo/eskuvo-01-1600.webp 1600w"
+             sizes="(max-width: 767px) 90vw, (min-width: 1440px) 800px, 56vw"
+             width="2400" height="1600"
+             loading="lazy" decoding="async"
+             style="object-position: 50% 55%"
+             alt="Csókolózó jegyespár esti fényfüzérek alatt, szálló szirmokkal"
+             data-i18n-attr="alt:works.wedding.alt">
             </div>
             <div class="work__caption">
               <h3 class="work__title" data-i18n="works.wedding.title">Esküvő</h3>
-              <span class="work__more" aria-hidden="true" data-i18n="works.more">Megnézem</span>
+              <p class="work__desc"><span data-i18n="works.wedding.desc">Két ember, egy történet</span> <span class="arrow" aria-hidden="true">↗</span></p>
             </div>
           </a>
         </li>
-        <li class="work">
-          <a class="work__link" href="images/web/portraits/portre-03-2400.webp" data-gallery="portre">
+        <li class="work work--portrait">
+          <a class="work__link" href="images/web/portraits/portre-01-1600.webp" data-gallery="portre">
             <div class="work__media">
-              <img src="images/web/portraits/portre-03-960.webp"
-                   srcset="images/web/portraits/portre-03-480.webp 480w, images/web/portraits/portre-03-960.webp 960w, images/web/portraits/portre-03-1600.webp 1600w"
-                   sizes="(max-width: 700px) 92vw, (min-width: 1528px) 700px, 46vw"
-                   width="2400" height="1600" loading="lazy" decoding="async"
-                   alt="Öltönyös férfi ül egy irodában, mögötte neonfelirat" data-i18n-attr="alt:works.portrait.alt">
+              <img src="images/web/portraits/portre-01-960.webp"
+             srcset="images/web/portraits/portre-01-480.webp 480w, images/web/portraits/portre-01-960.webp 960w, images/web/portraits/portre-01-1600.webp 1600w"
+             sizes="(max-width: 767px) 90vw, (min-width: 1440px) 468px, 33vw"
+             width="1920" height="2880"
+             loading="lazy" decoding="async"
+             style="object-position: 50% 30%"
+             alt="Szakállas, tetovált férfi összefont karral, sötét háttér előtt"
+             data-i18n-attr="alt:works.portrait.alt">
             </div>
             <div class="work__caption">
               <h3 class="work__title" data-i18n="works.portrait.title">Portré</h3>
-              <span class="work__more" aria-hidden="true" data-i18n="works.more">Megnézem</span>
+              <p class="work__desc"><span data-i18n="works.portrait.desc">Karakter és jelenlét</span> <span class="arrow" aria-hidden="true">↗</span></p>
             </div>
           </a>
         </li>
-        <li class="work">
-          <a class="work__link" href="images/web/koncert/koncert-03-2400.webp" data-gallery="koncert">
+        <li class="work work--concert">
+          <a class="work__link" href="images/web/koncert/koncert-02-2400.webp" data-gallery="koncert">
             <div class="work__media">
-              <img src="images/web/koncert/koncert-03-960.webp"
-                   srcset="images/web/koncert/koncert-03-480.webp 480w, images/web/koncert/koncert-03-960.webp 960w, images/web/koncert/koncert-03-1600.webp 1600w"
-                   sizes="(max-width: 700px) 92vw, (min-width: 1528px) 700px, 46vw"
-                   width="2400" height="1599" loading="lazy" decoding="async"
-                   alt="Előadó sziluettje füstben és reflektorfényben a közönség felett" data-i18n-attr="alt:works.concert.alt">
+              <img src="images/web/koncert/koncert-02-960.webp"
+             srcset="images/web/koncert/koncert-02-480.webp 480w, images/web/koncert/koncert-02-960.webp 960w, images/web/koncert/koncert-02-1600.webp 1600w"
+             sizes="(max-width: 767px) 90vw, (min-width: 1440px) 468px, 33vw"
+             width="3367" height="5051"
+             loading="lazy" decoding="async"
+             style="object-position: 45% 40%"
+             alt="Rapper mikrofonnal a közönség fölött, zöld színpadfények előtt"
+             data-i18n-attr="alt:works.concert.alt">
             </div>
             <div class="work__caption">
               <h3 class="work__title" data-i18n="works.concert.title">Koncert</h3>
-              <span class="work__more" aria-hidden="true" data-i18n="works.more">Megnézem</span>
+              <p class="work__desc"><span data-i18n="works.concert.desc">Fény, zaj, energia</span> <span class="arrow" aria-hidden="true">↗</span></p>
             </div>
           </a>
         </li>
-        <li class="work">
-          <a class="work__link" href="images/web/gastro/gastro-04-2400.webp" data-gallery="gastro">
+        <li class="work work--food">
+          <a class="work__link" href="images/web/gastro/gastro-06-2400.webp" data-gallery="gastro">
             <div class="work__media">
-              <img src="images/web/gastro/gastro-04-960.webp"
-                   srcset="images/web/gastro/gastro-04-480.webp 480w, images/web/gastro/gastro-04-960.webp 960w, images/web/gastro/gastro-04-1600.webp 1600w"
-                   sizes="(max-width: 700px) 92vw, (min-width: 1528px) 700px, 46vw"
-                   width="2400" height="1600" loading="lazy" decoding="async"
-                   alt="Forró csokoládé fatálcán, fenyőtobozokkal, felülnézetből" data-i18n-attr="alt:works.gastro.alt">
+              <img src="images/web/gastro/gastro-06-960.webp"
+             srcset="images/web/gastro/gastro-06-480.webp 480w, images/web/gastro/gastro-06-960.webp 960w, images/web/gastro/gastro-06-1600.webp 1600w"
+             sizes="(max-width: 767px) 90vw, (min-width: 1440px) 800px, 56vw"
+             width="2400" height="1600"
+             loading="lazy" decoding="async"
+             style="object-position: 50% 55%"
+             alt="Leves fatálcán, fahéjjal és fenyőtobozokkal, sötét háttér előtt"
+             data-i18n-attr="alt:works.gastro.alt">
             </div>
             <div class="work__caption">
               <h3 class="work__title" data-i18n="works.gastro.title">Gasztro</h3>
-              <span class="work__more" aria-hidden="true" data-i18n="works.more">Megnézem</span>
+              <p class="work__desc"><span data-i18n="works.gastro.desc">Ízek képekben</span> <span class="arrow" aria-hidden="true">↗</span></p>
             </div>
           </a>
         </li>
-        <li class="work work--wide">
+        <li class="work work--event">
           <a class="work__link" href="images/web/event/rendezveny-01-2400.webp" data-gallery="rendezveny">
             <div class="work__media">
               <img src="images/web/event/rendezveny-01-960.webp"
-                   srcset="images/web/event/rendezveny-01-480.webp 480w, images/web/event/rendezveny-01-960.webp 960w, images/web/event/rendezveny-01-1600.webp 1600w, images/web/event/rendezveny-01-2400.webp 2400w"
-                   sizes="(max-width: 700px) 92vw, (min-width: 1528px) 1400px, 92vw"
-                   width="2400" height="1600" loading="lazy" decoding="async"
-                   alt="Díszvacsora egy historikus belső térben, felülnézetből" data-i18n-attr="alt:works.event.alt">
+             srcset="images/web/event/rendezveny-01-480.webp 480w, images/web/event/rendezveny-01-960.webp 960w, images/web/event/rendezveny-01-1600.webp 1600w"
+             sizes="(max-width: 767px) 90vw, (min-width: 1440px) 468px, 33vw"
+             width="2400" height="1600"
+             loading="lazy" decoding="async"
+             style="object-position: 52% 50%"
+             alt="Díszvacsora egy historikus belső térben, felülnézetből"
+             data-i18n-attr="alt:works.event.alt">
             </div>
             <div class="work__caption">
               <h3 class="work__title" data-i18n="works.event.title">Rendezvény</h3>
-              <span class="work__more" aria-hidden="true" data-i18n="works.more">Megnézem</span>
+              <p class="work__desc"><span data-i18n="works.event.desc">A pillanat ritmusa</span> <span class="arrow" aria-hidden="true">↗</span></p>
             </div>
           </a>
         </li>
@@ -191,133 +203,168 @@
     </div>
   </section>
 
-  <!-- ================= FILMEK =================
-       Vimeo-azonosítók: assets/js/content.js films.
-       data-film="kulcs" köti össze a borítót a filmmel. -->
+  <!-- ================= IDÉZETES KÉPSÁV ================= -->
+  <section class="quote" aria-label="Idézet" data-i18n-attr="aria-label:quote.label">
+    <div class="quote__media">
+      <img src="images/web/koncert-960.webp"
+             srcset="images/web/koncert-480.webp 480w, images/web/koncert-960.webp 960w, images/web/koncert-1600.webp 1600w, images/web/koncert-2400.webp 2400w"
+             sizes="100vw"
+             width="6000" height="4000"
+             loading="lazy" decoding="async"
+             class="is-bw"
+             style="object-position: 50% 42%"
+             alt="">
+    </div>
+    <blockquote class="quote__text">
+      <p><span data-i18n="quote.line1">„Nem csupán azt keresem, ami történik.</span> <span data-i18n="quote.line2">Azt keresem, ami megmarad belőle.”</span></p>
+    </blockquote>
+  </section>
+
+  <!-- ================= FILMEK — 02 =================
+       Vimeo-azonosítók: assets/js/content.js films. data-film="kulcs" köti össze. -->
   <section class="section films" id="filmek" aria-labelledby="films-title">
     <div class="wrap">
       <header class="section-head">
-        <h2 class="section-title" id="films-title" data-i18n="films.title">Történetek mozgásban.</h2>
-        <p class="section-intro" data-i18n="films.intro">Dokumentumfilm, rövidfilm és esküvői film.</p>
+        <div>
+          <p class="label"><span data-i18n="films.label">Filmek</span> — 02</p>
+          <h2 class="title-l" id="films-title"><span data-i18n="films.title1">A kép mozdul. A történet</span> <span data-i18n="films.title2">marad.</span></h2>
+        </div>
+        <p class="section-head__intro section-head__intro--narrow" data-i18n="films.intro">Rövid és hosszabb formátumok, atmoszférával és saját ritmussal.</p>
       </header>
 
       <div class="films__grid">
-        <article class="film film--featured">
-          <a class="film__play" href="https://vimeo.com/1188963244" data-film="dokumentumfilm"
-             aria-label="Lejátszás: Dokumentumfilm" data-i18n-attr="aria-label:films.doc.play">
-            <span class="film__media">
+        <article class="film">
+          <a class="film__play" href="https://vimeo.com/1188963244" data-film="dokumentumfilm" aria-label="Lejátszás: Dokumentumfilm" data-i18n-attr="aria-label:films.doc.play">
+            <div class="film__media">
               <img src="images/web/film/dokumentumfilm-borito-960.webp"
-                   srcset="images/web/film/dokumentumfilm-borito-480.webp 480w, images/web/film/dokumentumfilm-borito-960.webp 960w, images/web/film/dokumentumfilm-borito-1600.webp 1600w"
-                   sizes="(min-width: 1528px) 1400px, 92vw"
-                   width="2396" height="1616" loading="lazy" decoding="async" alt="">
-              <span class="play-icon" aria-hidden="true"></span>
-            </span>
-          </a>
-          <div class="film__caption">
+             srcset="images/web/film/dokumentumfilm-borito-480.webp 480w, images/web/film/dokumentumfilm-borito-960.webp 960w"
+             sizes="(max-width: 767px) 90vw, (min-width: 1440px) 420px, 30vw"
+             width="2396" height="1616"
+             loading="lazy" decoding="async"
+             style="object-position: 55% 40%"
+             alt="">
+            </div>
             <h3 class="film__title" data-i18n="films.doc.title">Dokumentumfilm</h3>
-            <p class="film__meta">22:16</p>
-          </div>
+            <p class="film__desc"><span data-i18n="films.doc.desc">Valós történetek, közelről.</span> <span class="film__icon" aria-hidden="true">▶</span></p>
+          </a>
         </article>
-
         <article class="film">
-          <a class="film__play" href="https://vimeo.com/1188963168" data-film="storytelling"
-             aria-label="Lejátszás: Visual Storytelling" data-i18n-attr="aria-label:films.story.play">
-            <span class="film__media">
+          <a class="film__play" href="https://vimeo.com/1188963168" data-film="storytelling" aria-label="Lejátszás: Visual Storytelling" data-i18n-attr="aria-label:films.story.play">
+            <div class="film__media">
               <img src="images/web/visual-storytelling-960.webp"
-                   srcset="images/web/visual-storytelling-480.webp 480w, images/web/visual-storytelling-960.webp 960w, images/web/visual-storytelling-1600.webp 1600w"
-                   sizes="(max-width: 700px) 92vw, 46vw"
-                   width="3840" height="2160" loading="lazy" decoding="async" alt="">
-              <span class="play-icon" aria-hidden="true"></span>
-            </span>
-          </a>
-          <div class="film__caption">
+             srcset="images/web/visual-storytelling-480.webp 480w, images/web/visual-storytelling-960.webp 960w"
+             sizes="(max-width: 767px) 90vw, (min-width: 1440px) 420px, 30vw"
+             width="3840" height="2160"
+             loading="lazy" decoding="async"
+             style="object-position: 48% 50%"
+             alt="">
+            </div>
             <h3 class="film__title" data-i18n="films.story.title">Visual Storytelling</h3>
-            <p class="film__meta">4:02</p>
-          </div>
-        </article>
-
-        <article class="film">
-          <a class="film__play" href="https://vimeo.com/1188707738" data-film="eskuvoi"
-             aria-label="Lejátszás: Esküvői film" data-i18n-attr="aria-label:films.wedding.play">
-            <span class="film__media">
-              <img src="images/web/weddings-video-960.webp"
-                   srcset="images/web/weddings-video-480.webp 480w, images/web/weddings-video-960.webp 960w, images/web/weddings-video-1600.webp 1600w"
-                   sizes="(max-width: 700px) 92vw, 46vw"
-                   width="2750" height="1700" loading="lazy" decoding="async" alt="">
-              <span class="play-icon" aria-hidden="true"></span>
-            </span>
+            <p class="film__desc"><span data-i18n="films.story.desc">Hangulat, ritmus, mozgás.</span> <span class="film__icon" aria-hidden="true">▶</span></p>
           </a>
-          <div class="film__caption">
+        </article>
+        <article class="film">
+          <a class="film__play" href="https://vimeo.com/1188707738" data-film="eskuvoi" aria-label="Lejátszás: Esküvői film" data-i18n-attr="aria-label:films.wedding.play">
+            <div class="film__media">
+              <img src="images/web/weddings-video-960.webp"
+             srcset="images/web/weddings-video-480.webp 480w, images/web/weddings-video-960.webp 960w"
+             sizes="(max-width: 767px) 90vw, (min-width: 1440px) 420px, 30vw"
+             width="2750" height="1700"
+             loading="lazy" decoding="async"
+             style="object-position: 52% 40%"
+             alt="">
+            </div>
             <h3 class="film__title" data-i18n="films.wedding.title">Esküvői film</h3>
-            <p class="film__meta">3:36</p>
-          </div>
+            <p class="film__desc"><span data-i18n="films.wedding.desc">A napotok, mozgó emlékként.</span> <span class="film__icon" aria-hidden="true">▶</span></p>
+          </a>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ================= SZOLGÁLTATÁSOK ================= -->
-  <section class="section section--alt services" id="szolgaltatasok" aria-labelledby="services-title">
-    <div class="wrap">
-      <header class="section-head">
-        <h2 class="section-title" id="services-title" data-i18n="services.title">Amiben együtt dolgozhatunk</h2>
-      </header>
-
-      <ul class="services__list" role="list">
-        <li class="service">
-          <h3 class="service__title" data-i18n="services.s1.title">Esküvői fotó és film</h3>
-          <p class="service__text" data-i18n="services.s1.text">Fotó és film külön vagy együtt, a nagy pillanatoktól a csendes részletekig.</p>
-          <p class="service__links">
-            <a class="arrow-link" href="#munkak" data-gallery="eskuvo" data-i18n="services.s1.link1">Fotók</a>
-            <a class="arrow-link" href="#filmek" data-film="eskuvoi" data-i18n="services.s1.link2">Film</a>
-          </p>
-        </li>
-        <li class="service">
-          <h3 class="service__title" data-i18n="services.s2.title">Rendezvény-, koncert- és portréfotózás</h3>
-          <p class="service__text" data-i18n="services.s2.text">Úgy fotózom, hogy az esemény hangulata és az emberek is valódiak maradjanak.</p>
-          <p class="service__links">
-            <a class="arrow-link" href="#munkak" data-gallery="rendezveny" data-i18n="services.s2.link1">Rendezvény</a>
-            <a class="arrow-link" href="#munkak" data-gallery="koncert" data-i18n="services.s2.link2">Koncert</a>
-            <a class="arrow-link" href="#munkak" data-gallery="portre" data-i18n="services.s2.link3">Portré</a>
-          </p>
-        </li>
-        <li class="service">
-          <h3 class="service__title" data-i18n="services.s3.title">Gasztrofotózás és dokumentumfilm</h3>
-          <p class="service__text" data-i18n="services.s3.text">Ételek, italok és helyek fotói, valamint emberek története közelről, filmen.</p>
-          <p class="service__links">
-            <a class="arrow-link" href="#munkak" data-gallery="gastro" data-i18n="services.s3.link1">Gasztro</a>
-            <a class="arrow-link" href="#filmek" data-film="dokumentumfilm" data-i18n="services.s3.link2">Film</a>
-          </p>
-        </li>
-      </ul>
+  <!-- ================= SZOLGÁLTATÁSOK — 03 ================= -->
+  <section class="section services" id="szolgaltatasok" aria-labelledby="services-title">
+    <div class="wrap services__grid">
+      <div>
+        <p class="label"><span data-i18n="services.label">Szolgáltatások</span> — 03</p>
+        <h2 class="title-m" id="services-title"><span data-i18n="services.title1">Személyre szabott</span> <span data-i18n="services.title2">vizuális történetek.</span></h2>
+      </div>
+      <ol class="services__list" role="list">
+        <li class="service"><span class="service__num">01</span><h3 class="service__name" data-i18n="services.s1.name">Esküvő</h3><p class="service__desc" data-i18n="services.s1.desc">Teljes napos történetmesélés fotón és filmen.</p></li>
+        <li class="service"><span class="service__num">02</span><h3 class="service__name" data-i18n="services.s2.name">Portré &amp; editorial</h3><p class="service__desc" data-i18n="services.s2.desc">Természetes portrék alkotóknak, márkáknak, magánembereknek.</p></li>
+        <li class="service"><span class="service__num">03</span><h3 class="service__name" data-i18n="services.s3.name">Esemény &amp; koncert</h3><p class="service__desc" data-i18n="services.s3.desc">Jelenlét, energia és a fontos részletek.</p></li>
+        <li class="service"><span class="service__num">04</span><h3 class="service__name" data-i18n="services.s4.name">Gasztro</h3><p class="service__desc" data-i18n="services.s4.desc">Atmoszféra és textúra minden képkockán.</p></li>
+      </ol>
     </div>
   </section>
 
-  <!-- ================= RÓLAM ================= -->
+  <!-- ================= SZEMLÉLET — 04 ================= -->
+  <section class="approach" id="szemlelet" aria-labelledby="approach-title">
+    <div class="approach__media">
+      <img src="images/web/about-photo-960.webp"
+             srcset="images/web/about-photo-480.webp 480w, images/web/about-photo-960.webp 960w, images/web/about-photo-1600.webp 1600w"
+             sizes="(max-width: 767px) 100vw, 50vw"
+             width="8245" height="5497"
+             loading="lazy" decoding="async"
+             class="is-bw"
+             style="object-position: 58% 50%"
+             alt="Vidor Gergely filmkamerával a vállán egy futóverseny rajtjánál"
+             data-i18n-attr="alt:approach.imageAlt">
+    </div>
+    <div class="approach__text">
+      <p class="label"><span data-i18n="approach.label">Szemlélet</span> — 04</p>
+      <h2 class="title-m" id="approach-title"><span data-i18n="approach.title1">Figyelek. Kapcsolódom. Nem</span> <span data-i18n="approach.title2">rendezek túl.</span></h2>
+      <p class="approach__body" data-i18n="approach.body">A közös munka beszélgetéssel kezdődik. Megismerem a történetet és a közeget, majd teret hagyok annak, ami természetesen történik. A végeredmény letisztult, személyes és időtálló.</p>
+      <ol class="steps" role="list">
+        <li><span>01</span> <span data-i18n="approach.step1">Kapcsolódás</span></li>
+        <li><span>02</span> <span data-i18n="approach.step2">Alkotás</span></li>
+        <li><span>03</span> <span data-i18n="approach.step3">Átadás</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= RÓLAM — 05 ================= -->
   <section class="section about" id="rolam" aria-labelledby="about-title">
     <div class="wrap about__grid">
-      <figure class="about__figure">
-        <img src="images/web/headline-960.webp"
+      <div class="about__photos">
+        <figure class="about__main">
+          <img src="images/web/headline-960.webp"
              srcset="images/web/headline-480.webp 480w, images/web/headline-960.webp 960w, images/web/headline-1600.webp 1600w"
-             sizes="(max-width: 800px) 92vw, 38vw"
-             width="5497" height="5497" loading="lazy" decoding="async"
+             sizes="(max-width: 767px) 62vw, 430px"
+             width="5497" height="5497"
+             loading="lazy" decoding="async"
+             style="object-position: 40% 50%"
              alt="Vidor Gergely nádasban áll, egyik kezében magasra emelt filmkamera"
              data-i18n-attr="alt:about.imageAlt">
-      </figure>
+        </figure>
+        <figure class="about__detail">
+          <img src="images/web/about/kamera-reszlet-480.webp"
+             srcset="images/web/about/kamera-reszlet-480.webp 480w"
+             sizes="(max-width: 767px) 30vw, 200px"
+             width="880" height="1232"
+             loading="lazy" decoding="async"
+             class="is-bw"
+             style="object-position: 50% 40%"
+             alt="Kamera Vidor Gergely kezében forgatás közben, fekete-fehérben"
+             data-i18n-attr="alt:about.detailAlt">
+        </figure>
+      </div>
       <div class="about__text">
-        <h2 class="section-title" id="about-title" data-i18n="about.title">Vidor Gergely vagyok.</h2>
-        <p data-i18n="about.p1">Budapesti fotós és operatőr vagyok, 2015 óta dolgozom ebben. A nagyapám fényképezőgépével kezdtem, később a fotó mellé a film is odakerült.</p>
-        <p data-i18n="about.p2">Figyelem, hogyan mozdulnak az emberek, hol áll meg a fény, és mi történik két nagy pillanat között. Nem rendezem túl a helyzeteket: akkor exponálok, amikor valami tényleg megtörténik.</p>
+        <p class="label"><span data-i18n="about.label">Rólam</span> — 05</p>
+        <h2 class="title-m" id="about-title"><span data-i18n="about.title1">Vidor Gergely, fotós és</span> <span data-i18n="about.title2">operatőr.</span></h2>
+        <p class="about__body" data-i18n="about.body">Budapesten élek és dolgozom. 2015 óta fotózom és filmezek embereket, esküvőket, eseményeket és történeteket. A képeimben az őszinte pillanatokat, a fény finom változásait és a helyzet saját ritmusát keresem.</p>
+        <p class="meta" data-i18n="about.meta">Budapest · 2015 óta</p>
       </div>
     </div>
   </section>
 
-  <!-- ================= KAPCSOLAT ================= -->
-  <section class="section section--alt contact" id="kapcsolat" aria-labelledby="contact-title">
+  <!-- ================= KAPCSOLAT — 06 ================= -->
+  <section class="section contact" id="kapcsolat" aria-labelledby="contact-title">
     <div class="wrap contact__grid">
       <div class="contact__intro">
-        <h2 class="contact__title" id="contact-title" data-i18n="contact.title">Beszéljünk a tervedről.</h2>
-        <p class="contact__lead" data-i18n="contact.lead">Írd meg, milyen fotózásra vagy filmre gondoltál, és beszéljük át a részleteket.</p>
+        <p class="label"><span data-i18n="contact.label">Kapcsolat</span> — 06</p>
+        <h2 class="title-l" id="contact-title"><span data-i18n="contact.title1">Mesélj a</span> <span data-i18n="contact.title2">történetedről.</span></h2>
+        <p class="contact__lead" data-i18n="contact.lead">Esküvő, portré, film vagy egy különleges esemény? Írj néhány sort, és beszéljük át, hogyan dolgozhatunk együtt.</p>
         <ul class="contact__details" role="list">
           <li><a href="mailto:vidor.gergely@gmail.com">vidor.gergely@gmail.com</a></li>
           <li><a href="tel:+36205609623">+36&nbsp;20&nbsp;560&nbsp;9623</a></li>
@@ -336,47 +383,37 @@
         </div>
 
         <div class="field">
-          <label for="f-name"><span data-i18n="form.name">Név</span> <span class="field__req" aria-hidden="true">*</span></label>
-          <input id="f-name" name="nev" type="text" autocomplete="name" required aria-describedby="f-name-err">
+          <label for="f-name"><span data-i18n="form.name">Név</span><span class="visually-hidden" data-i18n="form.requiredMark"> (kötelező)</span></label>
+          <input id="f-name" name="nev" type="text" autocomplete="name" required placeholder="Írj ide..." data-i18n-attr="placeholder:form.placeholder" aria-describedby="f-name-err">
           <p class="field__error" id="f-name-err" hidden></p>
         </div>
         <div class="field">
-          <label for="f-email"><span data-i18n="form.email">E-mail</span> <span class="field__req" aria-hidden="true">*</span></label>
-          <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="f-email-err">
+          <label for="f-email"><span data-i18n="form.email">E-mail</span><span class="visually-hidden" data-i18n="form.requiredMark"> (kötelező)</span></label>
+          <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="Írj ide..." data-i18n-attr="placeholder:form.placeholder" aria-describedby="f-email-err">
           <p class="field__error" id="f-email-err" hidden></p>
         </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="f-type"><span data-i18n="form.type">Milyen munkáról van szó?</span> <span class="field__opt" data-i18n="form.optional">(nem kötelező)</span></label>
-            <select id="f-type" name="munka_tipusa">
-              <option value="" data-i18n="form.typeChoose">Válassz…</option>
-              <option value="Esküvői fotó" data-i18n="form.typeWeddingPhoto">Esküvői fotó</option>
-              <option value="Esküvői film" data-i18n="form.typeWeddingFilm">Esküvői film</option>
-              <option value="Esküvői fotó és film" data-i18n="form.typeWeddingBoth">Esküvői fotó és film</option>
-              <option value="Rendezvény" data-i18n="form.typeEvent">Rendezvény</option>
-              <option value="Koncert" data-i18n="form.typeConcert">Koncert</option>
-              <option value="Portré" data-i18n="form.typePortrait">Portré</option>
-              <option value="Gasztro" data-i18n="form.typeFood">Gasztro</option>
-              <option value="Dokumentumfilm" data-i18n="form.typeDoc">Dokumentumfilm</option>
-              <option value="Egyéb" data-i18n="form.typeOther">Egyéb</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="f-date"><span data-i18n="form.date">Tervezett időpont</span> <span class="field__opt" data-i18n="form.optional">(nem kötelező)</span></label>
-            <input id="f-date" name="idopont" type="text" autocomplete="off" placeholder="pl. 2027. június" data-i18n-attr="placeholder:form.datePlaceholder">
-          </div>
+        <div class="field">
+          <label for="f-type" data-i18n="form.type">Miben gondolkodsz?</label>
+          <select id="f-type" name="munka_tipusa">
+            <option value="" data-i18n="form.typeChoose">Esküvő / Portré / Film / Esemény</option>
+            <option value="Esküvő" data-i18n="form.typeWedding">Esküvő</option>
+            <option value="Portré" data-i18n="form.typePortrait">Portré</option>
+            <option value="Film" data-i18n="form.typeFilm">Film</option>
+            <option value="Esemény" data-i18n="form.typeEvent">Esemény</option>
+            <option value="Egyéb" data-i18n="form.typeOther">Egyéb</option>
+          </select>
         </div>
         <div class="field">
-          <label for="f-message"><span data-i18n="form.message">Üzenet</span> <span class="field__req" aria-hidden="true">*</span></label>
-          <textarea id="f-message" name="uzenet" rows="6" required aria-describedby="f-message-err"></textarea>
+          <label for="f-message"><span data-i18n="form.message">Üzenet</span><span class="visually-hidden" data-i18n="form.requiredMark"> (kötelező)</span></label>
+          <textarea id="f-message" name="uzenet" rows="1" required placeholder="Írj ide..." data-i18n-attr="placeholder:form.placeholder" aria-describedby="f-message-err"></textarea>
           <p class="field__error" id="f-message-err" hidden></p>
         </div>
 
         <div class="form__footer">
-          <button type="submit" class="btn btn--primary form__submit">
-            <span class="form__submit-label" data-i18n="form.submit">Üzenet küldése</span>
+          <button type="submit" class="btn btn--light form__submit">
+            <span class="form__submit-label" data-i18n="form.submit">Üzenet küldése</span> <span class="btn__arrow" aria-hidden="true">→</span>
           </button>
-          <p class="form__note"><span data-i18n="form.required">A *-gal jelölt mezők kötelezők.</span> <span data-i18n="form.privacy">Az üzeneted a FormSubmit űrlapszolgáltatáson keresztül, e-mailben érkezik meg hozzám.</span></p>
+          <p class="form__note" data-i18n="form.privacy">Az üzeneted a FormSubmit űrlapszolgáltatáson keresztül, e-mailben érkezik meg hozzám.</p>
         </div>
         <div class="form__status" id="form-status" role="status" aria-live="polite" tabindex="-1" hidden></div>
       </form>
@@ -387,17 +424,28 @@
 <!-- ================= LÁBLÉC ================= -->
 <footer class="site-footer">
   <div class="wrap footer__inner">
-    <p class="footer__brand">Vidor Photography <span class="footer__copy">© <span id="year">2026</span></span></p>
-    <ul class="footer__social" role="list">
+    <a class="logo logo--dark" href="#top" aria-label="VIDOR Photo &amp; Film — az oldal eleje" data-i18n-attr="aria-label:a11y.home">
+      <span class="logo__name">VIDOR</span>
+      <span class="logo__sub">PHOTO &amp; FILM</span>
+    </a>
+    <ul class="footer__nav" role="list">
+      <li><a href="#munkak" data-i18n="nav.work">Munkák</a></li>
+      <li><a href="#filmek" data-i18n="nav.films">Filmek</a></li>
+      <li><a href="#rolam" data-i18n="nav.about">Rólam</a></li>
+      <li><a href="#kapcsolat" data-i18n="nav.contact">Kapcsolat</a></li>
       <li><a href="https://www.instagram.com/vidorphotography1/" rel="noopener" target="_blank">Instagram<span class="visually-hidden" data-i18n="a11y.newTab"> (új lapon nyílik meg)</span></a></li>
-      <li><a href="https://www.facebook.com/gergo.vidor.9/" rel="noopener" target="_blank">Facebook<span class="visually-hidden" data-i18n="a11y.newTab"> (új lapon nyílik meg)</span></a></li>
-      <li><a href="https://www.youtube.com/channel/UCSgU3P5uT4wRdOBFBHtwg5g" rel="noopener" target="_blank">YouTube<span class="visually-hidden" data-i18n="a11y.newTab"> (új lapon nyílik meg)</span></a></li>
     </ul>
-    <a class="footer__top" href="#top" data-i18n="footer.top">Vissza a tetejére ↑</a>
+    <div class="footer__end">
+      <div class="lang lang--footer" role="group" aria-label="Nyelv" data-i18n-attr="aria-label:a11y.language">
+        <button type="button" class="lang__btn" data-lang="hu" aria-pressed="true" lang="hu" aria-label="Magyar">HU</button>
+        <button type="button" class="lang__btn" data-lang="en" aria-pressed="false" lang="en" aria-label="English">EN</button>
+      </div>
+      <p class="footer__copy">© <span id="year">2026</span> VIDOR PHOTOGRAPHY · BUDAPEST</p>
+    </div>
   </div>
 </footer>
 
-<!-- ================= GALÉRIA (egyetlen párbeszédablak, rács + nagy kép nézet) ================= -->
+<!-- ================= GALÉRIA (rács + nagy kép nézet) ================= -->
 <dialog class="viewer" id="viewer" aria-labelledby="viewer-title">
   <div class="viewer__bar">
     <div class="viewer__heading">
@@ -430,7 +478,7 @@
 <dialog class="player" id="player" aria-labelledby="player-title">
   <div class="player__bar">
     <h2 class="player__title" id="player-title">Videó</h2>
-    <button type="button" class="close-btn close-btn--light" data-close>
+    <button type="button" class="close-btn" data-close>
       <span class="close-btn__label" data-i18n="viewer.close">Bezárás</span> <span aria-hidden="true">✕</span>
     </button>
   </div>

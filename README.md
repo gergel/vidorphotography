@@ -7,7 +7,7 @@ GitHub Pages-kompatibilis, minden hivatkozás relatív.
 
 ```
 index.html                  az oldal szerkezete és a magyar alapszöveg
-assets/css/style.css        megjelenés (sötét színrendszer, DM Sans, térközök a :root változókban)
+assets/css/style.css        megjelenés a PDF-referencia szerint (színek, méretek a :root változókban)
 assets/js/content.js        SZERKESZTHETŐ: galériák képei, sorrend, képleírások, Vimeo-filmek
 assets/js/i18n.js           SZERKESZTHETŐ: minden szöveg magyarul és angolul, kulcsokkal
 assets/js/main.js           működés (nyelvváltás, menü, galéria, videó, űrlap)
@@ -42,19 +42,19 @@ python3 -m http.server 8000
 4. A galéria törléséhez elég üresre állítani az `images` listát; üres galériát az oldal
    nem mutat kattinthatóként (a hozzá tartozó borító is eltűnik).
 
-**Főoldali borítók** („Válogatott munkák”): az `index.html` `works__grid` részében az
-`<img>` `src`/`srcset` útvonalát kell átírni a `images/web/...` változatokra
-(`-480.webp`, `-960.webp`, `-1600.webp`), a `width`/`height` értéket az eredeti kép
-méretére, az `alt` szöveget pedig az `i18n.js`-ben (`works.*.alt`).
+**Főoldali borítók** („Válogatott munkák — 01”): az `index.html` `works__grid` részében az
+`<img>` `src`/`srcset` útvonalát kell átírni a `images/web/...` változatokra, a
+`width`/`height` értéket az eredeti kép méretére, az `alt` szöveget pedig az `i18n.js`-ben
+(`works.*.alt`). A képkivágás képenként az `<img>` `style="object-position: X% Y%"`
+értékével állítható. A képarányok a referenciát követik: Esküvő 800:610, Portré/Koncert/
+Rendezvény 468:620 (álló), Gasztro 800:500 — ezeket a `style.css` `.work--…` szabályai adják.
 
-**Nyitókép**: `index.html` → `hero__media` kép + a `<head>`-ben lévő `preload` sor.
-A kivágást a `style.css` `.hero` szabályában lévő `--hero-x` / `--hero-y` állítja (mobilra
-külön blokk). Asztali nézetben a `main.js` `fitHero()` függvénye finomhangolja a függőleges
-kivágást, hogy az előadó (`HERO_SUBJECT_BOTTOM`: a kép magasságának ~59%-áig) mindig a
-szöveg fölött maradjon. Más nyitókép esetén ezt az értéket az új kép fő témájához kell igazítani.
+**Nyitókép**: `images/hero/eskuvo-mezo.jpg` → `index.html` `hero__media` + a `<head>`-ben lévő
+`preload` sor. A 36%-os sötétítés és a menü/szöveg mögötti enyhe kontrasztkorrekció a
+`style.css` `.hero__media::after` szabályában van.
 
-**Borítóarányok**: a „Válogatott munkák” borítói 4:3-as vágásban jelennek meg, az utolsó
-(teljes szélességű) 21:9-ben. Fekvő képet válassz borítónak, hogy ne vágjon arcot.
+**Fekete-fehér képek** (idézetes sáv, Szemlélet, kamerás részletkép): az eredeti színes
+fájlokat a CSS `is-bw` osztálya jeleníti meg szürkeárnyalatosan; az eredetik változatlanok.
 
 **Megosztási kép** (Facebook/Messenger előnézet): `tools/build-images.py` `OG_SOURCE`
 értéke; a szkript elkészíti az `images/web/og-image.jpg` fájlt.
@@ -62,7 +62,7 @@ szöveg fölött maradjon. Más nyitókép esetén ezt az értéket az új kép 
 ## Videók cseréje
 
 - `assets/js/content.js` → `films`: a `vimeo` mező a Vimeo-link végén lévő szám.
-- Borítókép, cím és hossz: `index.html` „Filmek” szekció (`data-film="kulcs"`).
+- Borítókép, cím és rövid leírás: `index.html` „Filmek — 02” szekció (`data-film="kulcs"`).
 - A videó csak kattintásra töltődik be, a párbeszédablak bezárásakor leáll.
 
 ## Szövegek cseréje
@@ -70,7 +70,8 @@ szöveg fölött maradjon. Más nyitókép esetén ezt az értéket az új kép 
 Minden látható szöveg az `assets/js/i18n.js`-ben van, magyarul (`hu`) és angolul (`en`),
 azonos kulccsal. Az `index.html`-ben lévő magyar szöveg csak kezdőérték (JavaScript
 nélkül ez látszik), ezért ha egy szöveget módosítasz, írd át mindkét helyen.
-A választott nyelvet az oldal a böngészőben megjegyzi.
+A választott nyelvet az oldal a böngészőben megjegyzi. A HU / EN váltó asztali nézetben a
+láblécben, mobilon a fejlécben van (a referencia fejlécében nincs nyelvváltó).
 
 ## Kapcsolati űrlap (FormSubmit)
 
