@@ -34,9 +34,9 @@ window.VP_CONTENT = {
       title: { hu: 'Portré', en: 'Portraits' },
       note: { hu: 'Egyéni portrék', en: 'Individual portraits' },
       images: [
+        { src: 'images/portraits/portre-03.jpg', alt: { hu: 'Öltönyös férfi ül egy irodában, mögötte neonfelirat', en: 'Man in a suit seated in an office with a neon sign behind him' } },
         { src: 'images/portraits/portre-01.jpg', alt: { hu: 'Szakállas, tetovált férfi összefont karral, sötét háttér előtt', en: 'Bearded, tattooed man with folded arms against a dark background' } },
         { src: 'images/portraits/portre-02.jpg', alt: { hu: 'Nő bőrkabátban és piros maszkban, sötét háttér előtt', en: 'Woman in a leather jacket and red mask against a dark background' } },
-        { src: 'images/portraits/portre-03.jpg', alt: { hu: 'Öltönyös férfi ül egy irodában, mögötte neonfelirat', en: 'Man in a suit seated in an office with a neon sign behind him' } },
         { src: 'images/portraits/portre-04.jpg', alt: { hu: 'Szakállas férfi sétál egy belvárosi utcán', en: 'Bearded man walking down a city street' } },
         { src: 'images/portraits/portre-05.jpg', alt: { hu: 'Nő ül egy sziklán viharos égbolt alatt', en: 'Woman sitting on a rock under a stormy sky' } },
         { src: 'images/portraits/portre-06.jpg', alt: { hu: 'Nő nyújtás közben egy világos stúdióban', en: 'Woman stretching in a bright studio' } }
@@ -46,10 +46,10 @@ window.VP_CONTENT = {
       title: { hu: 'Gasztro', en: 'Food & drink' },
       note: { hu: 'Ételek, italok, helyek', en: 'Food, drinks and venues' },
       images: [
+        { src: 'images/gastro/gastro-04.jpg', alt: { hu: 'Forró csokoládé fatálcán, fenyőtobozokkal, felülnézetből', en: 'Hot chocolate on a wooden tray with pine cones, from above' } },
         { src: 'images/gastro.jpg', alt: { hu: 'Kéz nyúl egy pohár fehérborért, mellette sonkás-sajtos tál', en: 'A hand reaching for a glass of white wine beside a charcuterie plate' } },
         { src: 'images/gastro/gastro-02.jpg', alt: { hu: 'Tálalt főétel terített asztalon, vörösborral', en: 'Plated main course on a set table with red wine' } },
         { src: 'images/gastro/gastro-03.jpg', alt: { hu: 'Espresso martini koktélpohárban, márványháttér előtt', en: 'Espresso martini in a cocktail glass against marble' } },
-        { src: 'images/gastro/gastro-04.jpg', alt: { hu: 'Forró csokoládé fatálcán, fenyőtobozokkal, felülnézetből', en: 'Hot chocolate on a wooden tray with pine cones, from above' } },
         { src: 'images/gastro/gastro-05.jpg', alt: { hu: 'Fehérbor és hidegtál gyertyafényben', en: 'White wine and a cold platter by candlelight' } },
         { src: 'images/gastro/gastro-06.jpg', alt: { hu: 'Leves fatálcán, fahéjjal és fenyőtobozokkal', en: 'Soup on a wooden tray with cinnamon and pine cones' } },
         { src: 'images/gastro/gastro-07.jpg', alt: { hu: 'Steak zöldségekkel fehér tányéron', en: 'Steak with vegetables on a white plate' } }

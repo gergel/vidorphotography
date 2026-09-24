@@ -59,6 +59,7 @@
     }
     updateCounts();
     updateMenuLabel();
+    if (typeof fitHero === 'function') fitHero();
     if (viewer.key) renderViewer();
     if (persist) { try { localStorage.setItem('vp-lang', lang); } catch (e) {} }
   }
@@ -101,6 +102,36 @@
     });
     window.matchMedia('(min-width: 961px)').addEventListener('change', function (mq) { if (mq.matches) setMenu(false); });
   }
+
+  // Hero-kivágás asztali nézetben: a legkisebb olyan függőleges eltolás, amelynél az előadó
+  // (a koncertfotón ~58% magasságig) a szövegblokk fölött marad — így a legtöbb látszik az óriáskerékből.
+  var heroImg = $('.hero__media img');
+  var heroText = $('.hero__inner');
+  var HERO_SUBJECT_BOTTOM = 0.59; // az előadó lába a kép magasságához képest
+  function fitHero() {
+    if (!heroImg || !heroText || !heroImg.naturalWidth) return;
+    var hero = heroImg.closest('.hero');
+    if (window.matchMedia('(max-width: 760px)').matches) { hero.style.removeProperty('--hero-y'); return; }
+    var box = heroImg.getBoundingClientRect();
+    var scale = Math.max(box.width / heroImg.naturalWidth, box.height / heroImg.naturalHeight);
+    var drawH = heroImg.naturalHeight * scale;
+    var spare = drawH - box.height;
+    if (spare < 1) return;
+    var textTop = heroText.getBoundingClientRect().top - box.top;
+    var needed = (HERO_SUBJECT_BOTTOM * drawH - (textTop - 20)) / spare;
+    var p = Math.min(1, Math.max(0.3, needed));
+    hero.style.setProperty('--hero-y', (p * 100).toFixed(1) + '%');
+  }
+  if (heroImg) {
+    if (heroImg.complete) fitHero(); else heroImg.addEventListener('load', fitHero);
+    window.addEventListener('resize', fitHero);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitHero);
+  }
+
+  // Fejléc: a hero tetején átlátszó, görgetés után tömör grafitszürke.
+  function updateHeader() { if (header) header.classList.toggle('is-solid', window.scrollY > 24); }
+  window.addEventListener('scroll', updateHeader, { passive: true });
+  updateHeader();
 
   /* ---------------- Közös párbeszédablak-kezelés ---------------- */
   function openDialog(dlg, trigger) {

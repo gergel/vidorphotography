@@ -7,7 +7,7 @@ GitHub Pages-kompatibilis, minden hivatkozás relatív.
 
 ```
 index.html                  az oldal szerkezete és a magyar alapszöveg
-assets/css/style.css        megjelenés (színek, betűk, térközök a :root változókban)
+assets/css/style.css        megjelenés (sötét színrendszer, DM Sans, térközök a :root változókban)
 assets/js/content.js        SZERKESZTHETŐ: galériák képei, sorrend, képleírások, Vimeo-filmek
 assets/js/i18n.js           SZERKESZTHETŐ: minden szöveg magyarul és angolul, kulcsokkal
 assets/js/main.js           működés (nyelvváltás, menü, galéria, videó, űrlap)
@@ -48,8 +48,13 @@ python3 -m http.server 8000
 méretére, az `alt` szöveget pedig az `i18n.js`-ben (`works.*.alt`).
 
 **Nyitókép**: `index.html` → `hero__media` kép + a `<head>`-ben lévő `preload` sor.
-A kivágást a `style.css` `.hero__media img { object-position }` értéke állítja
-(asztali és mobil nézetre külön).
+A kivágást a `style.css` `.hero` szabályában lévő `--hero-x` / `--hero-y` állítja (mobilra
+külön blokk). Asztali nézetben a `main.js` `fitHero()` függvénye finomhangolja a függőleges
+kivágást, hogy az előadó (`HERO_SUBJECT_BOTTOM`: a kép magasságának ~59%-áig) mindig a
+szöveg fölött maradjon. Más nyitókép esetén ezt az értéket az új kép fő témájához kell igazítani.
+
+**Borítóarányok**: a „Válogatott munkák” borítói 4:3-as vágásban jelennek meg, az utolsó
+(teljes szélességű) 21:9-ben. Fekvő képet válassz borítónak, hogy ne vágjon arcot.
 
 **Megosztási kép** (Facebook/Messenger előnézet): `tools/build-images.py` `OG_SOURCE`
 értéke; a szkript elkészíti az `images/web/og-image.jpg` fájlt.
