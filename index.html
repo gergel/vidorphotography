@@ -1,2476 +1,465 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vidor Photography — Budapest</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vidor Photography — fotós és operatőr, Budapest</title>
+<meta name="description" content="Vidor Gergely budapesti fotós és operatőr. Esküvői fotó és film, rendezvény-, koncert-, portré- és gasztrofotózás, dokumentumfilm.">
+<link rel="canonical" href="https://www.vidorphotography.com/">
+<meta name="theme-color" content="#F5F3EE">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vidor Photography">
+<meta property="og:title" content="Vidor Photography — fotós és operatőr, Budapest">
+<meta property="og:description" content="Fotók és filmek esküvőkről, emberekről és eseményekről.">
+<meta property="og:url" content="https://www.vidorphotography.com/">
+<meta property="og:image" content="https://www.vidorphotography.com/images/web/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Esti fesztiválkoncert óriáskerékkel és tömeggel">
+<meta property="og:locale" content="hu_HU">
+<meta property="og:locale:alternate" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Neue+Haas+Grotesk+Display+Pro:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --black: #0d0d0f;
-    --off-black: #131317;
-    --dark: #1c1c22;
-    --mid: #28282f;
-    --border: rgba(255,255,255,0.07);
-    --muted: rgba(255,255,255,0.38);
-    --text: rgba(255,255,255,0.82);
-    --white: #f0f0ee;
-    --gold: #c8a96e;
-    --gold-light: #dfc28e;
-    --serif: 'Cormorant Garamond', Georgia, serif;
-    --sans: 'DM Sans', sans-serif;
-  }
-
-  html { scroll-behavior: smooth; font-size: 16px; }
-
-  body {
-    background: var(--black);
-    color: var(--text);
-    font-family: var(--sans);
-    font-weight: 300;
-    line-height: 1.6;
-    overflow-x: hidden;
-    cursor: none;
-  }
-
-  /* Custom cursor */
-  .cursor {
-    position: fixed;
-    width: 8px; height: 8px;
-    background: var(--gold);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: width 0.2s, height 0.2s, opacity 0.2s;
-  }
-  .cursor-ring {
-    position: fixed;
-    width: 32px; height: 32px;
-    border: 1px solid rgba(200,169,110,0.4);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: transform 0.12s ease-out, width 0.2s, height 0.2s;
-  }
-  body:has(a:hover) .cursor, body:has(button:hover) .cursor { width: 14px; height: 14px; }
-
-  /* Header */
-  header {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 24px 48px;
-    transition: background 0.4s, padding 0.4s, backdrop-filter 0.4s;
-  }
-  header.scrolled {
-    background: rgba(13,13,15,0.93);
-    backdrop-filter: blur(12px);
-    padding: 16px 48px;
-    border-bottom: 1px solid var(--border);
-  }
-  .logo {
-    font-family: var(--serif);
-    font-size: 1.25rem;
-    font-weight: 400;
-    letter-spacing: 0.08em;
-    color: var(--white);
-    text-decoration: none;
-    display: flex; align-items: center; gap: 10px;
-  }
-  .logo-mark {
-    width: 28px; height: 28px;
-    border: 1px solid var(--gold);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.7rem;
-    letter-spacing: 0;
-    color: var(--gold);
-    font-family: var(--sans);
-    font-weight: 500;
-  }
-  nav { display: flex; align-items: center; gap: 40px; }
-  .header-right { display: flex; align-items: center; gap: 14px; }
-  .lang-switch {
-    display: inline-flex;
-    border: 1px solid rgba(255,255,255,0.2);
-    background: rgba(13,13,15,0.6);
-  }
-  .lang-btn {
-    border: none;
-    background: transparent;
-    color: var(--muted);
-    font-size: 0.65rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 8px 10px;
-    cursor: pointer;
-    font-family: var(--sans);
-  }
-  .lang-btn.active {
-    color: var(--white);
-    background: rgba(200,169,110,0.16);
-  }
-  nav a {
-    font-size: 0.75rem;
-    font-weight: 400;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-    position: relative;
-  }
-  nav a::after {
-    content: '';
-    position: absolute; bottom: -4px; left: 0; right: 0;
-    height: 1px; background: var(--gold);
-    transform: scaleX(0); transform-origin: left;
-    transition: transform 0.3s ease;
-  }
-  nav a:hover { color: var(--white); }
-  nav a:hover::after { transform: scaleX(1); }
-  nav a.active { color: var(--white); }
-  nav a.active::after { transform: scaleX(1); }
-  .btn-primary {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: #ffffff;
-    background: var(--gold);
-    padding: 11px 24px;
-    cursor: none;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.2s;
-    display: inline-block;
-  }
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
-  .btn-outline {
-    font-size: 0.7rem;
-    font-weight: 400;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--white);
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 11px 24px;
-    cursor: none;
-    text-decoration: none;
-    transition: border-color 0.2s, color 0.2s, transform 0.2s;
-    display: inline-block;
-  }
-  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
-
-  /* Mobile menu */
-  .hamburger {
-    display: none;
-    flex-direction: column; gap: 5px;
-    cursor: none; background: none; border: none; padding: 4px;
-  }
-  .hamburger span {
-    display: block; width: 24px; height: 1px;
-    background: var(--white); transition: all 0.3s;
-  }
-  .mobile-nav {
-    display: none;
-    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    background: var(--black);
-    z-index: 99;
-    flex-direction: column; align-items: center; justify-content: center;
-    gap: 40px;
-  }
-  .mobile-nav.open { display: flex; }
-  .mobile-nav a {
-    font-family: var(--serif);
-    font-size: 2.5rem;
-    font-weight: 300;
-    color: var(--white);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .mobile-nav a:hover { color: var(--gold); }
-  .mobile-close {
-    position: absolute; top: 24px; right: 48px;
-    background: none; border: none; color: var(--white);
-    font-size: 1.5rem; cursor: none;
-  }
-
-  /* Hero */
-  #hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: minmax(0, 620px) minmax(0, 540px);
-    grid-template-rows: 1fr;
-    align-items: center;
-    justify-content: center;
-    padding: 120px 48px 80px;
-    position: relative;
-    overflow: hidden;
-    gap: 40px;
-  }
-  .hero-bg {
-    position: absolute; inset: 0;
-    background:
-      linear-gradient(to bottom, rgba(13,13,15,0.2) 0%, rgba(13,13,15,0.55) 60%, rgba(13,13,15,1) 100%),
-      repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 2px,
-        rgba(255,255,255,0.007) 2px,
-        rgba(255,255,255,0.007) 4px
-      );
-    z-index: 0;
-  }
-  .hero-visual {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(200,169,110,0.07) 0%, transparent 60%),
-      radial-gradient(ellipse 40% 40% at 20% 70%, rgba(255,255,255,0.02) 0%, transparent 50%);
-    z-index: 0;
-  }
-  /* Film grain overlay */
-  .hero-grain {
-    position: absolute; inset: 0; z-index: 1;
-    opacity: 0.04;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    background-size: 256px;
-  }
-  .hero-content { position: relative; z-index: 2; max-width: 600px; }
-  .hero-image-block {
-    position: relative; z-index: 2;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .hero-img-placeholder {
-    width: 100%; max-width: 540px;
-    aspect-ratio: 4/5;
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #111 100%);
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-img-placeholder img {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .hero-img-inner {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse at 40% 30%, rgba(200,169,110,0.12) 0%, transparent 50%),
-      radial-gradient(ellipse at 70% 80%, rgba(255,255,255,0.04) 0%, transparent 40%);
-  }
-  .hero-img-badge {
-    position: absolute; bottom: 24px; left: 24px;
-    background: rgba(13,13,15,0.88);
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 14px 20px;
-    display: flex; flex-direction: column;
-    gap: 2px;
-  }
-  .hero-img-badge-num {
-    font-family: var(--serif);
-    font-size: 1.8rem;
-    font-weight: 400;
-    color: var(--white);
-    line-height: 1;
-  }
-  .hero-img-badge-text {
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .hero-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 28px;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .hero-label::before {
-    content: '';
-    display: block; width: 32px; height: 1px;
-    background: var(--gold);
-  }
-  h1 {
-    font-family: var(--serif);
-    font-size: clamp(3.2rem, 7vw, 7rem);
-    font-weight: 300;
-    line-height: 1.05;
-    letter-spacing: -0.01em;
-    color: var(--white);
-    margin-bottom: 32px;
-  }
-  h1 em { font-style: italic; color: var(--gold); }
-  .hero-sub {
-    font-size: 1rem;
-    font-weight: 300;
-    color: var(--muted);
-    max-width: 480px;
-    margin-bottom: 40px;
-    line-height: 1.7;
-  }
-  .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 48px; }
-  .hero-equipment {
-    font-size: 0.68rem;
-    letter-spacing: 0.12em;
-    color: rgba(255,255,255,0.28);
-    text-transform: uppercase;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .hero-equipment::before {
-    content: '';
-    display: block; width: 20px; height: 1px;
-    background: rgba(255,255,255,0.18);
-  }
-
-  /* Scroll indicator */
-  .scroll-indicator {
-    position: absolute; bottom: 40px; left: 48px;
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
-    z-index: 2;
-  }
-  .scroll-line {
-    width: 1px; height: 60px;
-    background: linear-gradient(to bottom, transparent, var(--gold));
-    animation: scrollDrop 2s ease-in-out infinite;
-  }
-  .scroll-text {
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    writing-mode: vertical-rl;
-  }
-  @keyframes scrollDrop {
-    0%, 100% { opacity: 0.3; transform: scaleY(0.7); }
-    50% { opacity: 1; transform: scaleY(1); }
-  }
-
-  /* Sections */
-  section { padding: 120px 48px; }
-  .section-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 20px;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .section-label::before {
-    content: '';
-    display: block; width: 32px; height: 1px;
-    background: var(--gold);
-  }
-  h2 {
-    font-family: var(--serif);
-    font-size: clamp(2.4rem, 5vw, 4.5rem);
-    font-weight: 300;
-    line-height: 1.1;
-    color: var(--white);
-    margin-bottom: 24px;
-  }
-  h2 em { font-style: italic; color: var(--gold); }
-  .section-sub {
-    font-size: 0.95rem;
-    color: var(--muted);
-    max-width: 520px;
-    margin-bottom: 64px;
-    line-height: 1.7;
-  }
-
-  /* About */
-  #about { background: var(--off-black); }
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-    max-width: 1200px;
-    margin-left: auto; margin-right: auto;
-  }
-  .about-year {
-    font-family: var(--serif);
-    font-size: 7rem;
-    font-weight: 300;
-    color: rgba(255,255,255,0.04);
-    line-height: 1;
-    margin-bottom: -40px;
-    position: relative; z-index: 0;
-  }
-  .about-text-block { position: relative; z-index: 1; }
-  .about-name {
-    font-family: var(--serif);
-    font-size: 1.8rem;
-    font-weight: 400;
-    color: var(--white);
-    margin-bottom: 6px;
-  }
-  .about-title {
-    font-size: 0.75rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 28px;
-  }
-  .about-bio {
-    font-size: 0.95rem;
-    color: var(--muted);
-    line-height: 1.8;
-    margin-bottom: 24px;
-  }
-  .about-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 40px;
-  }
-  .stat-card {
-    border: 1px solid var(--border);
-    padding: 20px 24px;
-    transition: border-color 0.2s, background 0.2s;
-  }
-  .stat-card:hover { border-color: var(--gold); background: rgba(200,169,110,0.06); }
-  .stat-card-title {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--white);
-    margin-bottom: 4px;
-  }
-  .stat-card-sub {
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .about-right { padding-top: 20px; }
-  .about-photo {
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
-    margin-bottom: 40px;
-    filter: grayscale(15%);
-  }
-  .since-block {
-    border-left: 1px solid var(--gold);
-    padding-left: 24px;
-    margin-bottom: 40px;
-  }
-  .since-number {
-    font-family: var(--serif);
-    font-size: 3.5rem;
-    font-weight: 300;
-    color: var(--white);
-    line-height: 1;
-  }
-  .since-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-top: 6px;
-  }
-
-  /* Services */
-  #services { background: var(--black); }
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    margin-bottom: 48px;
-    max-width: 1200px;
-    margin-left: auto; margin-right: auto;
-  }
-  .service-card {
-    background: var(--black);
-    padding: 40px 32px;
-    position: relative;
-    overflow: hidden;
-    transition: background 0.3s;
-  }
-  .service-card[data-reference-action] { cursor: pointer; }
-  .service-card[data-reference-action]:focus-visible {
-    outline: 1px solid var(--gold);
-    outline-offset: -1px;
-  }
-  .service-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--gold);
-    transform: scaleX(0); transform-origin: left;
-    transition: transform 0.4s ease;
-  }
-  .service-card:hover { background: rgba(200,169,110,0.04); }
-  .service-card:hover::before { transform: scaleX(1); }
-  .service-num {
-    font-family: var(--serif);
-    font-size: 3rem;
-    font-weight: 300;
-    color: rgba(255,255,255,0.05);
-    line-height: 1;
-    margin-bottom: 12px;
-  }
-  .service-title {
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--white);
-    margin-bottom: 12px;
-    line-height: 1.3;
-  }
-  .service-desc {
-    font-size: 0.85rem;
-    color: var(--muted);
-    line-height: 1.7;
-    margin-bottom: 20px;
-  }
-  .service-link-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--gold);
-    text-decoration: none;
-    font-family: var(--sans); font-weight: 300;
-    display: flex; align-items: center; gap: 8px;
-    transition: gap 0.2s;
-  }
-  .service-card:hover .service-link-label { gap: 14px; }
-  .service-link-label::after { content: '→'; }
-
-  /* Portfolio */
-  #portfolio { background: var(--off-black); }
-  .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
-    max-width: 1200px;
-    margin-left: auto; margin-right: auto;
-    margin-bottom: 48px;
-  }
-  .portfolio-tile {
-    aspect-ratio: 3/4;
-    background: var(--dark);
-    position: relative;
-    overflow: hidden;
-    cursor: none;
-    display: block;
-    text-decoration: none;
-  }
-  .portfolio-tile:first-child { grid-column: span 2; aspect-ratio: auto; min-height: 360px; }
-  .portfolio-tile:nth-child(4) { grid-column: span 2; }
-  .tile-bg {
-    position: absolute; inset: 0;
-    background-color: var(--dark);
-    background-size: cover;
-    background-position: center;
-    transition: transform 0.6s ease;
-  }
-  .portfolio-tile:hover .tile-bg { transform: scale(1.04); }
-  .tile-overlay {
-    position: absolute; inset: 0;
-    background: rgba(26,26,255,0.85);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 2;
-  }
-  .portfolio-tile:hover .tile-overlay { opacity: 1; }
-  .tile-icon {
-    width: 48px; height: 48px;
-    border: 1px solid rgba(255,255,255,0.6);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 12px;
-    color: #ffffff;
-    font-size: 1rem;
-  }
-  .tile-action {
-    font-size: 0.68rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: #ffffff;
-  }
-  .tile-label {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    padding: 20px 20px 18px;
-    background: linear-gradient(to top, rgba(20,20,20,0.85), transparent);
-    z-index: 1;
-  }
-  .tile-label-text {
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: #ffffff;
-    letter-spacing: 0.06em;
-  }
-  .tile-label-type {
-    font-size: 0.62rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.55);
-    margin-top: 3px;
-  }
-  /* Decorative tile textures — kept dark for cinematic portfolio feel */
-  .tile-pattern-1 { background-image: repeating-linear-gradient(45deg, #1c1c1c, #1c1c1c 10px, #1e1e1e 10px, #1e1e1e 20px); }
-  .tile-pattern-2 { background-image: radial-gradient(ellipse at 30% 40%, #2a2218 0%, #111 60%); }
-  .tile-pattern-3 { background-image: radial-gradient(ellipse at 70% 30%, #182020 0%, #111 60%); }
-  .tile-pattern-4 { background-image: linear-gradient(160deg, #1a1510 0%, #111 50%, #141819 100%); }
-  .tile-pattern-5 { background-image: radial-gradient(ellipse at 50% 70%, #1e1810 0%, #111 70%); }
-  .tile-pattern-6 { background-image: repeating-linear-gradient(90deg, #111, #111 40px, #141414 40px, #141414 41px); }
-  .tile-pattern-7 { background-image: radial-gradient(ellipse at 20% 60%, #1a1018 0%, #111 60%); }
-  .tile-pattern-8 { background-image: linear-gradient(200deg, #111 0%, #1a1a12 100%); }
-
-  /* Video Modal (YouTube & Vimeo) */
-  .yt-modal {
-    display: none;
-    position: fixed; inset: 0;
-    z-index: 500;
-    align-items: center; justify-content: center;
-  }
-  .yt-modal.open { display: flex; }
-  .yt-modal-backdrop {
-    position: absolute; inset: 0;
-    background: rgba(0,0,0,0.88);
-    cursor: pointer;
-  }
-  .yt-modal-content {
-    position: relative;
-    width: min(900px, 92vw);
-    z-index: 1;
-  }
-  .yt-modal-close {
-    position: absolute;
-    top: -40px; right: 0;
-    background: transparent;
-    border: none;
-    color: rgba(255,255,255,0.7);
-    font-size: 1.4rem;
-    cursor: pointer;
-    line-height: 1;
-    padding: 4px 8px;
-    transition: color 0.2s;
-    font-family: var(--sans);
-  }
-  .yt-modal-close:hover { color: #fff; }
-  .yt-embed-wrap {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    background: #000;
-  }
-  .yt-embed-wrap iframe {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    border: 0;
-  }
-
-  /* Contact */
-  #contact { background: var(--black); }
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    max-width: 1100px;
-    margin-left: auto; margin-right: auto;
-    align-items: start;
-  }
-  .why-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 48px;
-  }
-  .why-item {
-    border-top: 1px solid var(--border);
-    padding-top: 16px;
-  }
-  .why-title {
-    font-size: 0.82rem;
-    font-weight: 500;
-    color: var(--white);
-    margin-bottom: 6px;
-  }
-  .why-desc {
-    font-size: 0.78rem;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-  .form-group { margin-bottom: 20px; }
-  .form-label {
-    display: block;
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 8px;
-  }
-  .form-input, .form-textarea {
-    width: 100%;
-    background: var(--dark);
-    border: 1px solid var(--border);
-    color: var(--white);
-    font-family: var(--sans);
-    font-size: 0.9rem;
-    font-weight: 300;
-    padding: 14px 16px;
-    outline: none;
-    transition: border-color 0.2s;
-    -webkit-appearance: none;
-  }
-  .form-input:focus, .form-textarea:focus { border-color: var(--gold); }
-  .form-textarea { resize: vertical; min-height: 120px; }
-  .form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,0.18); }
-  .form-note {
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.28);
-    margin-top: 16px;
-    line-height: 1.6;
-  }
-  .contact-info-title {
-    font-family: var(--serif);
-    font-size: 1.4rem;
-    font-weight: 400;
-    color: var(--white);
-    margin-bottom: 32px;
-  }
-  .contact-item {
-    display: flex; gap: 16px; align-items: flex-start;
-    margin-bottom: 24px;
-  }
-  .contact-icon {
-    width: 36px; height: 36px;
-    border: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    color: var(--gold);
-    font-size: 0.85rem;
-  }
-  .contact-item-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 4px;
-  }
-  .contact-item-value a {
-    color: var(--white);
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: color 0.2s;
-  }
-  .contact-item-value a:hover { color: var(--gold); }
-  .social-row {
-    display: flex; gap: 12px;
-    margin-top: 40px;
-  }
-  .social-link {
-    width: 40px; height: 40px;
-    border: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    transition: border-color 0.2s, color 0.2s;
-  }
-  .social-link:hover { border-color: var(--gold); color: var(--gold); }
-
-  /* Footer */
-  footer {
-    background: var(--off-black);
-    border-top: 1px solid var(--border);
-    padding: 64px 48px 40px;
-  }
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 48px;
-    margin-bottom: 48px;
-    max-width: 1200px;
-    margin-left: auto; margin-right: auto;
-  }
-  .footer-brand .logo { margin-bottom: 16px; }
-  .footer-tagline {
-    font-size: 0.82rem;
-    color: var(--muted);
-    line-height: 1.7;
-    max-width: 260px;
-    margin-bottom: 24px;
-  }
-  .footer-col-title {
-    font-size: 0.65rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 20px;
-  }
-  .footer-col a {
-    display: block;
-    font-size: 0.82rem;
-    color: var(--muted);
-    text-decoration: none;
-    margin-bottom: 10px;
-    transition: color 0.2s;
-  }
-  .footer-col a:hover { color: var(--white); }
-  .footer-contact-name {
-    font-size: 0.88rem;
-    font-weight: 500;
-    color: var(--white);
-    margin-bottom: 4px;
-  }
-  .footer-contact-title {
-    font-size: 0.72rem;
-    color: var(--muted);
-    margin-bottom: 16px;
-  }
-  .footer-bottom {
-    border-top: 1px solid var(--border);
-    padding-top: 24px;
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 16px;
-  }
-  .footer-copy {
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.2);
-  }
-  .footer-legal { display: flex; gap: 24px; }
-  .footer-legal a {
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.2);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .footer-legal a:hover { color: var(--muted); }
-
-  /* Divider */
-  .divider {
-    width: 100%; height: 1px;
-    background: var(--border);
-    margin: 0;
-  }
-
-  /* Fade-in animation */
-  .fade-up {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
-  .fade-up.delay-1 { transition-delay: 0.1s; }
-  .fade-up.delay-2 { transition-delay: 0.2s; }
-  .fade-up.delay-3 { transition-delay: 0.3s; }
-  .fade-up.delay-4 { transition-delay: 0.4s; }
-
-  /* Responsive */
-  @media (max-width: 1024px) {
-    .services-grid { grid-template-columns: repeat(2, 1fr); }
-    .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
-    .portfolio-tile:first-child, .portfolio-tile:nth-child(4) { grid-column: span 1; }
-    .footer-grid { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 768px) {
-    header { padding: 20px 24px; }
-    header.scrolled { padding: 14px 24px; }
-    nav, .header-cta { display: none; }
-    .header-right { gap: 8px; }
-    .lang-btn { padding: 8px 8px; }
-    .hamburger { display: flex; }
-    .mobile-close { right: 24px; }
-    section { padding: 80px 24px; }
-    #hero { padding: 100px 24px 64px; grid-template-columns: 1fr; }
-    .hero-image-block { display: none; }
-    .about-grid { grid-template-columns: 1fr; gap: 40px; }
-    .services-grid { grid-template-columns: 1fr; }
-    .portfolio-grid { grid-template-columns: 1fr 1fr; }
-    .contact-grid { grid-template-columns: 1fr; gap: 48px; }
-    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-    .footer-bottom { flex-direction: column; align-items: flex-start; }
-    body { cursor: auto; }
-    .cursor, .cursor-ring { display: none; }
-    .scroll-indicator { display: none; }
-    .hero-buttons { flex-direction: column; width: fit-content; }
-    .why-grid { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 480px) {
-    h1 { font-size: 2.8rem; }
-    .portfolio-grid { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr; }
-    .about-stats { grid-template-columns: 1fr; }
-  }
-
-  /* Gallery Modal */
-  .gallery-modal {
-    display: none;
-    position: fixed; inset: 0;
-    z-index: 600;
-    align-items: center; justify-content: center;
-  }
-  .gallery-modal.open { display: flex; }
-  .gallery-modal-backdrop {
-    position: absolute; inset: 0;
-    background: rgba(0,0,0,0.92);
-    cursor: pointer;
-  }
-  .gallery-modal-content {
-    position: relative; z-index: 1;
-    width: min(1100px, 95vw);
-    max-height: 90vh;
-    background: var(--off-black);
-    border: 1px solid var(--border);
-    display: flex; flex-direction: column;
-    overflow: hidden;
-  }
-  .gallery-modal-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 24px 32px;
-    border-bottom: 1px solid var(--border);
-    flex-shrink: 0;
-  }
-  .gallery-modal-title {
-    font-family: var(--serif);
-    font-size: 1.6rem; font-weight: 300;
-    color: var(--white);
-  }
-  .gallery-modal-close {
-    background: transparent; border: none;
-    color: rgba(255,255,255,0.7);
-    font-size: 1.4rem; cursor: pointer;
-    padding: 4px 10px; line-height: 1;
-    transition: color 0.2s;
-  }
-  .gallery-modal-close:hover { color: #fff; }
-  .gallery-grid-wrap {
-    overflow-y: auto;
-    padding: 28px 32px;
-    flex: 1;
-  }
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-  }
-  .gallery-grid-item {
-    aspect-ratio: 4/3;
-    overflow: hidden;
-    cursor: pointer;
-    background: var(--dark);
-    position: relative;
-  }
-  .gallery-grid-item img {
-    width: 100%; height: 100%;
-    object-fit: cover; display: block;
-    transition: transform 0.4s ease;
-  }
-  .gallery-grid-item:hover img { transform: scale(1.06); }
-  .gallery-grid-item::after {
-    content: '⊕';
-    position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 2rem; color: white;
-    background: rgba(0,0,0,0.38);
-    opacity: 0;
-    transition: opacity 0.25s;
-  }
-  .gallery-grid-item:hover::after { opacity: 1; }
-  .gallery-grid-item:focus { outline: 2px solid var(--gold); outline-offset: 2px; }
-  .gallery-empty {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--muted);
-    font-size: 0.92rem;
-    line-height: 1.8;
-  }
-
-  /* Lightbox */
-  .lightbox {
-    display: none;
-    position: fixed; inset: 0;
-    z-index: 700;
-    align-items: center; justify-content: center;
-  }
-  .lightbox.open { display: flex; }
-  .lightbox-backdrop {
-    position: absolute; inset: 0;
-    background: rgba(0,0,0,0.96);
-    cursor: pointer;
-  }
-  .lightbox-img {
-    position: relative; z-index: 1;
-    max-width: 90vw; max-height: 85vh;
-    object-fit: contain; display: block;
-    user-select: none;
-  }
-  .lightbox-close {
-    position: absolute; top: 18px; right: 22px; z-index: 2;
-    background: transparent; border: none;
-    color: rgba(255,255,255,0.7);
-    font-size: 1.6rem; cursor: pointer;
-    padding: 4px 8px; line-height: 1;
-    transition: color 0.2s;
-  }
-  .lightbox-close:hover { color: #fff; }
-  .lightbox-prev, .lightbox-next {
-    position: absolute; top: 50%; z-index: 2;
-    transform: translateY(-50%);
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.18);
-    color: white; font-size: 1.8rem; cursor: pointer;
-    width: 48px; height: 72px;
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.2s, border-color 0.2s;
-  }
-  .lightbox-prev:hover, .lightbox-next:hover { background: rgba(200,169,110,0.25); border-color: var(--gold); }
-  .lightbox-prev { left: 20px; }
-  .lightbox-next { right: 20px; }
-  .lightbox-counter {
-    position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
-    z-index: 2;
-    font-size: 0.875rem; letter-spacing: 0.12em;
-    color: rgba(255,255,255,0.55);
-  }
-
-  .gallery-empty-hint {
-    font-size: 0.8rem;
-    opacity: 0.6;
-    display: block;
-    margin-top: 6px;
-  }
-    .gallery-modal-content { width: 100%; max-height: 100dvh; border: none; border-radius: 0; }
-    .gallery-modal-header { padding: 16px 20px; }
-    .gallery-grid-wrap { padding: 16px; }
-    .lightbox-prev { left: 8px; }
-    .lightbox-next { right: 8px; }
-  }
-
-  /* Service Detail Modal */
-  .service-modal {
-    display: none;
-    position: fixed; inset: 0;
-    z-index: 610;
-    align-items: center; justify-content: center;
-    padding: 16px;
-  }
-  .service-modal.open { display: flex; animation: svcFadeIn 0.25s ease; }
-  @keyframes svcFadeIn { from { opacity: 0; } to { opacity: 1; } }
-  .service-modal-backdrop {
-    position: absolute; inset: 0;
-    background: rgba(0,0,0,0.92);
-    cursor: pointer;
-  }
-  .service-modal-content {
-    position: relative; z-index: 1;
-    width: min(820px, 100%);
-    max-height: 90vh;
-    background: var(--off-black);
-    border: 1px solid var(--border);
-    display: flex; flex-direction: column;
-    overflow: hidden;
-  }
-  .service-modal-header {
-    display: flex; align-items: flex-start; justify-content: space-between;
-    padding: 24px 32px;
-    border-bottom: 1px solid var(--border);
-    flex-shrink: 0;
-    gap: 16px;
-  }
-  .service-modal-header-left { flex: 1; min-width: 0; }
-  .service-modal-num {
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 6px;
-  }
-  .service-modal-title {
-    font-family: var(--serif);
-    font-size: 1.6rem; font-weight: 300;
-    color: var(--white);
-    line-height: 1.2;
-  }
-  .service-modal-close {
-    background: transparent; border: none;
-    color: rgba(255,255,255,0.7);
-    font-size: 1.4rem; cursor: pointer;
-    padding: 4px 10px; line-height: 1;
-    transition: color 0.2s;
-    flex-shrink: 0;
-    margin-top: -4px;
-  }
-  .service-modal-close:hover { color: #fff; }
-  .service-modal-body { overflow-y: auto; flex: 1; }
-  .service-modal-images {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3px;
-    padding: 24px 24px 0;
-  }
-  .service-modal-img-item {
-    aspect-ratio: 4/3;
-    overflow: hidden;
-    background: var(--dark);
-    position: relative;
-  }
-  .service-modal-img-item img {
-    width: 100%; height: 100%;
-    object-fit: cover; display: block;
-    transition: transform 0.4s ease;
-  }
-  .service-modal-img-item:hover img { transform: scale(1.05); }
-  .service-modal-img-empty {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3px;
-    padding: 24px 24px 0;
-  }
-  .service-modal-img-slot {
-    aspect-ratio: 4/3;
-    background: var(--dark);
-    border: 1px dashed rgba(255,255,255,0.07);
-    display: flex; align-items: center; justify-content: center;
-    color: rgba(255,255,255,0.12);
-    font-size: 0.58rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-  .service-modal-info { padding: 28px 32px 32px; }
-  .service-modal-subtitle {
-    font-size: 0.68rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 16px;
-    display: flex; align-items: center; gap: 10px;
-  }
-  .service-modal-subtitle::before {
-    content: '';
-    display: block; width: 24px; height: 1px;
-    background: var(--gold);
-  }
-  .service-modal-desc {
-    font-size: 0.9rem;
-    color: var(--muted);
-    line-height: 1.8;
-    margin-bottom: 24px;
-    max-width: 640px;
-  }
-  .service-modal-includes-title {
-    font-size: 0.68rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.45);
-    margin-bottom: 12px;
-    font-weight: 500;
-  }
-  .service-modal-bullets {
-    list-style: none;
-    margin: 0 0 28px; padding: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px 32px;
-  }
-  .service-modal-bullets li {
-    font-size: 0.85rem;
-    color: var(--muted);
-    display: flex; align-items: flex-start; gap: 10px;
-    line-height: 1.5;
-  }
-  .service-modal-bullets li::before {
-    content: '—';
-    color: var(--gold);
-    flex-shrink: 0;
-    font-family: var(--serif);
-  }
-  .service-modal-cta {
-    display: flex; gap: 12px; flex-wrap: wrap;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
-  }
-  @media (max-width: 640px) {
-    .service-modal-content { max-height: 100dvh; border: none; }
-    .service-modal-header { padding: 18px 20px; }
-    .service-modal-title { font-size: 1.3rem; }
-    .service-modal-images, .service-modal-img-empty { grid-template-columns: repeat(2, 1fr); padding: 16px 16px 0; }
-    .service-modal-info { padding: 20px 20px 24px; }
-    .service-modal-bullets { grid-template-columns: 1fr; }
-  }
-</style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap">
+<link rel="preload" as="image" href="images/web/koncert-1600.webp"
+      imagesrcset="images/web/koncert-960.webp 960w, images/web/koncert-1600.webp 1600w, images/web/koncert-2400.webp 2400w"
+      imagesizes="(max-width: 600px) 180vw, (min-width: 1568px) 1440px, 92vw" fetchpriority="high">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23191919'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23F5F3EE'%3EV%3C/text%3E%3C/svg%3E">
+<script>
+  // Nyelv beállítása még a megjelenítés előtt, hogy ne villanjon a magyar szöveg.
+  try { if (localStorage.getItem('vp-lang') === 'en') document.documentElement.lang = 'en'; } catch (e) {}
+  document.documentElement.classList.add('js');
+</script>
 </head>
 <body>
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Ugrás a tartalomra</a>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<!-- ================= FEJLÉC ================= -->
+<header class="site-header" id="top">
+  <div class="wrap header__inner">
+    <a class="wordmark" href="#main" aria-label="Vidor Photography — az oldal eleje" data-i18n-attr="aria-label:a11y.home">
+      <span class="wordmark__name">VIDOR</span>
+      <span class="wordmark__sub">PHOTOGRAPHY &amp; FILM</span>
+    </a>
 
-<!-- Mobile Nav -->
-<div class="mobile-nav" id="mobileNav">
-  <button class="mobile-close" id="mobileClose">✕</button>
-  <a href="#about" onclick="closeMobile()">About</a>
-  <a href="#services" onclick="closeMobile()">Services</a>
-  <a href="#portfolio" onclick="closeMobile()">Portfolio</a>
-  <a href="#contact" onclick="closeMobile()">Contact</a>
-  <a href="#contact" class="btn-primary" onclick="closeMobile()">Book Now</a>
-</div>
+    <nav class="nav" id="site-nav" aria-label="Főmenü" data-i18n-attr="aria-label:a11y.mainNav">
+      <ul class="nav__list">
+        <li><a href="#munkak" data-i18n="nav.work">Munkák</a></li>
+        <li><a href="#filmek" data-i18n="nav.films">Filmek</a></li>
+        <li><a href="#rolam" data-i18n="nav.about">Rólam</a></li>
+        <li><a href="#kapcsolat" data-i18n="nav.contact">Kapcsolat</a></li>
+      </ul>
+      <a class="btn btn--primary nav__cta-mobile" href="#kapcsolat" data-i18n="nav.cta">Beszéljünk</a>
+    </nav>
 
-<!-- Header -->
-<header id="header">
-  <a href="#hero" class="logo">
-    <div class="logo-mark">VP</div>
-    Vidor Photography
-  </a>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#portfolio">Portfolio</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <div class="header-right">
-    <div class="lang-switch" aria-label="Language switcher">
-      <button type="button" class="lang-btn active" data-lang="en">EN</button>
-      <button type="button" class="lang-btn" data-lang="hu">HU</button>
+    <div class="header__actions">
+      <div class="lang" role="group" aria-label="Nyelv" data-i18n-attr="aria-label:a11y.language">
+        <button type="button" class="lang__btn" data-lang="hu" aria-pressed="true" lang="hu" aria-label="Magyar">HU</button>
+        <button type="button" class="lang__btn" data-lang="en" aria-pressed="false" lang="en" aria-label="English">EN</button>
+      </div>
+      <a class="btn btn--primary header__cta" href="#kapcsolat" data-i18n="nav.cta">Beszéljünk</a>
+      <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="site-nav">
+        <span class="menu-toggle__label" data-i18n="nav.menu">Menü</span>
+        <span class="menu-toggle__icon" aria-hidden="true"></span>
+      </button>
     </div>
-    <a href="#contact" class="btn-primary header-cta">Book Now</a>
   </div>
-  <button class="hamburger" id="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
 </header>
 
-<!-- Hero -->
-<section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-visual"></div>
-  <div class="hero-grain"></div>
-  <div class="hero-content">
-    <div class="hero-label">Budapest, Hungary</div>
-    <h1>Cinematic<br><em>storytelling</em><br>through photo &amp; video</h1>
-    <p class="hero-sub">Professional photography and videography for events, weddings, portraits, and gastro — based in Budapest.</p>
-    <div class="hero-buttons">
-      <a href="#portfolio" class="btn-primary">View My Work</a>
-      <a href="#contact" class="btn-outline">Get In Touch</a>
-    </div>
-    <div class="hero-equipment">Events · Weddings · Portraits · Gastro · Concerts</div>
-  </div>
-  <div class="hero-image-block">
-    <div class="hero-img-placeholder">
-      <img src="headline.jpg" alt="Vidor Photography — headline">
-      <div class="hero-img-inner"></div>
-      <div class="hero-img-badge">
-        <span class="hero-img-badge-num">10+</span>
-        <span class="hero-img-badge-text">Years of experience</span>
-      </div>
-    </div>
-  </div>
-  <div class="scroll-indicator">
-    <div class="scroll-text">Scroll</div>
-    <div class="scroll-line"></div>
-  </div>
-</section>
+<main id="main">
 
-<!-- About -->
-<section id="about">
-  <div class="about-grid">
-    <div>
-      <div class="section-label fade-up">About</div>
-      <div class="about-year fade-up">2015</div>
-      <div class="about-text-block">
-        <div class="about-name fade-up">Vidor Gergely</div>
-        <div class="about-title fade-up">Photographer &amp; Videographer</div>
-        <p class="about-bio fade-up">Photography has been part of my life since childhood, when I first picked up my grandfather’s camera and started capturing the world around me. What began as curiosity slowly turned into a passion for storytelling — first through photos, then through cinematic filmmaking.</p>
-        <p class="about-bio fade-up">Today, I work as a photographer and cinematographer, creating emotional, atmosphere-driven visuals for weddings, events, brands, and documentaries. For me, the most important part of every project is not just how it looks, but how it feels years later.</p>
-        <p class="about-bio fade-up">I love capturing real moments — the small gestures, the energy of a crowd, the quiet in-between scenes, and the emotions people often don’t even notice in the moment. My goal is always to create timeless visuals that feel honest, cinematic, and deeply personal.</p>
-        <div class="about-stats fade-up">
-          <div class="stat-card">
-            <div class="stat-card-title">Real moments</div>
-            <div class="stat-card-sub">HONEST STORYTELLING</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-card-title">Since 2015</div>
-            <div class="stat-card-sub">DAILY CREATIVE WORK</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-card-title">Cinematic mood</div>
-            <div class="stat-card-sub">TIMELESS VISUALS</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-card-title">Small details</div>
-            <div class="stat-card-sub">BIG STORIES</div>
+  <!-- ================= NYITÓSZEKCIÓ ================= -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div class="hero__text">
+        <p class="eyebrow hero__eyebrow" data-i18n="hero.eyebrow">Vidor Gergely · fotós és operatőr · Budapest</p>
+        <h1 class="hero__title" id="hero-title">
+          <span data-i18n="hero.title1">Történetek fényben.</span>
+          <span data-i18n="hero.title2">Mozgásban. Képekben.</span>
+        </h1>
+        <div class="hero__aside">
+          <p class="hero__lead" data-i18n="hero.lead">Fotók és filmek esküvőkről, emberekről és eseményekről. Személyes látásmóddal, a részletekre figyelve.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#munkak" data-i18n="hero.ctaPrimary">Nézd meg a munkáim</a>
+            <a class="text-link" href="#kapcsolat"><span data-i18n="hero.ctaSecondary">Beszéljünk a tervedről</span> <span aria-hidden="true">↗</span></a>
           </div>
         </div>
-        <div style="margin-top:32px;">
-          <a href="#contact" class="btn-primary fade-up">Contact Me</a>
-        </div>
       </div>
     </div>
-    <div class="about-right fade-up delay-2">
-      <!-- FOTÓ: Saját kép — Töltsd fel ide: images/about-photo.jpg -->
-      <img src="images/about-photo.jpg" alt="Vidor Gergely" class="about-photo" onerror="this.style.display='none'">
-      
-  </div>
-</section>
+    <figure class="wrap hero__figure">
+      <div class="hero__media">
+        <img src="images/web/koncert-1600.webp"
+             srcset="images/web/koncert-480.webp 480w, images/web/koncert-960.webp 960w, images/web/koncert-1600.webp 1600w, images/web/koncert-2400.webp 2400w"
+             sizes="(max-width: 600px) 180vw, (min-width: 1568px) 1440px, 92vw"
+             width="6000" height="4000" fetchpriority="high" decoding="async"
+             alt="Esti fesztiválkoncert: az előadó a színpad szélén, mögötte óriáskerék és a közönség viharos ég alatt"
+             data-i18n-attr="alt:hero.imageAlt">
+      </div>
+    </figure>
+  </section>
 
-<div class="divider"></div>
+  <!-- ================= VÁLOGATOTT MUNKÁK =================
+       Borítókép cseréje: írd át az <img> src/srcset útvonalát (images/web/...).
+       data-gallery="kulcs" → assets/js/content.js galleries.kulcs -->
+  <section class="section works" id="munkak" aria-labelledby="works-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="eyebrow" data-i18n="works.eyebrow">Fotó</p>
+        <h2 class="section-title" id="works-title" data-i18n="works.title">Válogatott munkák</h2>
+        <p class="section-intro" data-i18n="works.intro">Öt terület, mindegyikhez egy kisebb válogatás — kattints a képre a galériáért.</p>
+      </header>
 
-<!-- Services -->
-<section id="services">
-  <div class="section-label fade-up">Services</div>
-  <h2 class="fade-up">Professional photo<br>&amp; <em>video services</em></h2>
-  <p class="section-sub fade-up">For various events, weddings, portrait photography, and travel content creation.</p>
+      <ul class="works__grid" role="list">
+        <li class="work work--a">
+          <a class="work__link" href="images/web/eskuvo/eskuvo-01-2400.webp" data-gallery="eskuvo">
+            <div class="work__media ratio-3x2">
+              <img src="images/web/eskuvo/eskuvo-01-960.webp"
+                   srcset="images/web/eskuvo/eskuvo-01-480.webp 480w, images/web/eskuvo/eskuvo-01-960.webp 960w, images/web/eskuvo/eskuvo-01-1600.webp 1600w"
+                   sizes="(max-width: 600px) 92vw, (max-width: 900px) 92vw, 58vw"
+                   width="2400" height="1600" loading="lazy" decoding="async"
+                   alt="Csókolózó jegyespár esti fényfüzérek alatt, szálló szirmokkal" data-i18n-attr="alt:works.wedding.alt">
+            </div>
+            <div class="work__caption">
+              <h3 class="work__title" data-i18n="works.wedding.title">Esküvő</h3>
+              <span class="work__meta"><span data-i18n="works.wedding.meta">Válogatás több esküvőből</span><span class="work__count" data-count="eskuvo"></span></span>
+            </div>
+          </a>
+        </li>
 
-  <div class="services-grid fade-up">
-    <div class="service-card" data-reference-action="gallery" data-reference-key="eskuvo">
-      <div class="service-num">01</div>
-      <div class="service-title">Wedding Photography &amp; Videography</div>
-      <p class="service-desc">Capture every moment of your special day in cinematic style, creating timeless memories.</p>
-      <span class="service-link-label">View Work</span>
+        <li class="work work--b">
+          <a class="work__link" href="images/web/portraits/portre-01-1600.webp" data-gallery="portre">
+            <div class="work__media ratio-4x5">
+              <img src="images/web/portraits/portre-01-960.webp"
+                   srcset="images/web/portraits/portre-01-480.webp 480w, images/web/portraits/portre-01-960.webp 960w, images/web/portraits/portre-01-1600.webp 1600w"
+                   sizes="(max-width: 600px) 92vw, (max-width: 900px) 46vw, 32vw"
+                   width="1920" height="2880" loading="lazy" decoding="async"
+                   alt="Szakállas, tetovált férfi összefont karral, sötét háttér előtt" data-i18n-attr="alt:works.portrait.alt">
+            </div>
+            <div class="work__caption">
+              <h3 class="work__title" data-i18n="works.portrait.title">Portré</h3>
+              <span class="work__meta"><span data-i18n="works.portrait.meta">Egyéni portrék</span><span class="work__count" data-count="portre"></span></span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work work--c">
+          <a class="work__link" href="images/web/gastro-2400.webp" data-gallery="gastro">
+            <div class="work__media ratio-4x5">
+              <img src="images/web/gastro-960.webp"
+                   srcset="images/web/gastro-480.webp 480w, images/web/gastro-960.webp 960w, images/web/gastro-1600.webp 1600w"
+                   sizes="(max-width: 600px) 92vw, (max-width: 900px) 46vw, 40vw"
+                   width="4000" height="6000" loading="lazy" decoding="async"
+                   alt="Kéz nyúl egy pohár fehérborért, mellette sonkás-sajtos tál" data-i18n-attr="alt:works.gastro.alt">
+            </div>
+            <div class="work__caption">
+              <h3 class="work__title" data-i18n="works.gastro.title">Gasztro</h3>
+              <span class="work__meta"><span data-i18n="works.gastro.meta">Ételek, italok, helyek</span><span class="work__count" data-count="gastro"></span></span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work work--d">
+          <a class="work__link" href="images/web/koncert/koncert-03-2400.webp" data-gallery="koncert">
+            <div class="work__media ratio-3x2">
+              <img src="images/web/koncert/koncert-03-960.webp"
+                   srcset="images/web/koncert/koncert-03-480.webp 480w, images/web/koncert/koncert-03-960.webp 960w, images/web/koncert/koncert-03-1600.webp 1600w"
+                   sizes="(max-width: 900px) 92vw, 50vw"
+                   width="2400" height="1599" loading="lazy" decoding="async"
+                   alt="Előadó sziluettje füstben és reflektorfényben a közönség felett" data-i18n-attr="alt:works.concert.alt">
+            </div>
+            <div class="work__caption">
+              <h3 class="work__title" data-i18n="works.concert.title">Koncert</h3>
+              <span class="work__meta"><span data-i18n="works.concert.meta">Koncertek és fesztiválok</span><span class="work__count" data-count="koncert"></span></span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work work--e">
+          <a class="work__link" href="images/web/event/rendezveny-01-2400.webp" data-gallery="rendezveny">
+            <div class="work__media ratio-3x2">
+              <img src="images/web/event/rendezveny-01-960.webp"
+                   srcset="images/web/event/rendezveny-01-480.webp 480w, images/web/event/rendezveny-01-960.webp 960w, images/web/event/rendezveny-01-1600.webp 1600w"
+                   sizes="(max-width: 900px) 92vw, 66vw"
+                   width="2400" height="1600" loading="lazy" decoding="async"
+                   alt="Díszvacsora egy historikus belső térben, felülnézetből" data-i18n-attr="alt:works.event.alt">
+            </div>
+            <div class="work__caption">
+              <h3 class="work__title" data-i18n="works.event.title">Rendezvény</h3>
+              <span class="work__meta"><span data-i18n="works.event.meta">Válogatás több rendezvényről</span><span class="work__count" data-count="rendezveny"></span></span>
+            </div>
+          </a>
+        </li>
+      </ul>
     </div>
-    <div class="service-card" data-reference-action="gallery" data-reference-key="event">
-      <div class="service-num">02</div>
-      <div class="service-title">Event Photography</div>
-      <p class="service-desc">Professional event photography capturing the energy and moments of corporate events, parties, and celebrations.</p>
-      <span class="service-link-label">View Work</span>
+  </section>
+
+  <!-- ================= FILMEK =================
+       Vimeo-azonosítók: assets/js/content.js films.
+       data-film="kulcs" köti össze a borítót a filmmel. -->
+  <section class="section films" id="filmek" aria-labelledby="films-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="eyebrow" data-i18n="films.eyebrow">Film</p>
+        <h2 class="section-title" id="films-title" data-i18n="films.title">Történetek mozgásban.</h2>
+        <p class="section-intro" data-i18n="films.intro">Dokumentumfilm, rövidfilm és esküvői film. A videók kattintásra töltődnek be a Vimeóról.</p>
+      </header>
+
+      <div class="films__grid">
+        <article class="film film--featured">
+          <a class="film__play" href="https://vimeo.com/1188963244" data-film="dokumentumfilm"
+             aria-label="Lejátszás: Dokumentumfilm" data-i18n-attr="aria-label:films.doc.play">
+            <span class="film__media">
+              <img src="images/web/film/dokumentumfilm-borito-960.webp"
+                   srcset="images/web/film/dokumentumfilm-borito-480.webp 480w, images/web/film/dokumentumfilm-borito-960.webp 960w, images/web/film/dokumentumfilm-borito-1600.webp 1600w"
+                   sizes="(min-width: 1568px) 1440px, 92vw"
+                   width="2396" height="1616" loading="lazy" decoding="async" alt="">
+              <span class="play-icon" aria-hidden="true"></span>
+            </span>
+          </a>
+          <div class="film__caption">
+            <h3 class="film__title" data-i18n="films.doc.title">Dokumentumfilm</h3>
+            <p class="film__meta"><span data-i18n="films.doc.meta">Dokumentumfilm</span> · 22:16</p>
+          </div>
+        </article>
+
+        <article class="film">
+          <a class="film__play" href="https://vimeo.com/1188963168" data-film="storytelling"
+             aria-label="Lejátszás: Visual Storytelling" data-i18n-attr="aria-label:films.story.play">
+            <span class="film__media">
+              <img src="images/web/visual-storytelling-960.webp"
+                   srcset="images/web/visual-storytelling-480.webp 480w, images/web/visual-storytelling-960.webp 960w, images/web/visual-storytelling-1600.webp 1600w"
+                   sizes="(max-width: 700px) 92vw, 46vw"
+                   width="3840" height="2160" loading="lazy" decoding="async" alt="">
+              <span class="play-icon" aria-hidden="true"></span>
+            </span>
+          </a>
+          <div class="film__caption">
+            <h3 class="film__title" data-i18n="films.story.title">Visual Storytelling</h3>
+            <p class="film__meta"><span data-i18n="films.story.meta">Rövidfilm</span> · 4:02</p>
+          </div>
+        </article>
+
+        <article class="film">
+          <a class="film__play" href="https://vimeo.com/1188707738" data-film="eskuvoi"
+             aria-label="Lejátszás: Esküvői film" data-i18n-attr="aria-label:films.wedding.play">
+            <span class="film__media">
+              <img src="images/web/weddings-video-960.webp"
+                   srcset="images/web/weddings-video-480.webp 480w, images/web/weddings-video-960.webp 960w, images/web/weddings-video-1600.webp 1600w"
+                   sizes="(max-width: 700px) 92vw, 46vw"
+                   width="2750" height="1700" loading="lazy" decoding="async" alt="">
+              <span class="play-icon" aria-hidden="true"></span>
+            </span>
+          </a>
+          <div class="film__caption">
+            <h3 class="film__title" data-i18n="films.wedding.title">Esküvői film</h3>
+            <p class="film__meta"><span data-i18n="films.wedding.meta">Esküvő</span> · 3:36</p>
+          </div>
+        </article>
+      </div>
     </div>
-    <div class="service-card" data-reference-action="gallery" data-reference-key="gastro">
-      <div class="service-num">03</div>
-      <div class="service-title">Gastro Photography</div>
-      <p class="service-desc">Appetizing food and beverage photography for restaurants, bars, and culinary brands.</p>
-      <span class="service-link-label">View Work</span>
+  </section>
+
+  <!-- ================= SZOLGÁLTATÁSOK ================= -->
+  <section class="section services" id="szolgaltatasok" aria-labelledby="services-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="eyebrow" data-i18n="services.eyebrow">Szolgáltatások</p>
+        <h2 class="section-title" id="services-title" data-i18n="services.title">Amiben együtt dolgozhatunk</h2>
+      </header>
+
+      <ol class="services__list" role="list">
+        <li class="service">
+          <span class="service__num" aria-hidden="true">01</span>
+          <h3 class="service__title" data-i18n="services.s1.title">Esküvői fotó és film</h3>
+          <div class="service__body">
+            <p data-i18n="services.s1.text">Fotózás és film, külön vagy együtt. A nagy pillanatok mellett a köztük lévő csendesebb részletekre is figyelek.</p>
+            <p class="service__links">
+              <a class="arrow-link" href="#munkak" data-gallery="eskuvo" data-i18n="services.s1.link1">Esküvői fotók</a>
+              <a class="arrow-link" href="#filmek" data-film="eskuvoi" data-i18n="services.s1.link2">Esküvői film</a>
+            </p>
+          </div>
+        </li>
+        <li class="service">
+          <span class="service__num" aria-hidden="true">02</span>
+          <h3 class="service__title" data-i18n="services.s2.title">Rendezvény-, koncert- és portréfotózás</h3>
+          <div class="service__body">
+            <p data-i18n="services.s2.text">Rendezvények, koncertek, fesztiválok és egyéni portrék. Úgy dolgozom, hogy a képeken az esemény hangulata és az emberek is valódiak maradjanak.</p>
+            <p class="service__links">
+              <a class="arrow-link" href="#munkak" data-gallery="rendezveny" data-i18n="services.s2.link1">Rendezvény</a>
+              <a class="arrow-link" href="#munkak" data-gallery="koncert" data-i18n="services.s2.link2">Koncert</a>
+              <a class="arrow-link" href="#munkak" data-gallery="portre" data-i18n="services.s2.link3">Portré</a>
+            </p>
+          </div>
+        </li>
+        <li class="service">
+          <span class="service__num" aria-hidden="true">03</span>
+          <h3 class="service__title" data-i18n="services.s3.title">Gasztrofotózás és dokumentumfilm</h3>
+          <div class="service__body">
+            <p data-i18n="services.s3.text">Ételek, italok és helyek fotói vendéglátóhelyeknek és márkáknak. Dokumentumfilmben emberek történetét követem, türelemmel és közelről.</p>
+            <p class="service__links">
+              <a class="arrow-link" href="#munkak" data-gallery="gastro" data-i18n="services.s3.link1">Gasztro</a>
+              <a class="arrow-link" href="#filmek" data-film="dokumentumfilm" data-i18n="services.s3.link2">Dokumentumfilm</a>
+            </p>
+          </div>
+        </li>
+      </ol>
     </div>
-    <div class="service-card" data-reference-action="gallery" data-reference-key="portraits">
-      <div class="service-num">04</div>
-      <div class="service-title">Portrait Photography</div>
-      <p class="service-desc">Expressive, artistic portrait photos with unique lighting and atmospheric mood.</p>
-      <span class="service-link-label">View Work</span>
+  </section>
+
+  <!-- ================= RÓLAM ================= -->
+  <section class="section about" id="rolam" aria-labelledby="about-title">
+    <div class="wrap about__grid">
+      <figure class="about__figure">
+        <img src="images/web/headline-960.webp"
+             srcset="images/web/headline-480.webp 480w, images/web/headline-960.webp 960w, images/web/headline-1600.webp 1600w"
+             sizes="(max-width: 900px) 92vw, 40vw"
+             width="5497" height="5497" loading="lazy" decoding="async"
+             alt="Vidor Gergely nádasban áll, egyik kezében magasra emelt filmkamera"
+             data-i18n-attr="alt:about.imageAlt">
+      </figure>
+      <div class="about__text">
+        <p class="eyebrow" data-i18n="about.eyebrow">Rólam</p>
+        <h2 class="section-title" id="about-title" data-i18n="about.title">Vidor Gergely vagyok.</h2>
+        <p data-i18n="about.p1">Gyerekkorom óta fényképezek: a nagyapám fényképezőgépével kezdtem, később a fotó mellé a film is odakerült. Budapesten élek, fotósként és operatőrként dolgozom.</p>
+        <p data-i18n="about.p2">A legtöbbet a megfigyelésből tanulok: hogyan mozdulnak az emberek, hol áll meg a fény, mi történik két nagy pillanat között. Nem rendezem túl a helyzeteket. Inkább jelen vagyok, és akkor exponálok, amikor valami tényleg megtörténik.</p>
+        <p class="about__since" data-i18n="about.since">2015 óta dolgozom fotósként és operatőrként.</p>
+      </div>
     </div>
-    <div class="service-card" data-reference-action="gallery" data-reference-key="koncert">
-      <div class="service-num">05</div>
-      <div class="service-title">Concert Photography</div>
-      <p class="service-desc">Dynamic concert and live performance photography capturing the energy and atmosphere of music events.</p>
-      <span class="service-link-label">View Work</span>
-    </div>
-    <div class="service-card" data-reference-action="vimeo" data-reference-key="1188963244">
-      <div class="service-num">06</div>
-      <div class="service-title">Documentary Film</div>
-      <p class="service-desc">Cinematic documentary filmmaking with authentic storytelling and professional production quality.</p>
-      <span class="service-link-label">View Work</span>
-    </div>
-  </div>
+  </section>
 
-  <div style="text-align:center;" class="fade-up">
-    <a href="#contact" class="btn-primary">Get Started</a>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- Portfolio -->
-<section id="portfolio">
-  <div class="section-label fade-up">Portfolio</div>
-  <h2 class="fade-up">Selected <em>work</em></h2>
-  <p class="section-sub fade-up">Explore my work across different genres and styles.</p>
-
-  <div class="portfolio-grid fade-up">
-    <!-- VIDEO 1: Cseréld le a href-ben a VIDEO_ID-t a YouTube videód azonosítójára -->
-    <a href="https://vimeo.com/1188963244" data-vimeo="1188963244" class="portfolio-tile">
-      <div class="tile-bg tile-pattern-1" style="background-image: url('images/dokumentumfilm.jpg');"></div>
-      <div class="tile-overlay">
-        <div class="tile-icon">▶</div>
-        <div class="tile-action">Watch Video</div>
-      </div>
-      <div class="tile-label">
-        <div class="tile-label-text">Documentary Film</div>
-        <div class="tile-label-type">Video</div>
-      </div>
-    </a>
-    <!-- VIDEO 2: Cseréld le a href-ben a VIDEO_ID-t a YouTube videód azonosítójára -->
-    <a href="https://vimeo.com/1188963168" data-vimeo="1188963168" class="portfolio-tile">
-      <div class="tile-bg tile-pattern-2" style="background-image: url('images/visual-storytelling.jpg');"></div>
-      <div class="tile-overlay">
-        <div class="tile-icon">▶</div>
-        <div class="tile-action">Watch Video</div>
-      </div>
-      <div class="tile-label">
-        <div class="tile-label-text">Visual Storytelling</div>
-        <div class="tile-label-type">Video</div>
-      </div>
-    </a>
-    <!-- VIDEO 3: Vimeo videóhoz használd a data-vimeo="VIDEO_ID" attribútumot (pl. https://vimeo.com/1188707738 → data-vimeo="1188707738") -->
-    <a href="https://vimeo.com/1188707738" data-vimeo="1188707738" class="portfolio-tile">
-      <div class="tile-bg tile-pattern-3" style="background-image: url('images/weddings-video.jpg');"></div>
-      <div class="tile-overlay">
-        <div class="tile-icon">▶</div>
-        <div class="tile-action">Watch Video</div>
-      </div>
-      <div class="tile-label">
-        <div class="tile-label-text">Weddings Video</div>
-        <div class="tile-label-type">Video</div>
-      </div>
-    </a>
-    <!-- FOTÓ: Gastro — Töltsd fel: images/gastro/ mappába -->
-    <a href="#" data-gallery="gastro" class="portfolio-tile">
-      <div class="tile-bg tile-pattern-4" style="background-image: url('images/gastro.jpg');"></div>
-      <div class="tile-overlay">
-        <div class="tile-icon">⊞</div>
-        <div class="tile-action">View Gallery</div>
-      </div>
-      <div class="tile-label">
-        <div class="tile-label-text">Gastro</div>
-        <div class="tile-label-type">Photography</div>
-      </div>
-    </a>
-    <!-- FOTÓ: Portraits — Töltsd fel: images/portraits/ mappába -->
-    <a href="#" data-gallery="portraits" class="portfolio-tile">
-      <div class="tile-bg tile-pattern-5" style="background-image: url('images/portraits.jpg');"></div>
-      <div class="tile-overlay">
-        <div class="tile-icon">⊞</div>
-        <div class="tile-action">View Gallery</div>
-      </div>
-      <div class="tile-label">
-        <div class="tile-label-text">Portraits</div>
-        <div class="tile-label-type">Photography</div>
-      </div>
-    </a>
-    <!-- FOTÓ: Event — Töltsd fel: images/event/ mappába -->
-    <a href="#" data-gallery="event" class="portfolio-tile">
-      <div class="tile-bg tile-pattern-6" style="background-image: url('images/event.jpg');"></div>
-      <div class="tile-overlay">
-        <div class="tile-icon">⊞</div>
-        <div class="tile-action">View Gallery</div>
-      </div>
-      <div class="tile-label">
-        <div class="tile-label-text">Event</div>
-        <div class="tile-label-type">Photography</div>
-      </div>
-    </a>
-    <!-- FOTÓ: Esküvő — Töltsd fel: images/eskuvo/ mappába -->
-    <a href="#" data-gallery="eskuvo" class="portfolio-tile">
-      <div class="tile-bg tile-pattern-7" style="background-image: url('images/eskuvo.jpg');"></div>
-      <div class="tile-overlay">
-        <div class="tile-icon">⊞</div>
-        <div class="tile-action">View Gallery</div>
-      </div>
-      <div class="tile-label">
-        <div class="tile-label-text">Wedding</div>
-        <div class="tile-label-type">Photography</div>
-      </div>
-    </a>
-    <!-- FOTÓ: Koncert — Töltsd fel: images/koncert/ mappába -->
-    <a href="#" data-gallery="koncert" class="portfolio-tile">
-      <div class="tile-bg tile-pattern-8" style="background-image: url('images/koncert.jpg');"></div>
-      <div class="tile-overlay">
-        <div class="tile-icon">⊞</div>
-        <div class="tile-action">View Gallery</div>
-      </div>
-      <div class="tile-label">
-        <div class="tile-label-text">Concert</div>
-        <div class="tile-label-type">Photography</div>
-      </div>
-    </a>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- Contact -->
-<section id="contact">
-  <div class="section-label fade-up">Contact</div>
-  <h2 class="fade-up">Let's work<br><em>together</em></h2>
-  <p class="section-sub fade-up">Have a project in mind? Let's talk about how I can help capture your special moments.</p>
-
-  <div class="contact-grid">
-    <div>
-      <div class="why-grid fade-up">
-        <div class="why-item">
-          <div class="why-title">Professional equipment</div>
-          <div class="why-desc">2× Canon C70, RF lenses, DZO Cine optics &amp; Canon R6II</div>
-        </div>
-        <div class="why-item">
-          <div class="why-title">Years of experience</div>
-          <div class="why-desc">Daily work as cinematographer and photographer since 2015</div>
-        </div>
-        <div class="why-item">
-          <div class="why-title">Cinematic style</div>
-          <div class="why-desc">Unique visual storytelling in every project</div>
-        </div>
-        <div class="why-item">
-          <div class="why-title">Full service</div>
-          <div class="why-desc">From shooting to post-production, I cover everything</div>
-        </div>
+  <!-- ================= KAPCSOLAT ================= -->
+  <section class="section contact" id="kapcsolat" aria-labelledby="contact-title">
+    <div class="wrap contact__grid">
+      <div class="contact__intro">
+        <p class="eyebrow" data-i18n="contact.eyebrow">Kapcsolat</p>
+        <h2 class="contact__title" id="contact-title" data-i18n="contact.title">Mesélj, mit tervezel.</h2>
+        <p class="contact__lead" data-i18n="contact.lead">Írd meg, milyen fotózásra vagy filmre gondoltál, és beszéljük át a részleteket.</p>
+        <ul class="contact__details" role="list">
+          <li><a href="mailto:vidor.gergely@gmail.com">vidor.gergely@gmail.com</a></li>
+          <li><a href="tel:+36205609623">+36&nbsp;20&nbsp;560&nbsp;9623</a></li>
+          <li><span data-i18n="contact.location">Budapest</span></li>
+        </ul>
       </div>
 
-      <form class="fade-up" onsubmit="handleSubmit(event)">
-        <input type="hidden" name="_subject" value="New message — Vidor Photography">
+      <form class="form" id="contact-form" action="https://formsubmit.co/vidor.gergely@gmail.com" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="Új üzenet a vidorphotography.com oldalról">
+        <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
-        <div class="form-group">
-          <label class="form-label">Name *</label>
-          <input type="text" name="name" class="form-input" required placeholder="Your name">
+        <input type="hidden" name="nyelv" value="hu">
+        <div class="form__hp" aria-hidden="true">
+          <label for="f-honey">Ne töltsd ki</label>
+          <input type="text" id="f-honey" name="_honey" tabindex="-1" autocomplete="off">
         </div>
-        <div class="form-group">
-          <label class="form-label">Email *</label>
-          <input type="email" name="email" class="form-input" required placeholder="email@example.com">
+
+        <div class="field">
+          <label for="f-name"><span data-i18n="form.name">Név</span> <span class="field__req" aria-hidden="true">*</span></label>
+          <input id="f-name" name="nev" type="text" autocomplete="name" required aria-describedby="f-name-err">
+          <p class="field__error" id="f-name-err" hidden></p>
         </div>
-        <div class="form-group">
-          <label class="form-label">Message *</label>
-          <textarea name="message" class="form-textarea" required placeholder="Tell me about your project..."></textarea>
+        <div class="field">
+          <label for="f-email"><span data-i18n="form.email">E-mail</span> <span class="field__req" aria-hidden="true">*</span></label>
+          <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="f-email-err">
+          <p class="field__error" id="f-email-err" hidden></p>
         </div>
-        <button type="submit" class="btn-primary">Send Message</button>
-        <p class="form-note">Your information is kept confidential. I'll respond within 24 hours.</p>
+        <div class="field-row">
+          <div class="field">
+            <label for="f-type"><span data-i18n="form.type">Milyen munkáról van szó?</span> <span class="field__opt" data-i18n="form.optional">(nem kötelező)</span></label>
+            <select id="f-type" name="munka_tipusa">
+              <option value="" data-i18n="form.typeChoose">Válassz…</option>
+              <option value="Esküvői fotó" data-i18n="form.typeWeddingPhoto">Esküvői fotó</option>
+              <option value="Esküvői film" data-i18n="form.typeWeddingFilm">Esküvői film</option>
+              <option value="Esküvői fotó és film" data-i18n="form.typeWeddingBoth">Esküvői fotó és film</option>
+              <option value="Rendezvény" data-i18n="form.typeEvent">Rendezvény</option>
+              <option value="Koncert" data-i18n="form.typeConcert">Koncert</option>
+              <option value="Portré" data-i18n="form.typePortrait">Portré</option>
+              <option value="Gasztro" data-i18n="form.typeFood">Gasztro</option>
+              <option value="Dokumentumfilm" data-i18n="form.typeDoc">Dokumentumfilm</option>
+              <option value="Egyéb" data-i18n="form.typeOther">Egyéb</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-date"><span data-i18n="form.date">Tervezett időpont</span> <span class="field__opt" data-i18n="form.optional">(nem kötelező)</span></label>
+            <input id="f-date" name="idopont" type="text" autocomplete="off" placeholder="pl. 2027. június" data-i18n-attr="placeholder:form.datePlaceholder">
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-message"><span data-i18n="form.message">Üzenet</span> <span class="field__req" aria-hidden="true">*</span></label>
+          <textarea id="f-message" name="uzenet" rows="6" required aria-describedby="f-message-err"></textarea>
+          <p class="field__error" id="f-message-err" hidden></p>
+        </div>
+
+        <div class="form__footer">
+          <button type="submit" class="btn btn--primary form__submit">
+            <span class="form__submit-label" data-i18n="form.submit">Üzenet küldése</span>
+          </button>
+          <p class="form__note"><span data-i18n="form.required">A *-gal jelölt mezők kötelezők.</span> <span data-i18n="form.privacy">Az üzenetet a FormSubmit szolgáltatáson keresztül, e-mailben kapom meg.</span></p>
+        </div>
+        <div class="form__status" id="form-status" role="status" aria-live="polite" tabindex="-1" hidden></div>
       </form>
     </div>
+  </section>
+</main>
 
-    <div class="fade-up delay-2">
-      <div class="contact-info-title">Contact Information</div>
-
-      <div class="contact-item">
-        <div class="contact-icon">✆</div>
-        <div>
-          <div class="contact-item-label">Phone</div>
-          <div class="contact-item-value"><a href="tel:+36205609623">+36 20 560 9623</a></div>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">@</div>
-        <div>
-          <div class="contact-item-label">Email</div>
-          <div class="contact-item-value"><a href="mailto:vidor.gergely@gmail.com">vidor.gergely@gmail.com</a></div>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">⌖</div>
-        <div>
-          <div class="contact-item-label">Location</div>
-          <div class="contact-item-value"><a href="#">Budapest, Hungary</a></div>
-        </div>
-      </div>
-
-      <div style="margin-top:8px;">
-        <div class="footer-col-title">Follow on social media</div>
-        <div class="social-row">
-          <a href="https://www.facebook.com/gergo.vidor.9/" target="_blank" class="social-link" title="Facebook">fb</a>
-          <a href="https://www.instagram.com/vidorphotography1/" target="_blank" class="social-link" title="Instagram">ig</a>
-          <a href="https://www.youtube.com/channel/UCSgU3P5uT4wRdOBFBHtwg5g" target="_blank" class="social-link" title="YouTube">yt</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer>
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <a href="#hero" class="logo">
-        <div class="logo-mark">VP</div>
-        Vidor Photography
-      </a>
-      <p class="footer-tagline">Professional photography and videography services with a cinematic approach. Let's transform your moments into art.</p>
-      <div class="social-row">
-        <a href="https://www.facebook.com/gergo.vidor.9/" target="_blank" class="social-link" title="Facebook">fb</a>
-        <a href="https://www.instagram.com/vidorphotography1/" target="_blank" class="social-link" title="Instagram">ig</a>
-        <a href="https://www.youtube.com/channel/UCSgU3P5uT4wRdOBFBHtwg5g" target="_blank" class="social-link" title="YouTube">yt</a>
-      </div>
-    </div>
-    <div class="footer-col">
-      <div class="footer-col-title">Quick Links</div>
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#contact">Contact</a>
-    </div>
-    <div class="footer-col">
-      <div class="footer-col-title">Contact</div>
-      <div class="footer-contact-name">Vidor Gergely</div>
-      <div class="footer-contact-title">Photographer &amp; Videographer</div>
-      <a href="tel:+36205609623">+36 20 560 9623</a>
-      <a href="mailto:vidor.gergely@gmail.com">vidor.gergely@gmail.com</a>
-    </div>
-    <div class="footer-col">
-      <div class="footer-col-title">Work together</div>
-      <p style="font-size:0.82rem; color:var(--muted); line-height:1.7; margin-bottom:20px;">Ready to create something cinematic?</p>
-      <a href="#contact" class="btn-primary">Let's Collaborate</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="footer-copy">© 2025 Vidor Photography. All rights reserved.</div>
-    <div class="footer-legal">
-      <a href="#contact">Privacy Policy</a>
-      <a href="#contact">Terms of Service</a>
-    </div>
+<!-- ================= LÁBLÉC ================= -->
+<footer class="site-footer">
+  <div class="wrap footer__inner">
+    <p class="footer__brand">Vidor Photography <span class="footer__copy">© <span id="year">2026</span></span></p>
+    <ul class="footer__social" role="list">
+      <li><a href="https://www.instagram.com/vidorphotography1/" rel="noopener" target="_blank">Instagram<span class="visually-hidden" data-i18n="a11y.newTab"> (új lapon nyílik meg)</span></a></li>
+      <li><a href="https://www.facebook.com/gergo.vidor.9/" rel="noopener" target="_blank">Facebook<span class="visually-hidden" data-i18n="a11y.newTab"> (új lapon nyílik meg)</span></a></li>
+      <li><a href="https://www.youtube.com/channel/UCSgU3P5uT4wRdOBFBHtwg5g" rel="noopener" target="_blank">YouTube<span class="visually-hidden" data-i18n="a11y.newTab"> (új lapon nyílik meg)</span></a></li>
+    </ul>
+    <a class="footer__top" href="#top" data-i18n="footer.top">Vissza a tetejére ↑</a>
   </div>
 </footer>
 
-<!-- Gallery Modal -->
-<div id="galleryModal" class="gallery-modal" role="dialog" aria-modal="true" aria-labelledby="galleryModalTitle">
-  <div class="gallery-modal-backdrop"></div>
-  <div class="gallery-modal-content">
-    <div class="gallery-modal-header">
-      <div class="gallery-modal-title" id="galleryModalTitle"></div>
-      <button class="gallery-modal-close" id="galleryModalClose" aria-label="Close">✕</button>
+<!-- ================= GALÉRIA (egyetlen párbeszédablak, rács + nagy kép nézet) ================= -->
+<dialog class="viewer" id="viewer" aria-labelledby="viewer-title">
+  <div class="viewer__bar">
+    <div class="viewer__heading">
+      <h2 class="viewer__title" id="viewer-title">Galéria</h2>
+      <p class="viewer__meta" id="viewer-meta"></p>
     </div>
-    <div class="gallery-grid-wrap">
-      <div class="gallery-grid" id="galleryGrid"></div>
-    </div>
-  </div>
-</div>
-
-<!-- Lightbox -->
-<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
-  <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
-  <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
-  <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous">‹</button>
-  <img class="lightbox-img" id="lightboxImg" src="" alt="">
-  <button class="lightbox-next" id="lightboxNext" aria-label="Next">›</button>
-  <div class="lightbox-counter" id="lightboxCounter"></div>
-</div>
-
-<!-- Video Modal (YouTube & Vimeo) -->
-<div id="ytModal" class="yt-modal" role="dialog" aria-modal="true" aria-label="Video player">
-  <div class="yt-modal-backdrop"></div>
-  <div class="yt-modal-content">
-    <button class="yt-modal-close" id="ytModalClose" aria-label="Close">✕</button>
-    <div class="yt-embed-wrap">
-      <iframe id="ytIframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <div class="viewer__tools">
+      <button type="button" class="viewer__back" id="viewer-back" hidden>
+        <span aria-hidden="true">←</span> <span data-i18n="viewer.back">Összes kép</span>
+      </button>
+      <button type="button" class="close-btn" data-close>
+        <span class="close-btn__label" data-i18n="viewer.close">Bezárás</span> <span aria-hidden="true">✕</span>
+      </button>
     </div>
   </div>
-</div>
-
-<!-- Service Detail Modal -->
-<div id="serviceModal" class="service-modal" role="dialog" aria-modal="true" aria-labelledby="serviceModalTitle">
-  <div class="service-modal-backdrop"></div>
-  <div class="service-modal-content">
-    <div class="service-modal-header">
-      <div class="service-modal-header-left">
-        <div class="service-modal-num" id="serviceModalNum"></div>
-        <div class="service-modal-title" id="serviceModalTitle"></div>
-      </div>
-      <button class="service-modal-close" id="serviceModalClose" aria-label="Close">✕</button>
+  <div class="viewer__body">
+    <ul class="viewer__grid" id="viewer-grid" role="list"></ul>
+    <div class="viewer__single" id="viewer-single" hidden>
+      <figure class="viewer__figure">
+        <img id="viewer-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" decoding="async">
+        <figcaption class="viewer__caption" id="viewer-caption"></figcaption>
+      </figure>
+      <button type="button" class="viewer__nav viewer__nav--prev" id="viewer-prev" aria-label="Előző kép" data-i18n-attr="aria-label:viewer.prev"><span aria-hidden="true">←</span></button>
+      <button type="button" class="viewer__nav viewer__nav--next" id="viewer-next" aria-label="Következő kép" data-i18n-attr="aria-label:viewer.next"><span aria-hidden="true">→</span></button>
     </div>
-    <div class="service-modal-body" id="serviceModalBody"></div>
   </div>
-</div>
+</dialog>
 
-<script>
-  // Custom cursor
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-  function animCursor() {
-    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
-    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-    requestAnimationFrame(animCursor);
-  }
-  animCursor();
+<!-- ================= VIDEÓLEJÁTSZÓ ================= -->
+<dialog class="player" id="player" aria-labelledby="player-title">
+  <div class="player__bar">
+    <h2 class="player__title" id="player-title">Videó</h2>
+    <button type="button" class="close-btn close-btn--light" data-close>
+      <span class="close-btn__label" data-i18n="viewer.close">Bezárás</span> <span aria-hidden="true">✕</span>
+    </button>
+  </div>
+  <div class="player__frame" id="player-frame"></div>
+</dialog>
 
-  const LANG_STORAGE_KEY = 'vidor_lang';
-  const originalTextNodes = new WeakMap();
-  let currentLang = 'en';
-  let currentGalleryTitle = '';
-  const LANG_TEXT_HU = {
-    'About': 'Rólam',
-    'Services': 'Szolgáltatások',
-    'Portfolio': 'Portfólió',
-    'Contact': 'Kapcsolat',
-    'Book Now': 'Foglalás',
-    'Budapest, Hungary': 'Budapest, Magyarország',
-    'Cinematic': 'Filmszerű',
-    'storytelling': 'történetmesélés',
-    'through photo & video': 'fotón és videón keresztül',
-    'Professional photography and videography for events, weddings, portraits, and gastro — based in Budapest.': 'Professzionális fotó- és videós szolgáltatás rendezvényekre, esküvőkre, portrékhoz és gasztró projektekhez — Budapesten.',
-    'View My Work': 'Munkáim',
-    'Get In Touch': 'Kapcsolatfelvétel',
-    'Events · Weddings · Portraits · Gastro · Concerts': 'Rendezvények · Esküvők · Portrék · Gasztró · Koncertek',
-    'Scroll': 'Görgess',
-    'Photographer & Videographer': 'Fotós és videós',
-    'Photography has been part of my life since childhood, when I first picked up my grandfather’s camera and started capturing the world around me. What began as curiosity slowly turned into a passion for storytelling — first through photos, then through cinematic filmmaking.': 'A fotózás gyerekkorom óta az életem része: amikor először kézbe vettem nagyapám fényképezőgépét, elkezdtem megörökíteni a világot magam körül. Ami kíváncsiságként indult, fokozatosan történetmesélő szenvedéllyé vált — előbb fotókon, majd filmes képi világgal.',
-    'Today, I work as a photographer and cinematographer, creating emotional, atmosphere-driven visuals for weddings, events, brands, and documentaries. For me, the most important part of every project is not just how it looks, but how it feels years later.': 'Ma fotósként és operatőrként dolgozom, érzelmes, hangulatalapú vizuális anyagokat készítve esküvőkre, rendezvényekre, márkáknak és dokumentumfilmekhez. Számomra minden projektben nem csak az a fontos, hogyan néz ki, hanem az is, mit érez vele kapcsolatban az ember évekkel később.',
-    'I love capturing real moments — the small gestures, the energy of a crowd, the quiet in-between scenes, and the emotions people often don’t even notice in the moment. My goal is always to create timeless visuals that feel honest, cinematic, and deeply personal.': 'Szeretem elkapni a valódi pillanatokat — az apró gesztusokat, a tömeg energiáját, a csendes átmeneteket és azokat az érzelmeket, amelyeket sokszor észre sem veszünk az adott pillanatban. A célom mindig az, hogy őszinte, filmszerű és személyes, időtálló vizuális világot alkossak.',
-    'Real moments': 'Valódi pillanatok',
-    'Since 2015': '2015 óta',
-    'Cinematic mood': 'Filmszerű hangulat',
-    'Small details': 'Apró részletek',
-    'HONEST STORYTELLING': 'ŐSZINTE TÖRTÉNETMESÉLÉS',
-    'DAILY CREATIVE WORK': 'NAPI KREATÍV MUNKA',
-    'TIMELESS VISUALS': 'IDŐTLEN KÉPI VILÁG',
-    'BIG STORIES': 'NAGY TÖRTÉNETEK',
-    'Contact Me': 'Írj nekem',
-    'Professional photo': 'Professzionális fotó',
-    'video services': 'videós szolgáltatások',
-    'For various events, weddings, portrait photography, and travel content creation.': 'Különféle rendezvényekhez, esküvőkhöz, portréfotózáshoz és tartalomgyártáshoz.',
-    'Wedding Photography & Videography': 'Esküvőfotózás és videózás',
-    'Capture every moment of your special day in cinematic style, creating timeless memories.': 'Örökítsük meg a nagy nap minden pillanatát filmszerű stílusban, időtálló emlékeket alkotva.',
-    'View Work': 'Munkák megtekintése',
-    'Event Photography': 'Rendezvényfotózás',
-    'Professional event photography capturing the energy and moments of corporate events, parties, and celebrations.': 'Professzionális rendezvényfotók, amelyek megörökítik céges események, bulik és ünnepek hangulatát.',
-    'Gastro Photography': 'Gasztrofotózás',
-    'Appetizing food and beverage photography for restaurants, bars, and culinary brands.': 'Étvágygerjesztő étel- és italfotók éttermeknek, bároknak és gasztronómiai márkáknak.',
-    'Portrait Photography': 'Portréfotózás',
-    'Expressive, artistic portrait photos with unique lighting and atmospheric mood.': 'Kifejező, művészi portrék egyedi fényeléssel és hangulattal.',
-    'Concert Photography': 'Koncertfotózás',
-    'Dynamic concert and live performance photography capturing the energy and atmosphere of music events.': 'Dinamikus koncert- és élő előadásfotók, amelyek visszaadják a zenei események energiáját.',
-    'Documentary Film': 'Dokumentumfilm',
-    'Cinematic documentary filmmaking with authentic storytelling and professional production quality.': 'Filmszerű dokumentumfilmes munka hiteles történetmeséléssel és professzionális kivitelezéssel.',
-    'Get Started': 'Kezdjük el',
-    'Selected': 'Válogatott',
-    'work': 'munkák',
-    'Explore my work across different genres and styles.': 'Nézd meg a munkáimat különböző műfajokban és stílusokban.',
-    'Watch Video': 'Videó megtekintése',
-    'Video': 'Videó',
-    'Visual Storytelling': 'Vizuális történetmesélés',
-    'Weddings Video': 'Esküvői videó',
-    'View Gallery': 'Galéria megtekintése',
-    'Gastro': 'Gasztró',
-    'Portraits': 'Portrék',
-    'Event': 'Rendezvény',
-    'Photography': 'Fotózás',
-    'Wedding': 'Esküvő',
-    'Concert': 'Koncert',
-    "Let's work": 'Dolgozzunk',
-    'together': 'együtt',
-    "Have a project in mind? Let's talk about how I can help capture your special moments.": 'Van egy ötleted? Beszéljünk róla, hogyan örökíthetem meg a különleges pillanataidat.',
-    'Professional equipment': 'Professzionális felszerelés',
-    '2× Canon C70, RF lenses, DZO Cine optics & Canon R6II': '2× Canon C70, RF objektívek, DZO Cine optikák és Canon R6II',
-    'Years of experience': 'Évek tapasztalata',
-    'Daily work as cinematographer and photographer since 2015': 'Napi munka operatőrként és fotósként 2015 óta',
-    'Cinematic style': 'Filmszerű stílus',
-    'Unique visual storytelling in every project': 'Egyedi vizuális történetmesélés minden projektben',
-    'Full service': 'Teljes szolgáltatás',
-    'From shooting to post-production, I cover everything': 'A forgatástól az utómunkáig mindent lefedek',
-    'Name *': 'Név *',
-    'Your name': 'Neved',
-    'Email *': 'E-mail *',
-    'Message *': 'Üzenet *',
-    'Tell me about your project...': 'Mesélj a projektedről...',
-    'Send Message': 'Üzenet küldése',
-    "Your information is kept confidential. I'll respond within 24 hours.": 'Adataidat bizalmasan kezelem. 24 órán belül válaszolok.',
-    'Contact Information': 'Elérhetőségek',
-    'Phone': 'Telefon',
-    'Location': 'Helyszín',
-    'Follow on social media': 'Kövess közösségi médiában',
-    "Professional photography and videography services with a cinematic approach. Let's transform your moments into art.": 'Professzionális fotós és videós szolgáltatások filmszerű megközelítéssel. Tegyük művészetté a pillanataidat.',
-    'Quick Links': 'Gyors linkek',
-    'Work together': 'Dolgozzunk együtt',
-    'Ready to create something cinematic?': 'Készen állsz valami filmszerűre?',
-    "Let's Collaborate": 'Működjünk együtt',
-    '© 2025 Vidor Photography. All rights reserved.': '© 2025 Vidor Photography. Minden jog fenntartva.',
-    'All rights reserved.': 'Minden jog fenntartva.',
-    'Privacy Policy': 'Adatvédelmi irányelvek',
-    'Terms of Service': 'Felhasználási feltételek'
-  };
-  const UI_STRINGS = {
-    en: {
-      menu: 'Menu',
-      close: 'Close',
-      previous: 'Previous',
-      next: 'Next',
-      imagePreview: 'Image preview',
-      videoPlayer: 'Video player',
-      sending: 'Sending…',
-      sent: 'Message sent ✓',
-      submitError: 'Error — try again',
-      serverError: 'Server error',
-      galleryEmpty: 'Coming soon — images are being uploaded.',
-      galleryHint: 'Add images to the GALLERIES object in index.html.',
-      imageWord: 'image',
-      serviceFallback: 'Service',
-      viewGallery: 'View gallery',
-      watchVideo: 'Watch video',
-      photoSlot: 'Photo',
-      whatsIncluded: "What's included",
-      getInTouch: 'Get in touch',
-      bookNow: 'Book now',
-      subject: 'New message — Vidor Photography',
-      languageLabel: 'Language switcher',
-      pageTitle: 'Vidor Photography — Budapest'
-    },
-    hu: {
-      menu: 'Menü',
-      close: 'Bezárás',
-      previous: 'Előző',
-      next: 'Következő',
-      imagePreview: 'Kép nagyítva',
-      videoPlayer: 'Videó lejátszó',
-      sending: 'Küldés…',
-      sent: 'Üzenet elküldve ✓',
-      submitError: 'Hiba — próbáld újra',
-      serverError: 'Szerverhiba',
-      galleryEmpty: 'Hamarosan — a képek feltöltés alatt.',
-      galleryHint: 'Add hozzá a képeket a GALLERIES objektumhoz az index.html-ben.',
-      imageWord: 'kép',
-      serviceFallback: 'Szolgáltatás',
-      viewGallery: 'Galéria megtekintése',
-      watchVideo: 'Videó megtekintése',
-      photoSlot: 'Fotó',
-      whatsIncluded: 'Mit tartalmaz',
-      getInTouch: 'Kapcsolatfelvétel',
-      bookNow: 'Foglalás',
-      subject: 'Új üzenet — Vidor Photography',
-      languageLabel: 'Nyelvváltó',
-      pageTitle: 'Vidor Photography — Budapest'
-    }
-  };
-  const ATTR_TRANSLATIONS = [
-    { selector: '#hamburger', attr: 'aria-label', en: 'Menu', hu: 'Menü' },
-    { selector: '#galleryModalClose', attr: 'aria-label', en: 'Close', hu: 'Bezárás' },
-    { selector: '#lightbox', attr: 'aria-label', en: 'Image preview', hu: 'Kép nagyítva' },
-    { selector: '#lightboxClose', attr: 'aria-label', en: 'Close', hu: 'Bezárás' },
-    { selector: '#lightboxPrev', attr: 'aria-label', en: 'Previous', hu: 'Előző' },
-    { selector: '#lightboxNext', attr: 'aria-label', en: 'Next', hu: 'Következő' },
-    { selector: '#ytModal', attr: 'aria-label', en: 'Video player', hu: 'Videó lejátszó' },
-    { selector: '#ytModalClose', attr: 'aria-label', en: 'Close', hu: 'Bezárás' },
-    { selector: '#serviceModalClose', attr: 'aria-label', en: 'Close', hu: 'Bezárás' },
-    { selector: '.lang-switch', attr: 'aria-label', en: 'Language switcher', hu: 'Nyelvváltó' },
-    { selector: 'input[name="name"]', attr: 'placeholder', en: 'Your name', hu: 'Neved' },
-    { selector: 'input[name="email"]', attr: 'placeholder', en: 'email@example.com', hu: 'email@example.com' },
-    { selector: 'textarea[name="message"]', attr: 'placeholder', en: 'Tell me about your project...', hu: 'Mesélj a projektedről...' },
-    { selector: 'input[name="_subject"]', attr: 'value', en: 'New message — Vidor Photography', hu: 'Új üzenet — Vidor Photography' }
-  ];
-  const GALLERY_TITLES_HU = {
-    gastro: 'Gasztró',
-    portraits: 'Portrék',
-    event: 'Rendezvény',
-    eskuvo: 'Esküvő',
-    koncert: 'Koncert'
-  };
-  const SERVICE_TRANSLATIONS_HU = {
-    wedding: {
-      title: 'Esküvőfotózás és videózás',
-      subtitle: 'Filmszerű stílus · Történetmesélő munkafolyamat',
-      description: 'Az esküvőd többet érdemel egyszerű pillanatképeknél — egy filmet érdemel. Minden érzelmet, pillantást és múló pillanatot filmszerű szemmel és történetmesélő érzékenységgel örökítek meg. A reggeli készülődéstől az utolsó táncig semmi sem marad le.',
-      bullets: ['Egész napos lefedettség (szertartás + lagzi)', '2 fős stáb (fotó + videó)', 'Drónfelvételek (időjárásfüggő)', 'Filmszerű highlight film', 'Színkorrekció és vágás', 'Online galéria átadás']
-    },
-    event: {
-      title: 'Rendezvényfotózás',
-      subtitle: 'Céges és társasági események · Gyors átadás',
-      description: 'Konferenciák, gálák, szalagavatók, ballagások — megörökítem az energiát és a részleteket, amelyek egyedivé teszik az eseményt. Természetes és beállított képek gyors átadással, publikálásra és social media használatra készen.',
-      bullets: ['Teljes rendezvény-lefedettség', 'Természetes és beállított fotók', 'Gyors online galéria átadás', 'Nyomdai felbontás', 'Közösségi médiára optimalizált képek', 'Sajtó- és szerkesztőségi felhasználás']
-    },
-    gastro: {
-      title: 'Gasztrofotózás',
-      subtitle: 'Ételek, italok és hangulat · Márkára szabva',
-      description: 'Esztétikusan világított, komponált és stylingolt képek — a gasztrofotók vonzóvá teszik az étlapod és márkád. Éttermek, bárok és gasztronómiai vállalkozások vizuális történetmesélésére specializálódtam Budapesten.',
-      bullets: ['Étel- és tálalásfotók', 'Koktélok és italok', 'Enteriőr és hangulatképek', 'Retusált, azonnal használható fájlok', 'Social media és menüformátumok', 'Következetes márkaidentitás']
-    },
-    portraits: {
-      title: 'Portréfotózás',
-      subtitle: 'Stúdió és helyszín · Filmszerű hangulat',
-      description: 'Portrék, amelyek karaktert mutatnak. Stúdióban vagy budapesti helyszíneken természetes és mesterséges fénnyel készítek atmoszférikus, kifejező képeket — színész portréktól personal brandingig.',
-      bullets: ['Stúdiós vagy helyszíni fotózás', 'Természetes és stúdiófény', 'Retusált digitális átadás', 'Több szett ruha', 'Personal branding és headshot', 'Nyomtatási és digitális felhasználási jogok']
-    },
-    concert: {
-      title: 'Koncertfotózás',
-      subtitle: 'Élő előadások · Nagy energiájú dokumentálás',
-      description: 'Gyors, pontos és technikailag precíz — a koncertfotózás a csúcspillanat elkapásáról szól nehéz fényviszonyok között. Több száz élő koncertet fotóztam kluboktól fesztiválszínpadokig, mindig szerkesztőségi minőségű eredménnyel.',
-      bullets: ['Gyenge fényben szerzett tapasztalat', 'Színpad és közönség dinamikája', 'Előadói sajtófotók', 'Gyors kézbesítés', 'Szerkesztőségi és promó minőség', 'Fesztivál- és helyszíntapasztalat']
-    },
-    documentary: {
-      title: 'Dokumentumfilm',
-      subtitle: 'Filmszerű történetmesélés · Teljes gyártás',
-      description: 'Hosszú formátumú dokumentumfilmes munka újságírói szemlélettel és filmszerű esztétikával. A koncepciótól a végső vágásig végigviszem a teljes gyártási folyamatot — kutatás, forgatás, utómunka.',
-      bullets: ['2× Canon C70 cinema kamera', 'DZO Cine prémium optikák', '4K filmszerű felvétel', 'Professzionális hangrögzítés', 'Teljes színkorrekció', 'Vágás és utómunka']
-    }
-  };
-  function translateTextNodes() {
-    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
-    while (walker.nextNode()) {
-      const node = walker.currentNode;
-      const parent = node.parentElement;
-      if (!parent) continue;
-      if (parent.tagName === 'SCRIPT' || parent.tagName === 'STYLE') continue;
-      if (!originalTextNodes.has(node)) originalTextNodes.set(node, node.textContent);
-      const source = originalTextNodes.get(node);
-      const trimmed = source.trim();
-      if (!trimmed) continue;
-      const translated = currentLang === 'hu' ? (LANG_TEXT_HU[trimmed] || trimmed) : trimmed;
-      const leadingWhitespace = source.match(/^\s*/)[0];
-      const trailingWhitespace = source.match(/\s*$/)[0];
-      node.textContent = leadingWhitespace + translated + trailingWhitespace;
-    }
-  }
-  function applyAttributeTranslations() {
-    ATTR_TRANSLATIONS.forEach(function(item) {
-      const element = document.querySelector(item.selector);
-      if (!element) return;
-      element.setAttribute(item.attr, currentLang === 'hu' ? item.hu : item.en);
-    });
-  }
-  function updateServiceCardAriaLabels() {
-    document.querySelectorAll('.service-card[data-reference-action]').forEach(function(card) {
-      const titleEl = card.querySelector('.service-title');
-      const serviceTitle = titleEl ? titleEl.textContent.trim() : UI_STRINGS[currentLang].serviceFallback;
-      const actionLabel = card.dataset.referenceAction === 'gallery' ? UI_STRINGS[currentLang].viewGallery : UI_STRINGS[currentLang].watchVideo;
-      card.setAttribute('aria-label', actionLabel + ': ' + serviceTitle);
-    });
-  }
-  function applyLanguage(lang) {
-    currentLang = lang === 'hu' ? 'hu' : 'en';
-    document.documentElement.lang = currentLang;
-    document.title = UI_STRINGS[currentLang].pageTitle;
-    localStorage.setItem(LANG_STORAGE_KEY, currentLang);
-    document.querySelectorAll('.lang-btn').forEach(function(btn) {
-      btn.classList.toggle('active', btn.dataset.lang === currentLang);
-    });
-    translateTextNodes();
-    applyAttributeTranslations();
-    updateServiceCardAriaLabels();
-  }
-
-  // Header scroll
-  const header = document.getElementById('header');
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 60);
-  });
-
-  // Active nav highlight
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('nav a');
-  const observerNav = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        navLinks.forEach(a => a.classList.remove('active'));
-        const active = document.querySelector(`nav a[href="#${entry.target.id}"]`);
-        if (active) active.classList.add('active');
-      }
-    });
-  }, { threshold: 0.35 });
-  sections.forEach(s => observerNav.observe(s));
-
-  // Smooth scroll for ALL internal anchor links (skip action-only links like href="#")
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', e => {
-      const href = link.getAttribute('href');
-      if (!href || href === '#') return;
-      let target;
-      try { target = document.querySelector(href); } catch (_) { return; /* invalid selector, skip */ }
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // close mobile nav if open
-        document.getElementById('mobileNav').classList.remove('open');
-      }
-    });
-  });
-
-  // Mobile menu
-  document.getElementById('hamburger').addEventListener('click', () => {
-    document.getElementById('mobileNav').classList.add('open');
-  });
-  document.getElementById('mobileClose').addEventListener('click', () => {
-    document.getElementById('mobileNav').classList.remove('open');
-  });
-  document.querySelectorAll('.lang-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      applyLanguage(btn.dataset.lang);
-    });
-  });
-  applyLanguage(localStorage.getItem(LANG_STORAGE_KEY) || 'en');
-
-  // Fade-up on scroll
-  const faders = document.querySelectorAll('.fade-up');
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  faders.forEach(el => obs.observe(el));
-
-  // Video Modal (YouTube & Vimeo)
-  const ytModal = document.getElementById('ytModal');
-  const ytIframe = document.getElementById('ytIframe');
-  const ytClose = document.getElementById('ytModalClose');
-
-  function openYtModal(videoId) {
-    ytIframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
-    ytModal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function openVimeoModal(videoId) {
-    ytIframe.src = 'https://player.vimeo.com/video/' + videoId + '?autoplay=1';
-    ytModal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeYtModal() {
-    ytIframe.src = '';
-    ytModal.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  const ytBackdrop = document.querySelector('.yt-modal-backdrop');
-
-  // YouTube tiles: data-youtube="VIDEO_ID"
-  document.querySelectorAll('.portfolio-tile[data-youtube]').forEach(function(tile) {
-    tile.setAttribute('role', 'button');
-    tile.setAttribute('tabindex', '0');
-    tile.addEventListener('click', function(e) {
-      e.preventDefault();
-      openYtModal(tile.dataset.youtube);
-    });
-    tile.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openYtModal(tile.dataset.youtube);
-      }
-    });
-  });
-
-  // Vimeo tiles: data-vimeo="VIDEO_ID"
-  document.querySelectorAll('.portfolio-tile[data-vimeo]').forEach(function(tile) {
-    tile.setAttribute('role', 'button');
-    tile.setAttribute('tabindex', '0');
-    tile.addEventListener('click', function(e) {
-      e.preventDefault();
-      openVimeoModal(tile.dataset.vimeo);
-    });
-    tile.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openVimeoModal(tile.dataset.vimeo);
-      }
-    });
-  });
-
-  ytClose.addEventListener('click', closeYtModal);
-  if (ytBackdrop) ytBackdrop.addEventListener('click', closeYtModal);
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      if (lightbox.classList.contains('open')) { closeLightbox(); return; }
-      if (galleryModal.classList.contains('open')) { closeGallery(); return; }
-      if (serviceModal.classList.contains('open')) { closeServiceModal(); return; }
-      closeYtModal();
-    }
-    if (lightbox.classList.contains('open')) {
-      if (e.key === 'ArrowLeft') lightboxPrev();
-      if (e.key === 'ArrowRight') lightboxNext();
-    }
-  });
-
-  // ─── Service Detail Modal ────────────────────────────────────────────────
-  //
-  // KÉPEK FELTÖLTÉSE a service modalhoz:
-  // Minden szolgáltatáshoz tölts fel 4-6 képet a images/services/<kategória>/ mappába,
-  // majd vedd ki a kommentet az elérési utakról az alábbi SERVICES objektumban.
-  //
-  const SERVICES = {
-    wedding: {
-      num: '01',
-      title: 'Wedding Photography & Videography',
-      subtitle: 'Cinematic style · Storytelling workflow',
-      description: 'Your wedding day deserves more than snapshots — it deserves a film. I document every emotion, every glance, every fleeting moment with a cinematic eye and a storyteller\'s instinct. From the quiet morning preparations to the last dance, nothing goes unseen.',
-      bullets: [
-        'Full-day coverage (ceremony + reception)',
-        '2 operator (photo + video)',
-        'Drone footage (weather permitting)',
-        'Cinematic highlight film',
-        'Color grading & editing',
-        'Online gallery delivery',
-      ],
-      images: [
-        // 'images/services/wedding/wedding-01.jpg',
-        // 'images/services/wedding/wedding-02.jpg',
-        // 'images/services/wedding/wedding-03.jpg',
-        // 'images/services/wedding/wedding-04.jpg',
-        // 'images/services/wedding/wedding-05.jpg',
-        // 'images/services/wedding/wedding-06.jpg',
-      ]
-    },
-    event: {
-      num: '02',
-      title: 'Event Photography',
-      subtitle: 'Corporate & social events · Fast delivery',
-      description: 'Conferences, galas, school balls, graduations — I capture the energy and the details that make each event unique. Candid and portrait shots delivered quickly in a polished online gallery, ready for publication or social media.',
-      bullets: [
-        'Full event coverage',
-        'Candid & posed photography',
-        'Quick online gallery delivery',
-        'Print-ready resolution',
-        'Social media ready edits',
-        'Press & editorial use',
-      ],
-      images: [
-        // 'images/services/event/event-01.jpg',
-        // 'images/services/event/event-02.jpg',
-        // 'images/services/event/event-03.jpg',
-        // 'images/services/event/event-04.jpg',
-        // 'images/services/event/event-05.jpg',
-        // 'images/services/event/event-06.jpg',
-      ]
-    },
-    gastro: {
-      num: '03',
-      title: 'Gastro Photography',
-      subtitle: 'Food, drinks & atmosphere · Brand-ready',
-      description: 'Beautifully lit, styled, and composed — my gastro photography makes your menu and brand irresistible. Specialising in food, cocktails, interiors, and brand storytelling for restaurants, bars, and culinary entrepreneurs in Budapest.',
-      bullets: [
-        'Food & dish styling shots',
-        'Cocktails & beverages',
-        'Restaurant interior & ambiance',
-        'Retouched, ready-to-use files',
-        'Social media & menu formats',
-        'Brand identity consistency',
-      ],
-      images: [
-        // 'images/services/gastro/gastro-01.jpg',
-        // 'images/services/gastro/gastro-02.jpg',
-        // 'images/services/gastro/gastro-03.jpg',
-        // 'images/services/gastro/gastro-04.jpg',
-        // 'images/services/gastro/gastro-05.jpg',
-        // 'images/services/gastro/gastro-06.jpg',
-      ]
-    },
-    portraits: {
-      num: '04',
-      title: 'Portrait Photography',
-      subtitle: 'Studio & location · Cinematic mood',
-      description: 'Portraits that reveal character. Whether in-studio or on location in Budapest, I use natural and artificial light to craft atmospheric, expressive images — from actor headshots and personal branding to fine art portraits.',
-      bullets: [
-        'Studio or on-location sessions',
-        'Natural light & studio lighting',
-        'Retouched digital delivery',
-        'Multiple outfit changes',
-        'Personal branding & headshots',
-        'Print & digital usage rights',
-      ],
-      images: [
-        // 'images/services/portraits/portraits-01.jpg',
-        // 'images/services/portraits/portraits-02.jpg',
-        // 'images/services/portraits/portraits-03.jpg',
-        // 'images/services/portraits/portraits-04.jpg',
-        // 'images/services/portraits/portraits-05.jpg',
-        // 'images/services/portraits/portraits-06.jpg',
-      ]
-    },
-    concert: {
-      num: '05',
-      title: 'Concert Photography',
-      subtitle: 'Live performance · High-energy documentation',
-      description: 'Fast, reactive, and technically precise — concert photography is about capturing the peak moment in challenging light. I\'ve shot hundreds of live shows ranging from club nights to festival stages, always delivering editorial-quality results.',
-      bullets: [
-        'Low-light expertise',
-        'Stage & crowd dynamics',
-        'Artist press photos',
-        'Fast turnaround delivery',
-        'Editorial & promo quality',
-        'Festival & venue experience',
-      ],
-      images: [
-        // 'images/services/concert/concert-01.jpg',
-        // 'images/services/concert/concert-02.jpg',
-        // 'images/services/concert/concert-03.jpg',
-        // 'images/services/concert/concert-04.jpg',
-        // 'images/services/concert/concert-05.jpg',
-        // 'images/services/concert/concert-06.jpg',
-      ]
-    },
-    documentary: {
-      num: '06',
-      title: 'Documentary Film',
-      subtitle: 'Cinematic storytelling · Full production',
-      description: 'Long-form documentary filmmaking with a journalistic heart and a cinematic aesthetic. From concept to final cut, I handle the full production pipeline — researching, shooting, and editing stories that deserve to be told.',
-      bullets: [
-        '2× Canon C70 cinema cameras',
-        'DZO Cine premium optics',
-        '4K cinematic footage',
-        'Professional sound recording',
-        'Full color grading',
-        'Editing & post-production',
-      ],
-      images: [
-        // 'images/services/documentary/documentary-01.jpg',
-        // 'images/services/documentary/documentary-02.jpg',
-        // 'images/services/documentary/documentary-03.jpg',
-        // 'images/services/documentary/documentary-04.jpg',
-        // 'images/services/documentary/documentary-05.jpg',
-        // 'images/services/documentary/documentary-06.jpg',
-      ]
-    }
-  };
-
-  const serviceModal = document.getElementById('serviceModal');
-  const serviceModalBody = document.getElementById('serviceModalBody');
-  const serviceModalNum = document.getElementById('serviceModalNum');
-  const serviceModalTitle = document.getElementById('serviceModalTitle');
-
-  function escHtml(str) {
-    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-  }
-
-  function openServiceModal(key) {
-    const svcBase = SERVICES[key];
-    const svcHu = SERVICE_TRANSLATIONS_HU[key];
-    const svc = (currentLang === 'hu' && svcHu) ? {
-      ...svcBase,
-      ...svcHu,
-      bullets: svcHu.bullets || svcBase.bullets
-    } : svcBase;
-    if (!svc) return;
-    serviceModalNum.textContent = svc.num;
-    serviceModalTitle.textContent = svc.title;
-
-    let imagesHtml = '';
-    const imgs = svc.images.filter(Boolean).slice(0, 6);
-    if (imgs.length > 0) {
-      imagesHtml = '<div class="service-modal-images">' +
-        imgs.map(function(src) {
-          return '<div class="service-modal-img-item"><img src="' + escHtml(src) + '" alt="' + escHtml(svc.title) + '" loading="lazy"></div>';
-        }).join('') +
-        '</div>';
-    } else {
-      const slots = Array(6).fill('<div class="service-modal-img-slot">' + UI_STRINGS[currentLang].photoSlot + '</div>').join('');
-      imagesHtml = '<div class="service-modal-img-empty">' + slots + '</div>';
-    }
-
-    const bulletsHtml = svc.bullets.map(function(b) { return '<li>' + escHtml(b) + '</li>'; }).join('');
-    serviceModalBody.innerHTML =
-      imagesHtml +
-      '<div class="service-modal-info">' +
-        '<div class="service-modal-subtitle">' + escHtml(svc.subtitle) + '</div>' +
-        '<p class="service-modal-desc">' + escHtml(svc.description) + '</p>' +
-        '<div class="service-modal-includes-title">' + UI_STRINGS[currentLang].whatsIncluded + '</div>' +
-        '<ul class="service-modal-bullets">' + bulletsHtml + '</ul>' +
-        '<div class="service-modal-cta">' +
-          '<a href="#contact" class="btn-primary" onclick="closeServiceModal()">' + UI_STRINGS[currentLang].getInTouch + '</a>' +
-          '<a href="#contact" class="btn-outline" onclick="closeServiceModal()">' + UI_STRINGS[currentLang].bookNow + '</a>' +
-        '</div>' +
-      '</div>';
-
-    serviceModal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeServiceModal() {
-    serviceModal.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  document.getElementById('serviceModalClose').addEventListener('click', closeServiceModal);
-  document.querySelector('.service-modal-backdrop').addEventListener('click', closeServiceModal);
-
-  function openServiceReference(action, key) {
-    if (action === 'gallery') {
-      openGallery(key);
-      return;
-    }
-    if (action === 'vimeo') {
-      openVimeoModal(key);
-      return;
-    }
-    if (action === 'youtube') {
-      openYtModal(key);
-      return;
-    }
-  }
-
-  document.querySelectorAll('.service-card[data-reference-action]').forEach(function(card) {
-    card.setAttribute('role', 'button');
-    card.setAttribute('tabindex', '0');
-    card.addEventListener('click', function() {
-      openServiceReference(card.dataset.referenceAction, card.dataset.referenceKey);
-    });
-    card.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openServiceReference(card.dataset.referenceAction, card.dataset.referenceKey);
-      }
-    });
-  });
-  updateServiceCardAriaLabels();
-
-  // ─── Gallery & Lightbox ──────────────────────────────────────────────────
-  //
-  // KÉPEK FELTÖLTÉSE:
-  // Minden kategóriához tölts fel képeket a megfelelő mappába (images/<kategória>/),
-  // majd add hozzá az elérési útjukat az alábbi GALLERIES objektumhoz.
-  //
-  // Példa: 'images/gastro/gastro-01.jpg'
-  //
-  const GALLERIES = {
-    gastro: {
-      title: 'Gastro',
-      images: [
-        // 'images/gastro/gastro-01.jpg',
-        // 'images/gastro/gastro-02.jpg',
-        // 'images/gastro/gastro-03.jpg',
-      ]
-    },
-    portraits: {
-      title: 'Portraits',
-      images: [
-        // 'images/portraits/portraits-01.jpg',
-        // 'images/portraits/portraits-02.jpg',
-        // 'images/portraits/portraits-03.jpg',
-      ]
-    },
-    event: {
-      title: 'Event',
-      images: [
-        // 'images/event/event-01.jpg',
-        // 'images/event/event-02.jpg',
-        // 'images/event/event-03.jpg',
-      ]
-    },
-    eskuvo: {
-      title: 'Esküvő',
-      images: [
-        // 'images/eskuvo/eskuvo-01.jpg',
-        // 'images/eskuvo/eskuvo-02.jpg',
-        // 'images/eskuvo/eskuvo-03.jpg',
-      ]
-    },
-    koncert: {
-      title: 'Concert',
-      images: [
-        'images/koncert/koncert-01.jpg',
-        'images/koncert/koncert-02.jpg',
-        // 'images/koncert/koncert-03.jpg',
-      ]
-    }
-  };
-
-  const galleryModal = document.getElementById('galleryModal');
-  const galleryGrid = document.getElementById('galleryGrid');
-  const galleryModalTitle = document.getElementById('galleryModalTitle');
-  let currentGallery = [];
-
-  function openGallery(key) {
-    const gallery = GALLERIES[key];
-    if (!gallery) return;
-    currentGallery = gallery.images;
-    currentGalleryTitle = currentLang === 'hu' ? (GALLERY_TITLES_HU[key] || gallery.title) : gallery.title;
-    galleryModalTitle.textContent = currentGalleryTitle;
-    galleryGrid.innerHTML = '';
-    if (gallery.images.length === 0) {
-      galleryGrid.innerHTML = '<div class="gallery-empty">' + UI_STRINGS[currentLang].galleryEmpty + '<span class="gallery-empty-hint">' + UI_STRINGS[currentLang].galleryHint + '</span></div>';
-    } else {
-      gallery.images.forEach(function(src, idx) {
-        var item = document.createElement('div');
-        item.className = 'gallery-grid-item';
-        item.setAttribute('tabindex', '0');
-        item.setAttribute('aria-label', currentGalleryTitle + ' — ' + (idx + 1) + '. ' + UI_STRINGS[currentLang].imageWord);
-        var img = document.createElement('img');
-        img.src = src;
-        img.alt = currentGalleryTitle + ' ' + (idx + 1);
-        img.loading = 'lazy';
-        item.appendChild(img);
-        item.addEventListener('click', function() { openLightbox(idx); });
-        item.addEventListener('keydown', function(e) {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(idx); }
-        });
-        galleryGrid.appendChild(item);
-      });
-    }
-    galleryModal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeGallery() {
-    galleryModal.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  document.getElementById('galleryModalClose').addEventListener('click', closeGallery);
-  document.querySelector('.gallery-modal-backdrop').addEventListener('click', closeGallery);
-
-  // Photo tiles → open gallery
-  document.querySelectorAll('.portfolio-tile[data-gallery]').forEach(function(tile) {
-    tile.setAttribute('role', 'button');
-    tile.setAttribute('tabindex', '0');
-    tile.addEventListener('click', function(e) {
-      e.preventDefault();
-      openGallery(tile.dataset.gallery);
-    });
-    tile.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openGallery(tile.dataset.gallery); }
-    });
-  });
-
-  // Lightbox
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightboxImg');
-  const lightboxCounter = document.getElementById('lightboxCounter');
-  let currentLightboxIndex = 0;
-
-  function openLightbox(index) {
-    currentLightboxIndex = index;
-    updateLightboxImage();
-    lightbox.classList.add('open');
-  }
-
-  function closeLightbox() {
-    lightbox.classList.remove('open');
-    lightboxImg.src = '';
-    lightboxImg.alt = '';
-  }
-
-  function lightboxPrev() {
-    currentLightboxIndex = (currentLightboxIndex - 1 + currentGallery.length) % currentGallery.length;
-    updateLightboxImage();
-  }
-
-  function lightboxNext() {
-    currentLightboxIndex = (currentLightboxIndex + 1) % currentGallery.length;
-    updateLightboxImage();
-  }
-
-  function updateLightboxImage() {
-    lightboxImg.src = currentGallery[currentLightboxIndex];
-    lightboxImg.alt = currentGalleryTitle + ' — ' + (currentLightboxIndex + 1) + '. ' + UI_STRINGS[currentLang].imageWord;
-    lightboxCounter.textContent = (currentLightboxIndex + 1) + ' / ' + currentGallery.length;
-  }
-
-  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
-  document.getElementById('lightboxBackdrop').addEventListener('click', closeLightbox);
-  document.getElementById('lightboxPrev').addEventListener('click', lightboxPrev);
-  document.getElementById('lightboxNext').addEventListener('click', lightboxNext);
-
-  // Form submit
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('button[type="submit"]');
-    const originalText = btn.textContent;
-    btn.textContent = UI_STRINGS[currentLang].sending;
-    btn.disabled = true;
-
-    try {
-      const response = await fetch('https://formsubmit.co/ajax/vidor.gergely@gmail.com', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(e.target)
-      });
-
-      if (response.ok) {
-        btn.textContent = UI_STRINGS[currentLang].sent;
-        btn.style.background = '#3d6b50';
-        setTimeout(() => {
-          btn.textContent = originalText;
-          btn.style.background = '';
-          btn.disabled = false;
-          e.target.reset();
-        }, 3000);
-      } else {
-        throw new Error(UI_STRINGS[currentLang].serverError);
-      }
-    } catch (error) {
-      console.error('Form submission error:', error);
-      btn.textContent = UI_STRINGS[currentLang].submitError;
-      btn.style.background = '#6b3d3d';
-      setTimeout(() => {
-        btn.textContent = originalText;
-        btn.style.background = '';
-        btn.disabled = false;
-      }, 3000);
-    }
-  }
-</script>
+<script src="assets/js/image-manifest.js" defer></script>
+<script src="assets/js/content.js" defer></script>
+<script src="assets/js/i18n.js" defer></script>
+<script src="assets/js/main.js" defer></script>
 </body>
 </html>
