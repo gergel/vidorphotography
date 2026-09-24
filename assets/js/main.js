@@ -386,21 +386,41 @@
   var year = $('#year');
   if (year) year.textContent = String(new Date().getFullYear());
 
-  // Finom megjelenés görgetéskor (csak ha a felhasználó nem kért csökkentett mozgást).
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!reduce && 'IntersectionObserver' in window) {
-    var targets = $$('.section-head, .work, .film, .services__list, .approach__text, .about__photos, .about__text, .contact__intro, .form');
+  // Görgetéses megjelenés (egyszer fut elemenként). Csak a hajtás alatti elemek kapják meg,
+  // JavaScript nélkül minden azonnal látszik. Csökkentett mozgásnál a CSS csak áttűnést hagy meg.
+  if ('IntersectionObserver' in window) {
+    var mediaTargets = $$('.work__media, .film__media, .approach__media, .about__main, .about__detail, .quote__media');
+    var textTargets = $$('.section-head > *, .work__caption, .film__title, .film__desc, .service, .quote__text span, .approach__text > *, .about__text > *, .contact__intro > *, .form .field, .form__footer');
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) { en.target.classList.add('is-visible'); io.unobserve(en.target); }
+      // Az egyszerre beérkező elemek fentről lefelé, balról jobbra, kis késleltetéssel indulnak.
+      var visible = entries.filter(function (en) { return en.isIntersecting; }).map(function (en) { return en.target; });
+      visible.sort(function (x, y) {
+        var a = x.getBoundingClientRect(), b = y.getBoundingClientRect();
+        return (a.top - b.top) || (a.left - b.left);
       });
-    }, { rootMargin: '0px 0px -8% 0px' });
-    targets.forEach(function (el) {
-      var r = el.getBoundingClientRect();
-      if (r.top < window.innerHeight) return; // ami már látszik, azt nem animáljuk
-      el.classList.add('reveal');
+      visible.forEach(function (el, i) {
+        el.style.setProperty('--reveal-delay', Math.min(i, 6) * 70 + 'ms');
+        el.classList.add('is-visible');
+        io.unobserve(el);
+      });
+    }, { rootMargin: '0px 0px -10% 0px' });
+
+    function prepare(el, cls) {
+      if (el.getBoundingClientRect().top < window.innerHeight) return; // ami már látszik, nem animáljuk
+      el.classList.add(cls);
       io.observe(el);
+    }
+    mediaTargets.forEach(function (el) {
+      prepare(el, 'reveal-media');
+      // A feltárás után leveszi a lassú átmenetet, hogy a hover ismét gyors legyen.
+      el.addEventListener('transitionend', function done(e) {
+        if (e.target === el && e.propertyName === 'clip-path') {
+          el.classList.remove('reveal-media', 'is-visible');
+          el.removeEventListener('transitionend', done);
+        }
+      });
     });
+    textTargets.forEach(function (el) { prepare(el, 'reveal'); });
   }
 
   applyLang(lang, false);

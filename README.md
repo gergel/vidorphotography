@@ -7,7 +7,7 @@ GitHub Pages-kompatibilis, minden hivatkozás relatív.
 
 ```
 index.html                  az oldal szerkezete és a magyar alapszöveg
-assets/css/style.css        megjelenés a PDF-referencia szerint (színek, méretek a :root változókban)
+assets/css/style.css        megjelenés: sötét színrendszer, méretek és mozgás a :root változókban
 assets/js/content.js        SZERKESZTHETŐ: galériák képei, sorrend, képleírások, Vimeo-filmek
 assets/js/i18n.js           SZERKESZTHETŐ: minden szöveg magyarul és angolul, kulcsokkal
 assets/js/main.js           működés (nyelvváltás, menü, galéria, videó, űrlap)
@@ -50,8 +50,13 @@ python3 -m http.server 8000
 Rendezvény 468:620 (álló), Gasztro 800:500 — ezeket a `style.css` `.work--…` szabályai adják.
 
 **Nyitókép**: `images/hero/eskuvo-mezo.jpg` → `index.html` `hero__media` + a `<head>`-ben lévő
-`preload` sor. A 36%-os sötétítés és a menü/szöveg mögötti enyhe kontrasztkorrekció a
-`style.css` `.hero__media::after` szabályában van.
+`preload` sor. A borító a teljes képernyőt kitölti (`100svh`); a sötétítés és a szöveg mögötti
+átmenet a `style.css` `.hero__media::after` szabályában van.
+
+**Mozgás**: a `style.css` végén, „MOZGÁS” blokk. Hero-belépő (egyszer, betöltéskor),
+görgetéskor feltáruló képek és szövegek (egyszer, elemenként), gomb- és hover-visszajelzés
+(hover csak egérrel), galéria/videó nyitás-zárás, mobilmenü. Görbék: `--ease-out`,
+`--ease-in-out`. A `prefers-reduced-motion` beállításnál csak rövid áttűnés marad.
 
 **Fekete-fehér képek** (idézetes sáv, Szemlélet, kamerás részletkép): az eredeti színes
 fájlokat a CSS `is-bw` osztálya jeleníti meg szürkeárnyalatosan; az eredetik változatlanok.
