@@ -1,0 +1,25 @@
+[
+ {"id":"hero-eskuvo","size":[1280,780],"fps":30,"crossfade":0.8,"crf":27,"shots":[
+  {"image":"hero/eskuvo-mezo.jpg","duration":5,"from":[1.0,0.5,0.55],"to":[1.12,0.52,0.5],"ease":"inout"},
+  {"image":"eskuvo/eskuvo-06.jpg","duration":4,"from":[1.0,0.5,0.45],"to":[1.1,0.5,0.4],"ease":"inout"}]},
+ {"id":"hero-koncert","size":[1140,520],"fps":30,"crossfade":0.6,"crf":28,"shots":[
+  {"image":"koncert/koncert-03.jpg","duration":4,"from":[1.0,0.4,0.45],"to":[1.12,0.6,0.42],"ease":"inout"},
+  {"image":"koncert.jpg","duration":4,"from":[1.08,0.35,0.5],"to":[1.0,0.5,0.5],"ease":"inout"}]},
+ {"id":"hero-portre","size":[480,1040],"fps":30,"crossfade":0.6,"crf":28,"shots":[
+  {"image":"portraits/portre-02.jpg","duration":4,"from":[1.0,0.5,0.45],"to":[1.12,0.5,0.4],"ease":"inout"},
+  {"image":"portraits/portre-01.jpg","duration":4,"from":[1.1,0.5,0.35],"to":[1.0,0.5,0.4],"ease":"inout"}]},
+ {"id":"hero-gasztro","size":[640,460],"fps":30,"crossfade":0.6,"crf":28,"shots":[
+  {"image":"gastro/gastro-04.jpg","duration":4,"from":[1.0,0.45,0.5],"to":[1.15,0.55,0.5],"ease":"inout"},
+  {"image":"gastro/gastro-06.jpg","duration":4,"from":[1.12,0.5,0.5],"to":[1.0,0.5,0.5],"ease":"inout"}]},
+ {"id":"hero-rendezveny","size":[640,760],"fps":30,"crossfade":0.6,"crf":28,"shots":[
+  {"image":"event/rendezveny-05.jpg","duration":4,"from":[1.0,0.3,0.5],"to":[1.0,0.7,0.5],"ease":"inout"},
+  {"image":"event/rendezveny-03.jpg","duration":4,"from":[1.1,0.5,0.45],"to":[1.0,0.5,0.5],"ease":"inout"}]},
+ {"id":"mozisav","size":[1680,720],"fps":30,"crossfade":0.9,"crf":28,"shots":[
+  {"image":"visual-storytelling.jpg","duration":4.5,"from":[1.0,0.5,0.5],"to":[1.1,0.5,0.45],"ease":"inout"},
+  {"image":"film/dokumentumfilm-borito.jpg","duration":4,"from":[1.1,0.45,0.4],"to":[1.0,0.55,0.4],"ease":"inout"},
+  {"image":"weddings-video.jpg","duration":4.5,"from":[1.0,0.5,0.45],"to":[1.12,0.52,0.4],"ease":"inout"}]},
+ {"id":"rolam","size":[900,1000],"fps":30,"crf":28,"shots":[
+  {"image":"headline.jpg","duration":8,"from":[1.0,0.5,0.45],"to":[1.08,0.52,0.42],"ease":"inout","pingpong":true}]},
+ {"id":"lablec","size":[1280,480],"fps":30,"crf":30,"shots":[
+  {"image":"koncert/koncert-03.jpg","duration":10,"from":[1.0,0.3,0.5],"to":[1.15,0.7,0.45],"ease":"inout","pingpong":true}]}
+]

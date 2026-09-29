@@ -1,27 +1,33 @@
 import Header from '@/components/Header';
-import Hero from '@/components/Hero';
+import HeroWall from '@/components/HeroWall';
+import GenreMarquee from '@/components/GenreMarquee';
 import Works from '@/components/Works';
-import Statement from '@/components/Statement';
-import Films from '@/components/Films';
-import ServicesApproach from '@/components/ServicesApproach';
+import CinemaBand from '@/components/CinemaBand';
+import FilmReel from '@/components/FilmReel';
+import Services from '@/components/Services';
 import About from '@/components/About';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import GalleryHost from '@/components/GalleryHost';
+import Spill from '@/components/Spill';
 
-export default function Home() {
+export default function Page() {
   return (
     <>
+      <Spill />
       <Header />
       <main id="main">
-        <Hero />
+        <HeroWall />
+        <GenreMarquee />
         <Works />
-        <Statement />
-        <Films />
-        <ServicesApproach />
+        <CinemaBand />
+        <FilmReel />
+        <Services />
         <About />
         <Contact />
       </main>
       <Footer />
+      <GalleryHost />
     </>
   );
 }

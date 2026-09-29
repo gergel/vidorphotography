@@ -8,8 +8,7 @@
  *   2. Futtasd: npm run images   (elkészülnek a webes változatok és a manifest)
  *   3. Vegyél fel egy új sort a galéria images listájába (a sorrend = megjelenési sorrend).
  *
- * Videóháttér (hero, idézetes sáv): tedd az MP4-et a public/videos/ mappába,
- * és írd be az útvonalát a VIDEOS objektumba. Amíg null, a statikus kép látszik.
+ * Mozgó loopok: lásd lent a GENRES / LoopId részt és a tools/videos.json-t.
  */
 
 export type GalleryImage = { src: string; alt: string };
@@ -139,4 +138,54 @@ export const CONTACT = {
 export const SITE = {
   url: 'https://www.vidorphotography.com',
   name: 'VIDOR Photo & Film',
+};
+
+/* ------------------------------------------------------------------
+ * ÉLŐ VETÍTŐFAL — műfajok, színek és mozgó loopok
+ * A loopok a saját fotókból készülnek: tools/videos.json + python3 tools/build-videos.py.
+ * Valódi klip ugyanazzal a fájlnévvel (public/videos/<id>.mp4/.webm) felülírható.
+ * ------------------------------------------------------------------ */
+export type LoopId = 'hero-eskuvo' | 'hero-koncert' | 'hero-portre' | 'hero-gasztro' | 'hero-rendezveny' | 'mozisav' | 'rolam' | 'lablec';
+
+export type Genre = {
+  key: GalleryKey;
+  label: string; // rövid név (chip, szalag)
+  color: string; // műfajszín (CSS változó)
+  loop: LoopId;
+  /** a kapcsolati űrlap „Miben gondolkodsz?” értéke */
+  inquiry: string;
+};
+
+export const GENRES: Genre[] = [
+  { key: 'eskuvo', label: 'Esküvő', color: 'var(--color-sun)', loop: 'hero-eskuvo', inquiry: 'Esküvő' },
+  { key: 'koncert', label: 'Koncert', color: 'var(--color-dusk)', loop: 'hero-koncert', inquiry: 'Koncert' },
+  { key: 'portre', label: 'Portré', color: 'var(--color-violet)', loop: 'hero-portre', inquiry: 'Portré' },
+  { key: 'gastro', label: 'Gasztro', color: 'var(--color-ember)', loop: 'hero-gasztro', inquiry: 'Gasztro' },
+  { key: 'rendezveny', label: 'Rendezvény', color: 'var(--color-teal)', loop: 'hero-rendezveny', inquiry: 'Rendezvény' },
+];
+export const GENRE = Object.fromEntries(GENRES.map((g) => [g.key, g])) as Record<GalleryKey, Genre>;
+
+/** Kapcsolati űrlap műfaj-chipjei (a „Film” saját, világos színt kap). */
+export const INQUIRIES = [
+  ...GENRES.map((g) => ({ value: g.inquiry, color: g.color, loop: g.loop as LoopId })),
+  { value: 'Film', color: 'var(--color-cream)', loop: 'mozisav' as LoopId },
+];
+
+/** Szolgáltatás → műfaj (szín, loop, előre kiválasztott chip). */
+export const SERVICE_GENRE: Record<string, GalleryKey> = {
+  'Portré & Editorial': 'portre',
+  'Esküvő': 'eskuvo',
+  'Esemény & Koncert': 'koncert',
+  'Gasztro & Étterem': 'gastro',
+};
+
+export const QUOTE = 'Nem csupán azt keresem, ami történik. Azt keresem, ami megmarad belőle.';
+
+export const APPROACH = {
+  title: 'Figyelek. Kapcsolódom. Nem rendezek túl.',
+  steps: [
+    { n: '01', title: 'Kapcsolódás', text: 'A közös munka beszélgetéssel kezdődik. Megismerem a történetet és a közeget.', image: '/images/about/kamera-reszlet.jpg' },
+    { n: '02', title: 'Alkotás', text: 'Teret hagyok annak, ami természetesen történik.', image: '/images/about/forgatas-tengerpart.jpg' },
+    { n: '03', title: 'Átadás', text: 'A végeredmény letisztult, személyes és időtálló.', image: '/images/about-photo.jpg' },
+  ],
 };

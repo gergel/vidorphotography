@@ -1,19 +1,33 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   VIDOR PHOTO & FILM — design tokenek
+   VIDOR PHOTO & FILM — „Élő vetítőfal” design tokenek
    ========================================================================== */
 @theme {
-  --color-ink: #11110F;          /* sötét háttér, szöveg világos felületen */
-  --color-paper: #F1EFE9;        /* világos háttér */
-  --color-offwhite: #FAFAF7;     /* szöveg sötét felületen */
-  --color-muted: #77756E;        /* másodlagos szöveg világos felületen */
-  --color-muted-dark: #A8A59D;   /* másodlagos szöveg sötét felületen */
-  --color-line: #C9C6BD;         /* elválasztó világos felületen */
-  --color-line-dark: #3A3935;    /* elválasztó sötét felületen */
+  --color-night: #0B0A12;     /* alap háttér: a vetítőterem */
+  --color-night-2: #13111C;   /* panelek, sávok */
+  --color-night-3: #1C1927;   /* kiemelt panel */
+  --color-rule: #2B2738;      /* dekoratív vonal */
+  --color-rule-strong: #5E586E; /* űrlapmező, chip keret */
+  --color-cream: #F4F1EA;     /* fő szöveg */
+  --color-mist: #B3AEC0;      /* másodlagos szöveg (9:1 az éjszakán) */
 
-  --font-serif: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  /* műfajszínek — a színes felületen mindig night színű a betű (≥ 6:1) */
+  --color-sun: #FFB547;       /* Esküvő, fő akció */
+  --color-dusk: #FF5FA2;      /* Koncert */
+  --color-violet: #9B7BFF;    /* Portré */
+  --color-ember: #FF7A45;     /* Gasztro */
+  --color-teal: #2EE6C8;      /* Rendezvény */
+
+  /* a galéria-ablak régi nevei ugyanerre a palettára */
+  --color-ink: #0B0A12;
+  --color-offwhite: #F4F1EA;
+  --color-muted-dark: #B3AEC0;
+  --color-line-dark: #2B2738;
+
+  --font-display: var(--font-bricolage), 'Bricolage Grotesque', system-ui, sans-serif;
   --font-sans: var(--font-inter), 'Inter', system-ui, sans-serif;
+  --font-mono: var(--font-jbmono), 'JetBrains Mono', ui-monospace, monospace;
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
@@ -22,91 +36,102 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 72px;
+    scroll-padding-top: 76px;
     -webkit-text-size-adjust: 100%;
+    background: var(--color-night);
   }
   body {
-    background: var(--color-ink);
-    color: var(--color-offwhite);
+    /* a háttér a html-en van, így a fix háttérfény (z -10) a body mögött is látszik */
+    color: var(--color-cream);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
+    overflow-x: clip;
   }
   :focus-visible {
-    outline: 2px solid currentColor;
+    outline: 2px solid var(--color-sun);
     outline-offset: 3px;
   }
-  ::selection {
-    background: #FAFAF7;
-    color: #11110F;
-  }
-  html.lock {
-    overflow: hidden;
-  }
+  ::selection { background: var(--color-sun); color: var(--color-night); }
+  html.lock { overflow: hidden; }
   @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
+    html { scroll-behavior: auto; }
   }
 }
 
 @layer components {
-  /* Tartalomszélesség: max. 1296 px, 1440-en 72 px oldalmargó */
   .container-site {
     width: 100%;
     max-width: calc(1296px + 2 * clamp(20px, 5vw, 72px));
     margin-inline: auto;
     padding-inline: clamp(20px, 5vw, 72px);
   }
-  /* Szekciócímke: Inter Semibold, nagybetűs, 2.2 px betűköz */
+  /* mono címke / timecode */
   .label {
-    font-family: var(--font-sans);
+    font-family: var(--font-mono);
     font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 2.2px;
+    font-weight: 500;
+    letter-spacing: .14em;
     text-transform: uppercase;
     line-height: 1.4;
   }
   .display {
-    font-family: var(--font-serif);
-    font-weight: 500;
-    letter-spacing: -0.005em;
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -.03em;
     text-wrap: balance;
   }
-  .btn-light {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    height: 52px;
-    padding: 0 26px;
-    border-radius: 999px;
-    background: var(--color-offwhite);
-    color: var(--color-ink);
-    font-size: 13px;
-    font-weight: 600;
-    white-space: nowrap;
-    transition: background-color 200ms ease, transform 160ms var(--ease-out);
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+    min-height: 48px; padding: 0 22px; border-radius: 999px;
+    font-size: 15px; font-weight: 600; white-space: nowrap;
+    transition: transform 160ms var(--ease-out), background-color 200ms ease, color 200ms ease;
   }
-  .btn-light:hover { background: #fff; }
-  .btn-light:active { transform: scale(0.97); }
-  .btn-dark {
-    background: var(--color-ink);
-    color: var(--color-offwhite);
+  .btn:active { transform: scale(.97); }
+  .btn-sun { background: var(--color-sun); color: var(--color-night); }
+  .btn-night { background: var(--color-night); color: var(--color-cream); }
+  .btn-cream { background: var(--color-cream); color: var(--color-night); }
+  .btn-ghost { border: 1px solid rgba(244, 241, 234, .3); color: var(--color-cream); }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-ghost:hover { border-color: var(--color-cream); }
+    .btn-cream:hover { background: #fff; }
   }
-  .btn-dark:hover { background: #2a2a27; }
-  .link-underline {
-    text-decoration: underline;
-    text-decoration-color: transparent;
-    text-underline-offset: 0.35em;
-    text-decoration-thickness: 1px;
-    transition: text-decoration-color 200ms ease;
+
+  /* kis címke-chip a csempéken (sötét, tömör háttér → mindig olvasható) */
+  .tag {
+    display: inline-flex; align-items: center; gap: 8px; height: 28px; padding: 0 10px; border-radius: 4px;
+    background: rgba(11, 10, 18, .82); color: var(--color-cream);
+    font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
   }
-  .link-underline:hover { text-decoration-color: currentColor; }
-  .is-bw { filter: grayscale(1); }
+  .tag::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--dot, var(--color-sun)); }
+  .live {
+    display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 8px; border-radius: 4px;
+    background: rgba(11, 10, 18, .78); color: var(--color-cream);
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em;
+  }
+  .live::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #FF4D4D; }
 }
 
-/* Natív <dialog> nyitás/zárás animáció (a modal nem triggerhez kötött → középről) */
+/* ---------- élő fal: rámutatás (csak valódi egérnél) ---------- */
+.tile-media { transition: transform 700ms var(--ease-out); }
+.tile { transition: opacity 400ms var(--ease-out), box-shadow 300ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .wall:has(.tile:hover) .tile:not(:hover) { opacity: .55; }
+  .tile:hover .tile-media { transform: scale(1.04); }
+  .tile:hover { box-shadow: inset 0 0 0 2px var(--tc, var(--color-sun)); }
+}
+.tile:focus-visible { outline-offset: -3px; }
+
+/* ---------- filmszalag perforáció ---------- */
+.sprockets {
+  height: 14px;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 10px, rgba(244, 241, 234, .16) 10px 22px, transparent 22px 32px);
+  mask: linear-gradient(transparent 3px, #000 3px 11px, transparent 11px);
+}
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* ---------- natív <dialog> nyitás/zárás ---------- */
 dialog.vp-dialog {
   transition:
     opacity 250ms var(--ease-out),
@@ -117,7 +142,7 @@ dialog.vp-dialog {
 dialog.vp-dialog:not([open]) { opacity: 0; transform: scale(0.97); }
 @starting-style { dialog.vp-dialog[open] { opacity: 0; transform: scale(0.97); } }
 dialog.vp-dialog::backdrop {
-  background: rgba(8, 8, 7, 0.86);
+  background: rgba(6, 5, 10, .88);
   transition: opacity 250ms var(--ease-out), overlay 250ms allow-discrete, display 250ms allow-discrete;
 }
 dialog.vp-dialog:not([open])::backdrop { opacity: 0; }
@@ -127,13 +152,10 @@ dialog.vp-dialog:not([open])::backdrop { opacity: 0; }
   @starting-style { dialog.vp-dialog[open] { transform: none; } }
 }
 
-/* Hover-nagyítás csak valódi egérnél */
+.hover-zoom__img { transition: transform 700ms var(--ease-out); }
 @media (hover: hover) and (pointer: fine) {
   .hover-zoom:hover .hover-zoom__img { transform: scale(1.03); }
-  .hover-nudge:hover .hover-nudge__icon { transform: translate(2px, -2px); }
 }
-.hover-zoom__img { transition: transform 700ms var(--ease-out); }
-.hover-nudge__icon { display: inline-block; transition: transform 200ms var(--ease-out); }
 @media (prefers-reduced-motion: reduce) {
-  .hover-zoom__img { transition: none; }
+  .hover-zoom__img, .tile-media { transition: none; }
 }

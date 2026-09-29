@@ -5,10 +5,10 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { GALLERIES, type GalleryKey } from '@/lib/content';
 import { photo, ratio } from '@/lib/images';
 
-type Props = { galleryKey: GalleryKey | null; onClose: () => void };
+type Props = { galleryKey: GalleryKey | null; initialIndex?: number; onClose: () => void };
 
 /** Egyetlen párbeszédablak: képrács → nagy kép nézet. Escape zár, nyilak lapoznak, húzás mobilon. */
-export default function GalleryDialog({ galleryKey, onClose }: Props) {
+export default function GalleryDialog({ galleryKey, initialIndex = -1, onClose }: Props) {
   const ref = useRef<HTMLDialogElement>(null);
   const [index, setIndex] = useState(-1);
   const gallery = galleryKey ? GALLERIES[galleryKey] : null;
@@ -18,11 +18,11 @@ export default function GalleryDialog({ galleryKey, onClose }: Props) {
     const d = ref.current;
     if (!d) return;
     if (galleryKey && !d.open) {
-      setIndex(-1);
+      setIndex(initialIndex);
       d.showModal();
       document.documentElement.classList.add('lock');
     }
-  }, [galleryKey]);
+  }, [galleryKey, initialIndex]);
 
   // Fókusz: rács nézetben az utoljára nézett (vagy első) képre, nagy nézetben a „következő” gombra.
   const lastIndex = useRef(0);

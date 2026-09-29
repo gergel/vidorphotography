@@ -1,12 +1,12 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { CONTACT } from '@/lib/content';
+import { CONTACT, INQUIRIES } from '@/lib/content';
+import { useSite } from '@/lib/site';
 
 type Status = { kind: 'idle' | 'sending' | 'success' | 'error' };
 type Errors = Partial<Record<'name' | 'email' | 'message', string>>;
 
-const OPTIONS = ['Esküvő', 'Portré', 'Film', 'Esemény'];
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // Tartalék: ha a szerveren nincs beállítva Resend, a böngésző a (már aktivált) FormSubmit-re küld.
 const FORMSUBMIT = `https://formsubmit.co/ajax/${CONTACT.email}`;
@@ -34,6 +34,7 @@ async function sendViaFormSubmit(d: FormData) {
 }
 
 export default function ContactForm() {
+  const { inquiry, setInquiry, setAccent } = useSite();
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
   const [errors, setErrors] = useState<Errors>({});
   const statusRef = useRef<HTMLDivElement>(null);
@@ -69,68 +70,81 @@ export default function ContactForm() {
     requestAnimationFrame(() => statusRef.current?.focus());
   }
 
-  const field = 'block w-full rounded-none border-0 border-b border-line-dark bg-transparent px-0 pb-[11px] pt-0 text-[15px] leading-5 text-offwhite placeholder:text-muted-dark transition-colors duration-200 hover:border-[#6E6C66] focus:border-offwhite focus:shadow-[0_1px_0_0_#FAFAF7] focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-[6px] focus-visible:outline-offwhite max-md:pt-3 aria-[invalid=true]:border-[#E0A197]';
-  const label = 'label mb-2 block text-[10px] tracking-[1.5px] text-muted-dark';
-  const err = 'mt-1.5 text-[13px] text-[#F0B1A6]';
+  const field = 'block w-full rounded-[6px] border-2 border-night/25 bg-night/[0.06] px-4 py-3 text-[16px] text-night placeholder:text-night/55 transition-colors hover:border-night/50 focus:border-night focus:bg-night/[0.1] focus:outline-none aria-[invalid=true]:border-[#8A1C12]';
+  const label = 'mb-2 block font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-night/75';
+  const err = 'mt-1.5 text-[14px] font-medium text-[#6E1209]';
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} noValidate className="max-w-[676px]" aria-busy={status.kind === 'sending'}>
+    <form ref={formRef} onSubmit={onSubmit} noValidate className="text-night" aria-busy={status.kind === 'sending'}>
       <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden>
         <label htmlFor="f-honey">Ne töltsd ki</label>
         <input id="f-honey" name="_honey" tabIndex={-1} autoComplete="off" />
       </div>
 
-      <div className="mb-8">
-        <label htmlFor="f-name" className={label}>Név <span className="sr-only">(kötelező)</span></label>
-        <input id="f-name" name="name" autoComplete="name" placeholder="Írj ide..." className={field} aria-invalid={!!errors.name} aria-describedby={errors.name ? 'f-name-err' : undefined} />
-        {errors.name && <p id="f-name-err" className={err}>{errors.name}</p>}
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label htmlFor="f-name" className={label}>Név <span className="sr-only">(kötelező)</span></label>
+          <input id="f-name" name="name" autoComplete="name" className={field} aria-invalid={!!errors.name} aria-describedby={errors.name ? 'f-name-err' : undefined} />
+          {errors.name && <p id="f-name-err" className={err}>{errors.name}</p>}
+        </div>
+        <div>
+          <label htmlFor="f-email" className={label}>E-mail <span className="sr-only">(kötelező)</span></label>
+          <input id="f-email" name="email" type="email" inputMode="email" autoComplete="email" className={field} aria-invalid={!!errors.email} aria-describedby={errors.email ? 'f-email-err' : undefined} />
+          {errors.email && <p id="f-email-err" className={err}>{errors.email}</p>}
+        </div>
       </div>
-      <div className="mb-8">
-        <label htmlFor="f-email" className={label}>E-mail <span className="sr-only">(kötelező)</span></label>
-        <input id="f-email" name="email" type="email" inputMode="email" autoComplete="email" placeholder="Írj ide..." className={field} aria-invalid={!!errors.email} aria-describedby={errors.email ? 'f-email-err' : undefined} />
-        {errors.email && <p id="f-email-err" className={err}>{errors.email}</p>}
-      </div>
-      <div className="mb-8">
-        <label htmlFor="f-type" className={label}>Miben gondolkodsz?</label>
-        <select id="f-type" name="type" defaultValue="" className={`${field} cursor-pointer appearance-none bg-[url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='10'%20height='6'%3E%3Cpath%20d='M1%201l4%204%204-4'%20fill='none'%20stroke='%23A8A59D'%20stroke-width='1.2'/%3E%3C/svg%3E")] bg-[position:right_2px_center] bg-no-repeat pr-7 [&>option]:bg-ink`}>
-          <option value="">Esküvő / Portré / Film / Esemény</option>
-          {OPTIONS.map((o) => (
-            <option key={o} value={o}>{o}</option>
-          ))}
-        </select>
-      </div>
-      <div className="mb-8">
+
+      <fieldset className="mt-6">
+        <legend className={label}>Miben gondolkodsz?</legend>
+        <div className="flex flex-wrap gap-2">
+          {INQUIRIES.map((o) => {
+            const on = inquiry === o.value;
+            return (
+              <label key={o.value} className={`relative inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border-2 px-4 text-[14px] font-semibold transition-colors has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-night ${on ? 'border-night bg-night text-cream' : 'border-night/30 hover:border-night'}`}>
+                <input
+                  type="radio"
+                  name="type"
+                  value={o.value}
+                  checked={on}
+                  onChange={() => {
+                    setInquiry(o.value);
+                    const key = o.value === 'Film' ? 'film' : (['eskuvo', 'koncert', 'portre', 'gastro', 'rendezveny'] as const)[['Esküvő', 'Koncert', 'Portré', 'Gasztro', 'Rendezvény'].indexOf(o.value)];
+                    if (key) setAccent(key);
+                  }}
+                  className="sr-only"
+                />
+                {on && <span aria-hidden>✓</span>}
+                {o.value}
+              </label>
+            );
+          })}
+        </div>
+      </fieldset>
+
+      <div className="mt-6">
         <label htmlFor="f-message" className={label}>Üzenet <span className="sr-only">(kötelező)</span></label>
-        <textarea
-          id="f-message"
-          name="message"
-          rows={1}
-          placeholder="Írj ide..."
-          className={`${field} min-h-8 resize-none overflow-hidden max-md:min-h-11`}
-          onInput={(e) => {
-            const t = e.currentTarget;
-            t.style.height = 'auto';
-            t.style.height = `${t.scrollHeight + 1}px`;
-          }}
-          aria-invalid={!!errors.message}
-          aria-describedby={errors.message ? 'f-message-err' : undefined}
-        />
+        <textarea id="f-message" name="message" rows={4} className={`${field} resize-y`} aria-invalid={!!errors.message} aria-describedby={errors.message ? 'f-message-err' : undefined} />
         {errors.message && <p id="f-message-err" className={err}>{errors.message}</p>}
       </div>
 
-      <div className="flex flex-col items-start gap-4 md:flex-row md:items-center md:gap-7">
-        <button type="submit" className="btn-light" disabled={status.kind === 'sending'}>
+      <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-6">
+        <button type="submit" className="btn btn-night !min-h-14 !px-7 !text-[16px] max-sm:w-full" disabled={status.kind === 'sending'}>
           {status.kind === 'sending' ? 'Küldés…' : 'Üzenet küldése'} <span aria-hidden>→</span>
         </button>
-        <p className="max-w-[340px] text-xs leading-normal text-muted-dark">Az üzeneted e-mailben érkezik meg hozzám.</p>
+        <p className="text-[13px] text-night/75">Az üzeneted e-mailben érkezik meg hozzám.</p>
       </div>
 
       <div ref={statusRef} tabIndex={-1} role="status" aria-live="polite" className="mt-5 outline-none">
-        {status.kind === 'success' && <p className="border-t border-[#BFD9B6] pt-3 text-[15px] text-[#BFD9B6]">Köszönöm, megkaptam az üzeneted! Hamarosan válaszolok.</p>}
+        {status.kind === 'success' && (
+          <p className="flex items-center gap-3 rounded-[6px] bg-night px-4 py-3 text-[15px] text-cream">
+            <span aria-hidden className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-teal text-night">✓</span>
+            Köszönöm, megkaptam az üzeneted! Hamarosan válaszolok.
+          </p>
+        )}
         {status.kind === 'error' && (
-          <p className="border-t border-[#F0B1A6] pt-3 text-[15px] text-[#F0B1A6]">
+          <p className="rounded-[6px] bg-night px-4 py-3 text-[15px] text-cream">
             Az üzenetet most nem sikerült elküldeni. A beírt szöveg megmaradt — próbáld újra, vagy írj közvetlenül:{' '}
-            <a className="text-offwhite underline underline-offset-4" href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+            <a className="font-semibold text-sun underline underline-offset-4" href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
           </p>
         )}
       </div>

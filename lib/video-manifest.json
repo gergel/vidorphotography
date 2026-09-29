@@ -1,0 +1,58 @@
+{
+ "hero-eskuvo": {
+  "w": 1280,
+  "h": 780,
+  "mp4": "/videos/hero-eskuvo.mp4",
+  "webm": "/videos/hero-eskuvo.webm",
+  "poster": "/videos/hero-eskuvo-poster.webp"
+ },
+ "hero-koncert": {
+  "w": 1140,
+  "h": 520,
+  "mp4": "/videos/hero-koncert.mp4",
+  "webm": "/videos/hero-koncert.webm",
+  "poster": "/videos/hero-koncert-poster.webp"
+ },
+ "hero-portre": {
+  "w": 480,
+  "h": 1040,
+  "mp4": "/videos/hero-portre.mp4",
+  "webm": "/videos/hero-portre.webm",
+  "poster": "/videos/hero-portre-poster.webp"
+ },
+ "hero-gasztro": {
+  "w": 640,
+  "h": 460,
+  "mp4": "/videos/hero-gasztro.mp4",
+  "webm": "/videos/hero-gasztro.webm",
+  "poster": "/videos/hero-gasztro-poster.webp"
+ },
+ "hero-rendezveny": {
+  "w": 640,
+  "h": 760,
+  "mp4": "/videos/hero-rendezveny.mp4",
+  "webm": "/videos/hero-rendezveny.webm",
+  "poster": "/videos/hero-rendezveny-poster.webp"
+ },
+ "mozisav": {
+  "w": 1680,
+  "h": 720,
+  "mp4": "/videos/mozisav.mp4",
+  "webm": "/videos/mozisav.webm",
+  "poster": "/videos/mozisav-poster.webp"
+ },
+ "rolam": {
+  "w": 900,
+  "h": 1000,
+  "mp4": "/videos/rolam.mp4",
+  "webm": "/videos/rolam.webm",
+  "poster": "/videos/rolam-poster.webp"
+ },
+ "lablec": {
+  "w": 1280,
+  "h": 480,
+  "mp4": "/videos/lablec.mp4",
+  "webm": "/videos/lablec.webm",
+  "poster": "/videos/lablec-poster.webp"
+ }
+}

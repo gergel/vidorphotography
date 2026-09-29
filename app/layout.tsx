@@ -1,18 +1,25 @@
 import type { Metadata, Viewport } from 'next';
-import { Cormorant_Garamond, Inter } from 'next/font/google';
+import { Bricolage_Grotesque, Inter, JetBrains_Mono } from 'next/font/google';
 import { SITE } from '@/lib/content';
 import Providers from '@/components/Providers';
 import './globals.css';
 
-const cormorant = Cormorant_Garamond({
+const bricolage = Bricolage_Grotesque({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['600', '800'],
+  variable: '--font-bricolage',
+  display: 'swap',
+});
+const mono = JetBrains_Mono({
   subsets: ['latin', 'latin-ext'],
   weight: ['500'],
-  variable: '--font-cormorant',
+  variable: '--font-jbmono',
   display: 'swap',
+  preload: false,
 });
 const inter = Inter({
   subsets: ['latin', 'latin-ext'],
-  weight: ['400', '600'],
+  weight: ['400', '500', '600'],
   variable: '--font-inter',
   display: 'swap',
 });
@@ -36,21 +43,21 @@ export const metadata: Metadata = {
   },
   twitter: { card: 'summary_large_image' },
   icons: {
-    icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2311110F'/%3E%3Ctext x='16' y='22.5' font-family='Arial,sans-serif' font-weight='700' font-size='18' text-anchor='middle' fill='%23FAFAF7'%3EV%3C/text%3E%3C/svg%3E",
+    icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B0A12'/%3E%3Ctext x='16' y='22.5' font-family='Arial,sans-serif' font-weight='700' font-size='18' text-anchor='middle' fill='%23FFB547'%3EV%3C/text%3E%3C/svg%3E",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: '#11110F',
+  themeColor: '#0B0A12',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="hu" className={`${cormorant.variable} ${inter.variable}`}>
+    <html lang="hu" className={`${bricolage.variable} ${inter.variable} ${mono.variable}`}>
       <body>
         <a
           href="#main"
-          className="absolute left-3 -top-16 z-[100] rounded-full bg-offwhite px-4 py-3 text-sm font-semibold text-ink focus:top-3"
+          className="absolute left-3 -top-16 z-[100] rounded-full bg-sun px-4 py-3 text-sm font-semibold text-night focus:top-3"
         >
           Ugrás a tartalomra
         </a>

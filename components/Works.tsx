@@ -1,92 +1,126 @@
 'use client';
 
 import Image from 'next/image';
-import { useCallback, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
-import { WORKS, type GalleryKey, type Work } from '@/lib/content';
+import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
+import { useState } from 'react';
+import LoopVideo from './LoopVideo';
+import { GALLERIES, GENRE, GENRES, WORKS, type GalleryKey } from '@/lib/content';
 import { photo } from '@/lib/images';
-import { EASE_OUT, Reveal } from './Reveal';
-import GalleryDialog from './GalleryDialog';
+import { useSite } from '@/lib/site';
+import { useAccent } from './Spill';
 
-// 8 oszlopos rács (1440 px-en 28 px köz): széles 5, keskeny 3 oszlop; a képarányok a designból.
-const LAYOUT: Record<Work['layout'], { box: string; ratio: string; sizes: string }> = {
-  wide: { box: 'md:col-span-5', ratio: 'aspect-[800/610]', sizes: '(max-width: 767px) 90vw, (min-width: 1440px) 800px, 56vw' },
-  landscape: { box: 'md:col-span-5', ratio: 'aspect-[800/500]', sizes: '(max-width: 767px) 90vw, (min-width: 1440px) 800px, 56vw' },
-  tall: { box: 'md:col-span-3', ratio: 'aspect-[468/620]', sizes: '(max-width: 767px) 90vw, (min-width: 1440px) 468px, 33vw' },
-};
+const EASE = [0.23, 1, 0.32, 1] as const;
+// „Mind” nézet: különböző méretű csempék (12 oszlopos rácson)
+const SPANS = ['md:col-span-7 md:row-span-2', 'md:col-span-5 md:row-span-3', 'md:col-span-7 md:row-span-2', 'md:col-span-5 md:row-span-3', 'md:col-span-7 md:row-span-2'];
+const ORDER: GalleryKey[] = ['eskuvo', 'koncert', 'rendezveny', 'portre', 'gastro'];
+
+type Item = { id: string; gallery: GalleryKey; index: number; src: string; alt: string; title?: string; description?: string; count?: number; position?: string };
 
 export default function Works() {
-  const [open, setOpen] = useState<GalleryKey | null>(null);
-  const trigger = useRef<HTMLButtonElement | null>(null);
-  const close = useCallback(() => {
-    setOpen(null);
-    trigger.current?.focus();
-  }, []);
+  const { openGallery, setAccent } = useSite();
+  const [filter, setFilter] = useState<GalleryKey | 'mind'>('mind');
+  const [hovered, setHovered] = useState<string | null>(null);
+  const ref = useAccent(filter === 'mind' ? 'koncert' : filter);
+
+  const items: Item[] =
+    filter === 'mind'
+      ? ORDER.map((k) => {
+          const w = WORKS.find((x) => x.gallery === k)!;
+          return { id: `w-${k}`, gallery: k, index: -1, src: w.cover, alt: w.alt, title: w.title, description: w.description, count: GALLERIES[k].images.length, position: w.position };
+        })
+      : GALLERIES[filter].images.slice(0, 5).map((img, i) => ({ id: `${filter}-${i}`, gallery: filter, index: i, src: img.src, alt: img.alt }));
 
   return (
-    <section id="munkak" aria-labelledby="works-title" className="bg-paper py-[72px] text-ink md:py-[120px]">
+    <section ref={ref} id="munkak" aria-labelledby="works-title" className="py-20 md:py-28">
       <div className="container-site">
-        <Reveal as="header" className="mb-10 md:mb-[76px] md:flex md:items-end md:justify-between md:gap-8">
+        <header className="mb-8 flex flex-col gap-6 md:mb-10 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="label mb-3 text-muted">Válogatott munkák — 01</p>
-            <h2 id="works-title" className="display text-[clamp(40px,4.45vw,64px)] leading-[1.02]">
-              Képek, amelyek tovább élnek <span className="lg:block">a pillanatnál.</span>
-            </h2>
+            <p className="label mb-3 text-mist">Válogatott munkák — válassz műfajt</p>
+            <h2 id="works-title" className="display text-[clamp(44px,6vw,88px)] leading-[0.92]">Munkák</h2>
           </div>
-          <p className="mt-5 max-w-[300px] text-base leading-[1.625] text-muted md:mr-[30px] md:mt-0 md:shrink-0">
-            Emberek, helyzetek és részletek — őszintén, érzékenyen, felesleges pózok nélkül.
-          </p>
-        </Reveal>
-
-        <ul className="grid grid-cols-1 gap-y-11 md:grid-cols-8 md:items-start md:gap-x-[22px] md:gap-y-[72px] xl:gap-x-7">
-          {WORKS.map((w, i) => {
-            const l = LAYOUT[w.layout];
-            const p = photo(w.cover, 1600);
-            return (
-              <motion.li
-                key={w.title}
-                className={l.box}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '0px 0px -10% 0px' }}
-                transition={{ duration: 0.8, ease: EASE_OUT, delay: (i % 2) * 0.08 }}
-              >
+          <div role="group" aria-label="Szűrés műfaj szerint" className="no-scrollbar -mx-5 flex gap-2 overflow-x-auto px-5 lg:mx-0 lg:flex-wrap lg:px-0">
+            {[{ key: 'mind' as const, label: 'Mind', color: 'var(--color-cream)' }, ...GENRES].map((g) => {
+              const on = filter === g.key;
+              return (
                 <button
+                  key={g.key}
                   type="button"
-                  className="hover-zoom hover-nudge group block w-full text-left"
-                  onClick={(e) => {
-                    trigger.current = e.currentTarget;
-                    setOpen(w.gallery);
+                  aria-pressed={on}
+                  onClick={() => {
+                    setFilter(g.key);
+                    if (g.key !== 'mind') setAccent(g.key);
                   }}
-                  aria-haspopup="dialog"
+                  className={`inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full border px-4 text-[14px] font-medium transition-colors ${on ? 'border-transparent text-night' : 'border-rule-strong text-cream hover:border-cream'}`}
+                  style={on ? { background: g.color } : undefined}
                 >
-                  <span className={`block overflow-hidden bg-[#DDD9D0] ${l.ratio}`}>
-                    {/* enyhe scale-up megjelenéskor (a hover-nagyítás a belső képen fut) */}
-                    <motion.span
-                      className="block h-full w-full"
-                      initial={{ scale: 1.08 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ once: true, margin: '0px 0px -10% 0px' }}
-                      transition={{ duration: 1.4, ease: EASE_OUT }}
-                    >
-                      <Image {...p} alt={w.alt} sizes={l.sizes} className="hover-zoom__img h-full w-full object-cover" style={{ objectPosition: w.position }} />
-                    </motion.span>
-                  </span>
-                  <span className="flex flex-wrap items-start justify-between gap-x-4 pt-2.5">
-                    <span className="display text-[clamp(26px,2.1vw,30px)] leading-[1.3] group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4">
-                      {w.title}
-                    </span>
-                    <span className="whitespace-nowrap pt-[5px] text-xs text-muted">
-                      {w.description} <span className="hover-nudge__icon" aria-hidden>↗</span>
-                    </span>
-                  </span>
+                  {g.key !== 'mind' && <span aria-hidden className="h-2 w-2 rounded-full" style={{ background: on ? 'var(--color-night)' : g.color }} />}
+                  {g.label}
                 </button>
-              </motion.li>
-            );
-          })}
-        </ul>
+              );
+            })}
+          </div>
+        </header>
+
+        <LayoutGroup>
+          <motion.ul layout className="grid auto-rows-[minmax(0,1fr)] gap-2.5 md:auto-rows-[190px] md:grid-cols-12">
+            <AnimatePresence mode="popLayout" initial={false}>
+              {items.map((it, i) => {
+                const g = GENRE[it.gallery];
+                const span = filter === 'mind' ? SPANS[i] : i === 0 ? 'md:col-span-6 md:row-span-4' : 'md:col-span-3 md:row-span-2';
+                const p = photo(it.src, 1600);
+                const work = filter === 'mind';
+                return (
+                  <motion.li
+                    key={it.id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.96 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.96 }}
+                    transition={{ duration: 0.5, ease: EASE }}
+                    className={`${span} min-h-[260px] md:min-h-0`}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => openGallery(it.gallery, it.index)}
+                      onMouseEnter={() => {
+                        setHovered(it.id);
+                        setAccent(it.gallery);
+                      }}
+                      onMouseLeave={() => setHovered(null)}
+                      onFocus={() => setAccent(it.gallery)}
+                      className="tile group flex h-full w-full flex-col overflow-hidden rounded-[6px] bg-night-2 text-left"
+                      style={{ ['--tc' as string]: g.color }}
+                      aria-label={work ? `${it.title} galéria megnyitása (${it.count} fotó)` : `${it.alt} — nagy nézet`}
+                    >
+                      <span className="relative block min-h-0 flex-1 overflow-hidden">
+                        <Image src={p.src} alt="" fill sizes="(min-width:768px) 50vw, 100vw" className="tile-media object-cover" style={{ objectPosition: it.position ?? '50% 45%' }} />
+                        {work && <LoopVideo loop={g.loop} hoverPlay active={hovered === it.id} position={it.position} imgClassName="tile-media" className="opacity-0 transition-opacity duration-300 group-hover:opacity-100" />}
+                        {work && hovered === it.id && <span className="live absolute right-3 top-3">LOOP</span>}
+                      </span>
+                      {work && (
+                        <span className="flex items-end justify-between gap-4 border-t-2 px-4 py-3" style={{ borderColor: g.color }}>
+                          <span>
+                            <span className="display block text-[22px] leading-tight">{it.title}</span>
+                            <span className="block text-[13px] text-mist">{it.description}</span>
+                          </span>
+                          <span className="label shrink-0 text-[11px] text-mist">{it.count} fotó →</span>
+                        </span>
+                      )}
+                    </button>
+                  </motion.li>
+                );
+              })}
+            </AnimatePresence>
+          </motion.ul>
+        </LayoutGroup>
+        {filter !== 'mind' && (
+          <div className="mt-6">
+            <button type="button" onClick={() => openGallery(filter)} className="btn btn-ghost">
+              Mind a {GALLERIES[filter].images.length} fotó — {GALLERIES[filter].title} <span aria-hidden>→</span>
+            </button>
+          </div>
+        )}
       </div>
-      <GalleryDialog galleryKey={open} onClose={close} />
     </section>
   );
 }
