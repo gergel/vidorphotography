@@ -34,7 +34,7 @@ async function sendViaFormSubmit(d: FormData) {
 }
 
 export default function ContactForm() {
-  const { inquiry, setInquiry, setAccent } = useSite();
+  const { inquiry, setInquiry } = useSite();
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
   const [errors, setErrors] = useState<Errors>({});
   const statusRef = useRef<HTMLDivElement>(null);
@@ -70,12 +70,12 @@ export default function ContactForm() {
     requestAnimationFrame(() => statusRef.current?.focus());
   }
 
-  const field = 'block w-full rounded-[6px] border-2 border-night/25 bg-night/[0.06] px-4 py-3 text-[16px] text-night placeholder:text-night/55 transition-colors hover:border-night/50 focus:border-night focus:bg-night/[0.1] focus:outline-none aria-[invalid=true]:border-[#8A1C12]';
-  const label = 'mb-2 block font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-night/75';
-  const err = 'mt-1.5 text-[14px] font-medium text-[#6E1209]';
+  const field = 'block w-full rounded-[12px] border border-rule-strong bg-night px-4 py-3 text-[17px] text-cream transition-colors hover:border-mist focus:border-cream focus:outline-none aria-[invalid=true]:border-[#FF6961]';
+  const label = 'mb-2 block text-[13px] font-semibold text-mist';
+  const err = 'mt-1.5 text-[14px] text-[#FF8A80]';
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} noValidate className="text-night" aria-busy={status.kind === 'sending'}>
+    <form ref={formRef} onSubmit={onSubmit} noValidate className="text-cream" aria-busy={status.kind === 'sending'}>
       <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden>
         <label htmlFor="f-honey">Ne töltsd ki</label>
         <input id="f-honey" name="_honey" tabIndex={-1} autoComplete="off" />
@@ -100,20 +100,15 @@ export default function ContactForm() {
           {INQUIRIES.map((o) => {
             const on = inquiry === o.value;
             return (
-              <label key={o.value} className={`relative inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border-2 px-4 text-[14px] font-semibold transition-colors has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-night ${on ? 'border-night bg-night text-cream' : 'border-night/30 hover:border-night'}`}>
+              <label key={o.value} className={`relative inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border px-4 text-[14px] font-medium transition-colors has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-cream ${on ? 'border-cream bg-cream text-night' : 'border-rule-strong text-cream hover:border-mist'}`}>
                 <input
                   type="radio"
                   name="type"
                   value={o.value}
                   checked={on}
-                  onChange={() => {
-                    setInquiry(o.value);
-                    const key = o.value === 'Film' ? 'film' : (['eskuvo', 'koncert', 'portre', 'gastro', 'rendezveny'] as const)[['Esküvő', 'Koncert', 'Portré', 'Gasztro', 'Rendezvény'].indexOf(o.value)];
-                    if (key) setAccent(key);
-                  }}
+                  onChange={() => setInquiry(o.value)}
                   className="sr-only"
                 />
-                {on && <span aria-hidden>✓</span>}
                 {o.value}
               </label>
             );
@@ -128,23 +123,23 @@ export default function ContactForm() {
       </div>
 
       <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-6">
-        <button type="submit" className="btn btn-night !min-h-14 !px-7 !text-[16px] max-sm:w-full" disabled={status.kind === 'sending'}>
+        <button type="submit" className="btn btn-cream !min-h-12 !px-7 !text-[16px] max-sm:w-full" disabled={status.kind === 'sending'}>
           {status.kind === 'sending' ? 'Küldés…' : 'Üzenet küldése'} <span aria-hidden>→</span>
         </button>
-        <p className="text-[13px] text-night/75">Az üzeneted e-mailben érkezik meg hozzám.</p>
+        <p className="text-[14px] text-mist">Az üzeneted e-mailben érkezik meg hozzám.</p>
       </div>
 
       <div ref={statusRef} tabIndex={-1} role="status" aria-live="polite" className="mt-5 outline-none">
         {status.kind === 'success' && (
-          <p className="flex items-center gap-3 rounded-[6px] bg-night px-4 py-3 text-[15px] text-cream">
-            <span aria-hidden className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-teal text-night">✓</span>
+          <p className="flex items-center gap-3 rounded-[12px] bg-night px-4 py-3 text-[15px] text-cream">
+            <span aria-hidden className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-cream text-night">✓</span>
             Köszönöm, megkaptam az üzeneted! Hamarosan válaszolok.
           </p>
         )}
         {status.kind === 'error' && (
-          <p className="rounded-[6px] bg-night px-4 py-3 text-[15px] text-cream">
+          <p className="rounded-[12px] bg-night px-4 py-3 text-[15px] text-cream">
             Az üzenetet most nem sikerült elküldeni. A beírt szöveg megmaradt — próbáld újra, vagy írj közvetlenül:{' '}
-            <a className="font-semibold text-sun underline underline-offset-4" href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+            <a className="font-semibold text-cream underline underline-offset-4" href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
           </p>
         )}
       </div>

@@ -29,14 +29,14 @@ Környezeti változók (Railway → Variables), mind opcionális:
 ## Felépítés
 
 ```
-app/layout.tsx            betűtípusok (Bricolage Grotesque, Inter, JetBrains Mono), SEO és Open Graph
+app/layout.tsx            betűtípus (Inter), SEO és Open Graph
 app/page.tsx              a szekciók sorrendje
 app/globals.css           Tailwind + design tokenek (színek, betűk, görbék)
 app/api/contact/route.ts  kapcsolati űrlap szerveroldala (Resend)
-components/               Header, HeroWall, GenreMarquee, Works, CinemaBand, FilmReel, Services,
+components/               Header, HeroSequence, WorksRail (+Intro), CinemaBand, FilmReel, Services,
                           About, Contact (+ContactForm), Footer, GalleryDialog/GalleryHost,
-                          LoopVideo (videókeret), Spill (háttérfény)
-lib/site.tsx              közös állapot: mozgás szüneteltetése, háttérfény, űrlap-műfaj, galéria
+                          LoopVideo (videókeret), ScrollWords (görgetésre kivilágosodó szöveg)
+lib/site.tsx              közös állapot: mozgás szüneteltetése, űrlap-műfaj, galéria
 lib/video-budget.ts       egyszerre legfeljebb 4 (mobilon 2) loop fut
 public/videos/            loopok (MP4 + WebM + poszter) — tools/build-videos.py készíti
 docs/                     design terv (PDF) és a prompt, ami alapján az oldal készült
@@ -81,10 +81,14 @@ Sikert csak a szolgáltatás tényleges sikeres válasza után jelez; hibánál 
 
 ## Mozgás
 
-„Élő vetítőfal” (lásd `docs/VIDOR-design-terv-elo-vetitofal.pdf` és `docs/PROMPT-elo-vetitofal.md`):
-vetítős belépő a falon, csempénkénti finom térhatás, görgetésre gyorsuló műfaj-szalag, szűrhető
-mozaik, kinyíló mozisáv szavanként kivilágosodó idézettel, húzható filmtekercs mágneses
-lejátszógombbal, színnel töltődő szolgáltatás-sorok, vágóasztal-idővonal, műfajszínű kapcsolati lap.
-Egyszerre legfeljebb 4 videó fut (mobilon 2); ami nem látszik, megáll. A fejléc „Mozgás” gombja
-mindent megállít (a választást megjegyzi). Csökkentett mozgásnál és adatkímélő módban nincs videó,
-csak állókép és áttűnés.
+Letisztult, görgetésre épülő oldal (lásd `docs/PROMPT-elo-vetitofal.md`, 2. változat). Fekete-fehér felület,
+a színt a képek adják. Görgetés közben:
+- a nyitó teljes képernyős videó a falon lévő helyére zsugorodik, és köré kirajzolódik a videófal;
+- a nagy mondatok szavanként kivilágosodnak;
+- a munkák vízszintesen úsznak át;
+- a mozisáv szélesre nyílik;
+- a szemlélet lépései váltják egymást.
+
+Egyszerre legfeljebb 4 videó fut (mobilon 2), ami nem látszik, megáll. A fejléc „Mozgás” gombja mindent
+megállít (a választást megjegyzi). Csökkentett mozgásnál nincs rögzített jelenet és nincs videó,
+csak állókép és áttűnés. Mobilon a rögzített jelenetek helyett egyszerű, húzható sorok vannak.

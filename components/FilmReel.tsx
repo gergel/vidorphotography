@@ -5,7 +5,6 @@ import { motion, useSpring } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { FILMS, type Film } from '@/lib/content';
 import { photo } from '@/lib/images';
-import { useAccent } from './Spill';
 
 function Card({ f, onOpen }: { f: Film; onOpen: (f: Film, el: HTMLElement) => void }) {
   const x = useSpring(0, { stiffness: 250, damping: 20 });
@@ -32,22 +31,21 @@ function Card({ f, onOpen }: { f: Film; onOpen: (f: Film, el: HTMLElement) => vo
           x.set(0);
           y.set(0);
         }}
-        className="tile group block overflow-hidden rounded-[6px] bg-night-2"
-        style={{ ['--tc' as string]: 'var(--color-sun)' }}
-        draggable={false}
+        className="tile group block overflow-hidden rounded-[18px] bg-night-2"
+                draggable={false}
       >
-        <span className="relative block aspect-video overflow-hidden">
+        <span className="relative block aspect-video overflow-hidden rounded-[18px]">
           <Image src={p.src} alt="" fill sizes="(min-width:1024px) 46vw, 82vw" draggable={false} className="tile-media object-cover" style={{ objectPosition: f.position }} />
-          <motion.span style={{ x, y }} aria-hidden className="absolute left-1/2 top-1/2 -ml-10 -mt-10 grid h-20 w-20 place-items-center rounded-full bg-cream/95 shadow-[0_10px_40px_rgba(0,0,0,.4)]">
+          <motion.span style={{ x, y }} aria-hidden className="absolute left-1/2 top-1/2 -ml-10 -mt-10 grid h-20 w-20 place-items-center rounded-full bg-cream/90 backdrop-blur">
             <span className="ml-1.5 h-0 w-0 border-y-[13px] border-l-[21px] border-y-transparent border-l-night" />
           </motion.span>
         </span>
-        <span className="flex items-end justify-between gap-4 border-t border-rule px-5 py-4">
+        <span className="flex items-end justify-between gap-4 px-6 py-5">
           <span>
-            <span className="display block text-[clamp(22px,2vw,30px)] leading-tight">{f.title}</span>
-            <span className="block text-[14px] text-mist">{f.description}</span>
+            <span className="display block text-[clamp(22px,2vw,28px)] leading-tight">{f.title}</span>
+            <span className="mt-1 block text-[15px] text-mist">{f.description}</span>
           </span>
-          <span className="label shrink-0 rounded border border-sun/50 px-2 py-1 text-[11px] text-sun">▸ {f.duration}</span>
+          <span className="shrink-0 text-[15px] text-mist">{f.duration}</span>
         </span>
       </a>
     </li>
@@ -56,7 +54,6 @@ function Card({ f, onOpen }: { f: Film; onOpen: (f: Film, el: HTMLElement) => vo
 
 /** Filmek: vízszintesen húzható filmszalag; a Vimeo csak kattintásra töltődik be, bezáráskor leáll. */
 export default function FilmReel() {
-  const ref = useAccent('film');
   const strip = useRef<HTMLUListElement>(null);
   const [film, setFilm] = useState<Film | null>(null);
   const [current, setCurrent] = useState(0);
@@ -87,23 +84,22 @@ export default function FilmReel() {
   const go = (dir: number) => strip.current?.scrollBy({ left: dir * (cardWidth() + 16), behavior: 'smooth' });
 
   return (
-    <section ref={ref} id="filmek" aria-labelledby="films-title" className="py-20 md:py-28">
-      <div className="container-site mb-8 flex items-end justify-between gap-6">
+    <section id="filmek" aria-labelledby="films-title" className="py-20 md:py-28">
+      <div className="container-site mb-8 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
         <div>
-          <p className="label mb-3 text-mist">3 film · Vimeo</p>
-          <h2 id="films-title" className="display text-[clamp(44px,6vw,88px)] leading-[0.92]">Filmek</h2>
+          <p className="label mb-2">Filmek</p>
+          <h2 id="films-title" className="display text-[clamp(40px,5.2vw,80px)] leading-[1.02]">A kép mozdul. A történet marad.</h2>
         </div>
         <div className="flex items-center gap-3">
-          <span className="label text-mist" aria-live="polite">
+          <span className="text-[14px] tabular-nums text-mist" aria-live="polite">
             {String(current + 1).padStart(2, '0')} / {String(FILMS.length).padStart(2, '0')}
           </span>
-          <button type="button" aria-label="Előző film" onClick={() => go(-1)} className="grid h-11 w-11 place-items-center rounded-full border border-rule-strong hover:border-cream">←</button>
-          <button type="button" aria-label="Következő film" onClick={() => go(1)} className="grid h-11 w-11 place-items-center rounded-full bg-cream text-night">→</button>
+          <button type="button" aria-label="Előző film" onClick={() => go(-1)} className="grid h-11 w-11 place-items-center rounded-full bg-night-3 text-cream hover:bg-rule">‹</button>
+          <button type="button" aria-label="Következő film" onClick={() => go(1)} className="grid h-11 w-11 place-items-center rounded-full bg-night-3 text-cream hover:bg-rule">›</button>
         </div>
       </div>
 
-      <div className="bg-black/40 py-2">
-        <div aria-hidden className="sprockets" />
+      <div>
         <ul
           ref={strip}
           aria-label="Filmek listája"
@@ -154,7 +150,6 @@ export default function FilmReel() {
           ))}
           <li aria-hidden className="w-[clamp(20px,5vw,72px)] shrink-0" />
         </ul>
-        <div aria-hidden className="sprockets" />
       </div>
 
       <dialog

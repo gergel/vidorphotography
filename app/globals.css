@@ -4,13 +4,14 @@
    VIDOR PHOTO & FILM — „Élő vetítőfal” design tokenek
    ========================================================================== */
 @theme {
-  --color-night: #0B0A12;     /* alap háttér: a vetítőterem */
-  --color-night-2: #13111C;   /* panelek, sávok */
-  --color-night-3: #1C1927;   /* kiemelt panel */
-  --color-rule: #2B2738;      /* dekoratív vonal */
-  --color-rule-strong: #5E586E; /* űrlapmező, chip keret */
-  --color-cream: #F4F1EA;     /* fő szöveg */
-  --color-mist: #B3AEC0;      /* másodlagos szöveg (9:1 az éjszakán) */
+  --color-night: #000000;     /* alap háttér */
+  --color-night-2: #111113;   /* panelek, kártyák */
+  --color-night-3: #1C1C1F;   /* kiemelt panel */
+  --color-rule: #2A2A2D;      /* dekoratív vonal */
+  --color-rule-strong: #5A5A60; /* űrlapmező, chip keret */
+  --color-cream: #F5F5F7;     /* fő szöveg */
+  --color-mist: #A1A1A6;      /* másodlagos szöveg (8:1 a feketén) */
+  --color-dim: #6E6E73;       /* görgetésre kivilágosodó szöveg kiinduló színe */
 
   /* műfajszínek — a színes felületen mindig night színű a betű (≥ 6:1) */
   --color-sun: #FFB547;       /* Esküvő, fő akció */
@@ -20,14 +21,14 @@
   --color-teal: #2EE6C8;      /* Rendezvény */
 
   /* a galéria-ablak régi nevei ugyanerre a palettára */
-  --color-ink: #0B0A12;
-  --color-offwhite: #F4F1EA;
-  --color-muted-dark: #B3AEC0;
-  --color-line-dark: #2B2738;
+  --color-ink: #000000;
+  --color-offwhite: #F5F5F7;
+  --color-muted-dark: #A1A1A6;
+  --color-line-dark: #2A2A2D;
 
-  --font-display: var(--font-bricolage), 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-display: var(--font-inter), 'Inter', system-ui, sans-serif;
   --font-sans: var(--font-inter), 'Inter', system-ui, sans-serif;
-  --font-mono: var(--font-jbmono), 'JetBrains Mono', ui-monospace, monospace;
+  --font-mono: var(--font-inter), 'Inter', system-ui, sans-serif;
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
@@ -48,10 +49,10 @@
     overflow-x: clip;
   }
   :focus-visible {
-    outline: 2px solid var(--color-sun);
+    outline: 2px solid var(--color-cream);
     outline-offset: 3px;
   }
-  ::selection { background: var(--color-sun); color: var(--color-night); }
+  ::selection { background: var(--color-cream); color: #000; }
   html.lock { overflow: hidden; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -66,18 +67,18 @@
     padding-inline: clamp(20px, 5vw, 72px);
   }
   /* mono címke / timecode */
+  /* kis „eyebrow” felirat a címek fölött */
   .label {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: .14em;
-    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .01em;
     line-height: 1.4;
+    color: var(--color-mist);
   }
   .display {
     font-family: var(--font-display);
-    font-weight: 800;
-    letter-spacing: -.03em;
+    font-weight: 600;
+    letter-spacing: -.035em;
     text-wrap: balance;
   }
   .btn {
@@ -99,14 +100,13 @@
   /* kis címke-chip a csempéken (sötét, tömör háttér → mindig olvasható) */
   .tag {
     display: inline-flex; align-items: center; gap: 8px; height: 28px; padding: 0 10px; border-radius: 4px;
-    background: rgba(11, 10, 18, .82); color: var(--color-cream);
-    font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+    background: rgba(0, 0, 0, .6); color: var(--color-cream); backdrop-filter: blur(12px);
+    font-size: 12px; font-weight: 500; letter-spacing: .01em; border-radius: 999px; padding: 0 12px;
   }
-  .tag::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--dot, var(--color-sun)); }
   .live {
     display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 8px; border-radius: 4px;
-    background: rgba(11, 10, 18, .78); color: var(--color-cream);
-    font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em;
+    background: rgba(0, 0, 0, .6); color: var(--color-cream);
+    font-size: 11px; font-weight: 500; letter-spacing: .02em;
   }
   .live::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #FF4D4D; }
 }
@@ -115,9 +115,9 @@
 .tile-media { transition: transform 700ms var(--ease-out); }
 .tile { transition: opacity 400ms var(--ease-out), box-shadow 300ms var(--ease-out); }
 @media (hover: hover) and (pointer: fine) {
-  .wall:has(.tile:hover) .tile:not(:hover) { opacity: .55; }
-  .tile:hover .tile-media { transform: scale(1.04); }
-  .tile:hover { box-shadow: inset 0 0 0 2px var(--tc, var(--color-sun)); }
+  .wall:has(.tile:hover) .tile:not(:hover) { opacity: .7; }
+  .tile:hover .tile-media { transform: scale(1.03); }
+
 }
 .tile:focus-visible { outline-offset: -3px; }
 

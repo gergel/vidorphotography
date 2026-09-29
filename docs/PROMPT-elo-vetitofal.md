@@ -96,3 +96,34 @@ fénye a műfaj színére vált. Minden mozog és reagál, de gyors és akadály
 - Teljes billentyűzetes használat, látható fókusz, valódi `<a>`/`<button>` elemek.
 - Tiltólista: elmosás videón, az egész oldalt döntő 3D, hosszú, beragadó görgetés.
 - Ellenőrzés 390 / 768 / 1440 px-en; nincs vízszintes görgetés.
+
+---
+
+## 2. változat — letisztult, görgetésre épülő (Apple-termékoldal hangulat)
+Visszajelzés: „egy picit már túl színes; legyen letisztultabb, és minden azzal együtt mozogjon és
+változzon, ahogy az ember lefelé görget”. Ez a változat felülírja a fenti színeket és a szekciók
+egy részét. A tartalmi és működési szabályok maradnak.
+
+- **Színek:** fekete (`#000`), panel `#111113`, szöveg `#F5F5F7`, másodlagos `#A1A1A6`, halvány `#6E6E73`.
+  Nincsenek műfajszínek és színes háttérfény. A képek adják a színt, a felület fekete-fehér-szürke.
+  Egyetlen kiemelt gomb: fehér kapszula fekete betűvel.
+- **Betű:** csak Inter (600-as, szoros betűközű nagy címek; 400/500 szöveg). Nincs monospace címke.
+  Lekerekítés: kártyák 18 px, panelek 28 px.
+- **Nyitó jelenet (rögzített, kb. 3 képernyőnyi görgetés):**
+  - kezdetben teljes képernyős esküvői loop, rajta a cím („Fotók és filmek. Saját látásmóddal.”);
+  - görgetésre a cím elhalványul, a videó összezsugorodik a falon lévő helyére,
+    és köré lépcsőzetesen kirajzolódik a többi csempe, végül a szövegcsempe.
+  - Mobilon és csökkentett mozgásnál nincs rögzítés: teljes képernyős nyitókép, alatta a fal.
+- **Bevezető:** „Emberek, helyzetek és részletek — őszintén, érzékenyen, felesleges pózok nélkül.”
+  Görgetésre szavanként szürkéből fehérre világosodik.
+- **Munkák:** rögzített jelenet. Lefelé görgetve a nagy műfajkártyák vízszintesen úsznak át.
+  Mobilon húzható sor. Kattintásra a galéria nyílik.
+- **Mozisáv:** kártyából széltől szélig érő vászon, az idézet szavanként kivilágosodik.
+- **Filmek:** húzható sor, nagy kártyák, mágneses lejátszógomb, Vimeo csak kattintásra.
+- **Szolgáltatások:** nagy, halvány sorok. Rámutatásra a sor kifehéredik, a kurzor mellett kis előnézet lebeg.
+  Az „Ezt kérem →” előre kiválasztja a műfajt.
+- **Rólam:** a portré görgetésre nagyításból a helyére áll.
+  **Szemlélet:** rögzített jelenet, a 3 lépés görgetésre vált, a kép áttűnik, alul haladásjelző.
+- **Kapcsolat:** sötét panel, semleges chipek (kiválasztva fehér), a loop a választott műfajt mutatja.
+- **Mozgás:** minden a görgetéshez kötött (scroll-linked). Csak transform, opacity és szín animálódik.
+  A „Mozgás” gomb és a csökkentett mozgás beállítás minden videót megállít.
